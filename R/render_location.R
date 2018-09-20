@@ -1,4 +1,5 @@
 #' Colours and hill shades a raster using rayshader
+#'
 #' crop large rasters first using crop_raster_square()
 #' Use rayshader::plot_3d() to visualise the result
 #'
@@ -7,6 +8,8 @@
 #' @param elevation_palette a vector of colours to use for elevation shading
 #' @param sunangle rayshader sun angle
 #' This palette will be multiplied by your elevation palette so use "bw" to maintain original hues.
+#' @param fast skips ray shade and ambient shade to render quickly for checking
+#' @param lighten lightens the combination of elevation colours created by this package and sphere_shade() from rayshader
 #'
 #' @return rendedered scene to visualise with rayshader::plot_3d()
 #' returns a list. r$r is the rendered scene and r$elmat is the elevation matrix
@@ -21,7 +24,7 @@
 #'   shadow = TRUE
 #' )
 #' @export
-render_location <- function(raster_input, sphere_palette = "bw", elevation_palette = c("#54843f", "#808080", "#FFFFFF"), sunangle = 270){
+render_location <- function(raster_input, sphere_palette = "bw", elevation_palette = c("#54843f", "#808080", "#FFFFFF"), sunangle = 270, fast = FALSE, lighten = 0.25){
 
   #-------------- Create an elevation shaded png -----------------------------
 
@@ -57,13 +60,19 @@ render_location <- function(raster_input, sphere_palette = "bw", elevation_palet
     rayshader::sphere_shade(sunangle = sunangle, texture = sphere_palette)
 
 
-  shaded_elevation <- terrain_image * ss + (1 - ss) * 0.25
+  shaded_elevation <-
+    terrain_image + ((1 - terrain_image) * lighten) *
+    (ss + (1 - ss) * lighten)
 
 
   r <- shaded_elevation %>%
-    rayshader::add_water(rayshader::detect_water(elmat, min_area = 20, cutoff = 0.995), color="imhof4") %>%
-    rayshader::add_shadow(rayshader::ray_shade(elmat, anglebreaks = seq(60, 90), sunangle = sunangle, multicore = TRUE, lambert = FALSE, remove_edges = FALSE)) %>%
-    rayshader::add_shadow(rayshader::ambient_shade(elmat, multicore = TRUE, remove_edges = FALSE))
+    rayshader::add_water(rayshader::detect_water(elmat, min_area = 20, cutoff = 0.995), color="imhof4")
+
+  if(fast==FALSE){
+    r <- r %>%
+      rayshader::add_shadow(rayshader::ray_shade(elmat, anglebreaks = seq(60, 90), sunangle = sunangle, multicore = TRUE, lambert = FALSE, remove_edges = FALSE)) %>%
+      rayshader::add_shadow(rayshader::ambient_shade(elmat, multicore = TRUE, remove_edges = FALSE))
+  }
 
   return(list("elmat" = elmat, "r" = r))
 

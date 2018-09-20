@@ -2,13 +2,11 @@
 % Please edit documentation in R/render_location.R
 \name{render_location}
 \alias{render_location}
-\title{Colours and hill shades a raster using rayshader
-crop large rasters first using crop_raster_square()
-Use rayshader::plot_3d() to visualise the result}
+\title{Colours and hill shades a raster using rayshader}
 \usage{
 render_location(raster_input, sphere_palette = "bw",
   elevation_palette = c("#54843f", "#808080", "#FFFFFF"),
-  sunangle = 270)
+  sunangle = 270, fast = FALSE, lighten = 0.25)
 }
 \arguments{
 \item{raster_input}{a raster}
@@ -19,13 +17,16 @@ render_location(raster_input, sphere_palette = "bw",
 
 \item{sunangle}{rayshader sun angle
 This palette will be multiplied by your elevation palette so use "bw" to maintain original hues.}
+
+\item{fast}{skips ray shade and ambient shade to render quickly for checking}
+
+\item{lighten}{lightens the combination of elevation colours created by this package and sphere_shade() from rayshader}
 }
 \value{
 rendedered scene to visualise with rayshader::plot_3d()
 returns a list. r$r is the rendered scene and r$elmat is the elevation matrix
 }
 \description{
-Colours and hill shades a raster using rayshader
 crop large rasters first using crop_raster_square()
 Use rayshader::plot_3d() to visualise the result
 }
