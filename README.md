@@ -5,7 +5,7 @@ Helper functions to draw [rayshader](https://github.com/tylermorganwall/rayshade
 - With elevation shading (green valleys and snow capped peaks, or anything else you want)
 - with added  GPS tracks
 
-Rayshader is an awesome bit of kit! I'm just making it easier to apply some formatting that I like to it. 
+[Rayshader](https://github.com/tylermorganwall/rayshader) is an awesome bit of kit! I'm just doing some colouring in.
 
 ### Installing
 
