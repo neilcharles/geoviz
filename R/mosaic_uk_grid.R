@@ -14,19 +14,24 @@ mosaic_uk_grid <- function(os50_path, raster_output_file = "mosaic_uk_grid.raste
   read_from_zip <- function(file_id){
     file_id_u <- toupper(substr(file_id, 4, 7))
 
-    raster::raster(rgdal::readGDAL(
+    r <- raster::raster(rgdal::readGDAL(
       unzip(
         glue::glue("{os50_path}{file_id}"),
         glue::glue("{file_id_u}.asc")
       )
     ))
+
+    file.remove(glue::glue("{file_id_u}.asc"))
+
+    return(r)
+
   }
 
   grid_files <- list.files(os50_path, ".*OST50GRID.*", recursive = TRUE, include.dirs = TRUE)
 
   #Load all terrain files in input directory
   raster_layers <- tibble::tibble(filename = grid_files) %>%
-    mutate(raster =
+    dplyr::mutate(raster =
              purrr::map(filename, .f = ~read_from_zip(.))
     ) %>%
     dplyr::pull(raster)
