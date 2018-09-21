@@ -59,11 +59,7 @@ render_location <- function(raster_input, sphere_palette = "bw", elevation_palet
   ss <- elmat %>%
     rayshader::sphere_shade(sunangle = sunangle, texture = sphere_palette)
 
-
-  shaded_elevation <-
-    terrain_image + ((1 - terrain_image) * lighten) *
-    (ss + (1 - ss) * lighten)
-
+  shaded_elevation <- terrain_image * (ss + (1 - ss) * lighten)
 
   r <- shaded_elevation %>%
     rayshader::add_water(rayshader::detect_water(elmat, min_area = 20, cutoff = 0.995), color="imhof4")
