@@ -23,7 +23,7 @@ Download [OS Terrain 50](https://www.ordnancesurvey.co.uk/business-and-governmen
 library(geoviz)
 ```
 
-Stitch all of the GRID files together into a single raster of the entire UK. This will quite take some time! But it only needs to be done once and will save the raster it creates.
+You need to use the following line to stitch all of the GRID files together into a single raster of the entire UK. This will quite take some time! But it only needs to be done once and will save the raster it creates.
 
 Point the mosaic_uk_grid() function at the "data" directory from your OS50 download and Include the trailing / in the path.
 
