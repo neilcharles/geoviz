@@ -31,6 +31,8 @@ Point the mosaic_uk_grid() function at the "data" directory from your OS50 downl
 mosaic_uk_grid("path/to/grid/data/")  #ONLY RUN THIS ONCE TO CREATE THE WHOLE UK MOSAIC RASTER. IT WILL BE SLOW.
 ```
 
+If you find you run out of memory and can't build the UK raster, have a look at [this issue](https://github.com/neilcharles/geoviz/issues/1).
+
 Load the merged raster file
 
 ```R
