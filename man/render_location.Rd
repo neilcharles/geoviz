@@ -4,23 +4,23 @@
 \alias{render_location}
 \title{Colours and hill shades a raster using rayshader}
 \usage{
-render_location(raster_input, sphere_palette = "bw",
-  elevation_palette = c("#54843f", "#808080", "#FFFFFF"),
-  sunangle = 270, fast = FALSE, lighten = 0.25)
+render_location(raster_input, sphere_palette = "bw", sunangle = 270,
+  fast = FALSE, add_water = TRUE, water_min_area = 20,
+  water_cutoff = 0.995, water_colour = "imhof4", img_layers = NULL)
 }
 \arguments{
 \item{raster_input}{a raster}
 
-\item{sphere_palette}{A rayshader palette to use for sphere_shade(), e.g. "bw" or "desert".}
-
-\item{elevation_palette}{a vector of colours to use for elevation shading}
-
-\item{sunangle}{rayshader sun angle
+\item{sphere_palette}{A rayshader palette to use for sphere_shade(), e.g. "bw" or "desert".
 This palette will be multiplied by your elevation palette so use "bw" to maintain original hues.}
+
+\item{sunangle}{rayshader sun angle}
 
 \item{fast}{skips ray shade and ambient shade to render quickly for checking}
 
-\item{lighten}{lightens the combination of elevation colours created by this package and sphere_shade() from rayshader}
+\item{add_water}{}
+
+\item{elevation_palette}{a vector of colours to use for elevation shading}
 }
 \value{
 rendedered scene to visualise with rayshader::plot_3d()
