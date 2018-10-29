@@ -27,9 +27,9 @@ add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_widt
 
   cell_size_y <- raster::pointDistance(c(e@xmin, e@ymin), c(e@xmin, e@ymax), lonlat = TRUE) / nrow(raster_input)
 
-  distances_x <- raster::pointDistance(c(e@xmin, e@ymin), cbind(flight$long, rep(e@ymin, nrow(flight))), lonlat = TRUE) / cell_size_x
+  distances_x <- raster::pointDistance(c(e@xmin, e@ymin), cbind(long, rep(e@ymin, length(long))), lonlat = TRUE) / cell_size_x
 
-  distances_y <- raster::pointDistance(c(e@xmin, e@ymin), cbind(rep(e@xmin, nrow(flight)), flight$lat), lonlat = TRUE) / cell_size_y
+  distances_y <- raster::pointDistance(c(e@xmin, e@ymin), cbind(rep(e@xmin, length(lat)), lat), lonlat = TRUE) / cell_size_y
 
   if(clamp_to_ground | ground_shadow){
 
@@ -71,7 +71,7 @@ add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_widt
       -distances_y,
       color = colour,
       alpha = 0.2,
-      lwd = line_width * 8,
+      lwd = line_width * 6,
       shininess = 25,
       fog = TRUE
     )
@@ -82,7 +82,7 @@ add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_widt
       -distances_y,
       color = colour,
       alpha = 0.6,
-      lwd = line_width * 4,
+      lwd = line_width * 3,
       shininess = 80,
       fog = TRUE
     )
