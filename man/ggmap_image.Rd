@@ -4,10 +4,13 @@
 \alias{ggmap_image}
 \title{Gets a ggmap to overlay a rayshader scene and returns a raster}
 \usage{
-ggmap_image(raster_input, ...)
+ggmap_image(raster_input, use_bbox = TRUE, ...)
 }
 \arguments{
 \item{raster_input}{a raster to use for the dimensions of the overlay}
+
+\item{use_bbox}{Boolean. If TRUE, attempt to draw a map using the bounding box of raster_input. If FALSE, use the centre of raster_input and a zoom level (use ... to specify zoom = ).
+ggmap's attempt to fit Google maps will sometimes return a map that is too small, in which case set use_bbox = FALSE and a specify a zoom level that will cover your raster.}
 
 \item{...}{Additional parameters to pass to ggmap::get_map() e.g. maptype, source, zoom, color}
 }

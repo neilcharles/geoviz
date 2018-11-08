@@ -1,37 +1,37 @@
-#' Stitches together OS Terrain 50 'GRID' files and saves as a single large raster
-#' Requires a target directory of 'GRID' zip files.
+#' Stitches together ASTER GDEM TIF files and saves as a single large raster
+#' Requires a target directory of ASTER zip files. Effecively a duplicate of mosaic_uk_grid() with a few tweaks.
 #'
-#' @param os50_path directory containing OS Terrain 50 'GRID' files
+#' @param aster_path directory containing OS Terrain 50 'GRID' files
 #' @param raster_output_file path and filename for the merged raster. End in ".raster" to save in default R Raster format (.grd)
 #'
 #' @return TRUE
 #'
 #' @examples
-#' mosaic_uk_grid("path/to/grid/zip_files/", "output/file.raster")
+#' mosaic_ASTER("path/to/grid/zip_files/", "output/file.raster")
 #' @export
-mosaic_uk_grid <- function(os50_path, raster_output_file = "mosaic_uk_grid.raster"){
+mosaic_ASTER <- function(aster_path, raster_output_file = "mosaic_ASTER.raster"){
 
   read_from_zip <- function(file_id){
-    file_id_u <- toupper(substr(file_id, 4, 7))
+
+    file_id_u <- stringr::str_replace(file_id, ".zip", "_dem.tif")
 
     r <- raster::raster(rgdal::readGDAL(
       unzip(
-        glue::glue("{os50_path}{file_id}"),
-        glue::glue("{file_id_u}.asc")
+        glue::glue("{aster_path}{file_id}"),
+        glue::glue("{file_id_u}")
       )
     ))
 
-    file.remove(glue::glue("{file_id_u}.asc"))
+    file.remove(glue::glue("{file_id_u}"))
 
     return(r)
 
   }
 
-  grid_files <- list.files(os50_path, ".*OST50GRID.*", recursive = TRUE, include.dirs = TRUE)
+  grid_files <- list.files(aster_path, ".*ASTGTM.*.zip$", recursive = TRUE, include.dirs = TRUE)
 
   #Load all terrain files in input directory
   raster_layers <- tibble::tibble(filename = grid_files)
-
 
   #Intialise a raster to merge in the rest of the files one at a time. Can't do it all at once due to memory issues.
   raster_mosaic <- read_from_zip(raster_layers$filename[1])
@@ -44,7 +44,7 @@ mosaic_uk_grid <- function(os50_path, raster_output_file = "mosaic_uk_grid.raste
 
   }
 
-  raster::crs(raster_mosaic) <- "+init=epsg:27700"
+  raster::crs(raster_mosaic) <- "+init=epsg:4326"
 
   raster_mosaic = raster::projectRaster(raster_mosaic, crs = "+proj=longlat +datum=WGS84 +no_defs")
 

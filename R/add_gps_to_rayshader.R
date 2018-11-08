@@ -21,35 +21,47 @@
 #' @export
 add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_width = 1, colour = "red", alpha = 0.8, lightsaber = TRUE, clamp_to_ground = FALSE, raise_agl = 0, ground_shadow = FALSE){
 
+  #Convert the track to spatialpoints in raster_input's projection
+  track <- sp::SpatialPoints(cbind(long, lat), proj4string = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+  track <- sp::spTransform(track, sp::CRS(as.character(raster::crs(raster_input))))
+
+  track <- as.tibble(track@coords)
+
+  lat <- track$lat
+
+  long <- track$long
+
+  #Work out the dimensions of raster_input and map the track onto it
   e <- raster::extent(raster_input)
 
-  cell_size_x <- raster::pointDistance(c(e@xmin, e@ymin), c(e@xmax, e@ymin), lonlat = TRUE) / ncol(raster_input)
+  cell_size_x <- raster::pointDistance(c(e@xmin, e@ymin),
+                                       c(e@xmax, e@ymin), lonlat = FALSE)/ncol(raster_input)
 
-  cell_size_y <- raster::pointDistance(c(e@xmin, e@ymin), c(e@xmin, e@ymax), lonlat = TRUE) / nrow(raster_input)
+  cell_size_y <- raster::pointDistance(c(e@xmin, e@ymin),
+                                       c(e@xmin, e@ymax), lonlat = FALSE)/nrow(raster_input)
 
-  distances_x <- raster::pointDistance(c(e@xmin, e@ymin), cbind(long, rep(e@ymin, length(long))), lonlat = TRUE) / cell_size_x
+  distances_x <- raster::pointDistance(c(e@xmin, e@ymin),
+                                       cbind(long, rep(e@ymin, length(long))), lonlat = FALSE)/cell_size_x
 
-  distances_y <- raster::pointDistance(c(e@xmin, e@ymin), cbind(rep(e@xmin, length(lat)), lat), lonlat = TRUE) / cell_size_y
+  distances_y <- raster::pointDistance(c(e@xmin, e@ymin),
+                                       cbind(rep(e@xmin, length(lat)), lat), lonlat = FALSE)/cell_size_y
 
-  if(clamp_to_ground | ground_shadow){
+  if (clamp_to_ground | ground_shadow) {
 
-    sp_gps <-
-      sp::SpatialPoints(cbind(long, lat),
-                        proj4string = sp::CRS(
-                          "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
-                        )
-      )
+    sp_gps <- sp::SpatialPoints(cbind(long, lat), proj4string = sp::CRS(as.character(raster::crs(raster_input))))
 
     gps_ground_line <- raster::extract(raster_input, sp_gps)
 
   }
 
   if(clamp_to_ground){
+
     track_altitude <- gps_ground_line
+
   } else {
+
     track_altitude <- alt
   }
-
 
 
   if(!lightsaber){
