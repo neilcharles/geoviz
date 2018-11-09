@@ -220,7 +220,6 @@ Or crop a section from your DEM to fit a GPS track...
 DEM <- crop_raster_track(big_DEM, igc$lat, igc$long, width_buffer = 2)
 ```
 
-
 ### Loading GPS tracks
 
 You can load GPS track data any way that you like and pass decimal lat-longs as vectors to geoviz functions (see code examples above).
