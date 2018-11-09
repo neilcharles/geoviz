@@ -25,7 +25,7 @@ add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_widt
   track <- sp::SpatialPoints(cbind(long, lat), proj4string = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
   track <- sp::spTransform(track, sp::CRS(as.character(raster::crs(raster_input))))
 
-  track <- as.tibble(track@coords)
+  track <- tibble::as.tibble(track@coords)
 
   lat <- track$lat
 

@@ -14,7 +14,7 @@
 ggmap_image <- function(raster_input, use_bbox = TRUE, ...){
 
   #Work out the bounding box for the raster and convert it to ggmap projection
-  bounding_box <- as(extent(raster_input), "SpatialPolygons")
+  bounding_box <- as(raster::extent(raster_input), "SpatialPolygons")
 
   sp::proj4string(bounding_box) <- as.character(raster::crs(raster_input))
 
