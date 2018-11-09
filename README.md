@@ -16,15 +16,15 @@ devtools::install_github("neilcharles/geoviz")
 
 Geoviz helps you to draw images like these.
 
-![rendered scene](assets/bw_example.png)
+![rendered scene](assets/bw_example.jpg)
 
-![rendered scene](assets/stamen_example.png)
+![rendered scene](assets/stamen_example.jpg)
 
-### A quick note about Google Maps
+### A note about Google Maps
 
-The quick example below uses a Stamen map overlay because Google Maps now requires an API key. See [ggmap](https://github.com/dkahle/ggmap).
+The example below uses a Stamen map overlay because Google Maps now requires an API key. See [ggmap](https://github.com/dkahle/ggmap).
 
-If you want to do anything Googly with ggmap you'll need to register for an APIkey and before calling geocode() from ggmap or ggmap_image() from geoviz, run the following lines.
+If you want to do anything Googley with ggmap you'll need to register for an APIkey and before calling geocode() from ggmap or ggmap_image() from geoviz, run the following lines.
 
 ```R
 library(ggmap)
@@ -174,7 +174,7 @@ Whole world coverage but quite noisy. Copernicus is better if you're mapping in 
 
 Download DEM files from [here](https://search.earthdata.nasa.gov/search/granules?p=C197265171-LPDAAC_ECS&q=aster&ok=aster). Search for "ASTER" in the top left box and select "ASTER Global Digital Elevation Model V002" underneath the map. You won't realistically be able to stitch together a single file of the whole world - it would be enormous - so just download the areas you need.
 
-Stitching togehter the separate files is the same proces as for OS Terrain 50.
+Stitching together the separate files is the same proces as for OS Terrain 50.
 
 ```R
 mosaic_ASTER("path/to/data/")
@@ -223,6 +223,10 @@ DEM <- crop_raster_track(big_DEM, igc$lat, igc$long, width_buffer = 2)
 
 ### Loading GPS tracks
 
-You canload GPS track data any way that you like and pass decimal lat-longs as vectors to geoviz functions (see quick example above).
+You can load GPS track data any way that you like and pass decimal lat-longs as vectors to geoviz functions (see code examples above).
 
 If your GPS data is in IGC format - commonly used for glider flight data - then geoviz has a function read_igc(), which will do all the formatting work for you.
+
+```R
+igc <- read_igc("path/to/your/file.igc")
+```
