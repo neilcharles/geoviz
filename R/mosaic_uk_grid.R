@@ -11,6 +11,10 @@
 #' @export
 mosaic_uk_grid <- function(os50_path, raster_output_file = "mosaic_uk_grid.raster"){
 
+  if(substr(os50_path, nchar(os50_path), nchar(os50_path)) != "/"){
+    os50_path <- glue::glue("{os50_path}/")
+  }
+
   read_from_zip <- function(file_id){
     file_id_u <- toupper(substr(file_id, 4, 7))
 

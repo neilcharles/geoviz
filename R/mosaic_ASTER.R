@@ -11,6 +11,10 @@
 #' @export
 mosaic_ASTER <- function(aster_path, raster_output_file = "mosaic_ASTER.raster"){
 
+  if(substr(aster_path, nchar(aster_path), nchar(aster_path)) != "/"){
+    aster_path <- glue::glue("{aster_path}/")
+  }
+
   read_from_zip <- function(file_id){
 
     file_id_u <- stringr::str_replace(file_id, ".zip", "_dem.tif")

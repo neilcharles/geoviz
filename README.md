@@ -14,6 +14,12 @@ Helper functions to draw [rayshader](https://github.com/tylermorganwall/rayshade
 devtools::install_github("neilcharles/geoviz")
 ```
 
+Geoviz helps you to draw images like these.
+
+![rendered scene](assets/bw_example.png)
+
+![rendered scene](assets/stamen_example.png)
+
 ### A quick note about Google Maps
 
 The quick example below uses a Stamen map overlay because Google Maps now requires an API key. See [ggmap](https://github.com/dkahle/ggmap).
@@ -128,6 +134,8 @@ Copernicus map tiles are large, typically 3-5GB each and covering a country size
 
 ```R
 big_DEM <- raster::raster("path/to/file/eu_dem_v11_E30N30.TIF")
+
+zscale <- 25
 ```
 
 
@@ -156,6 +164,8 @@ Load the merged raster file
 
 ```R
 big_DEM <- raster::raster("mosaic_uk_grid.grd")
+
+zscale <- 50
 ```
 
 ### DEM Data Sources - NASA ASTER
@@ -181,11 +191,15 @@ Load the merged raster file
 
 ```R
 big_DEM <- raster::raster("mosaic_ASTER.grd")
+
+zscale <- 30
 ```
 
 ### Slicing pieces out of the DEM
 
 You probably don't want to render everything in your DEM data, you'll want to cut out a piece. Geoviz has two functions to help you do this.
+
+Crop out a square around a point...
 
 ```R
 
@@ -200,12 +214,15 @@ coords <- geocode("Keswick, UK")
 DEM <- crop_raster_square(big_DEM, coords$lat, coords$lon, square_km)
 ```
 
-Or...
+Or crop a section from your DEM to fit a GPS track...
 
 ```R
-#Crops an area around a set of points. Useful to slice out a section of your DEM that will fit a GPS trace.
 DEM <- crop_raster_track(big_DEM, igc$lat, igc$long, width_buffer = 2)
 ```
 
 
+### Loading GPS tracks
 
+You canload GPS track data any way that you like and pass decimal lat-longs as vectors to geoviz functions (see quick example above).
+
+If your GPS data is in IGC format - commonly used for glider flight data - then geoviz has a function read_igc(), which will do all the formatting work for you.
