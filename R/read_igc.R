@@ -67,7 +67,8 @@ read_igc <- function(path){
       lat = as(sp::char2dms(lat_dms), "numeric"),
       long = as(sp::char2dms(long_dms), "numeric")
     ) %>%
-    dplyr::arrange(time_hms)
+    dplyr::arrange(time_hms) %>%
+    dplyr::filter(!(lat==0 & long==0 & altitude==0))  #dump bad rows where all data is 0
 
   return(flight.points)
 }

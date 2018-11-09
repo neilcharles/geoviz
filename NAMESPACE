@@ -2,7 +2,10 @@
 
 export(add_gps_to_rayshader)
 export(crop_raster_square)
+export(crop_raster_track)
+export(elevation_shade)
+export(ggmap_image)
+export(mosaic_ASTER)
 export(mosaic_uk_grid)
 export(read_igc)
-export(render_location)
 importFrom(magrittr,"%>%")
