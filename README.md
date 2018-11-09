@@ -16,9 +16,9 @@ devtools::install_github("neilcharles/geoviz")
 
 Geoviz helps you to draw images like these.
 
-![rendered scene](assets/bw_example.png)
+![rendered scene](assets/bw_example.jpg)
 
-![rendered scene](assets/stamen_example.png)
+![rendered scene](assets/stamen_example.jpg)
 
 ### A quick note about Google Maps
 
