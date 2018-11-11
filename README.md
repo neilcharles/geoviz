@@ -109,7 +109,7 @@ rayshader::plot_3d(
 #Add the gps track
 
 add_gps_to_rayshader(
-  raster_crop,
+  DEM, 
   igc$lat,
   igc$long,
   igc$altitude,
