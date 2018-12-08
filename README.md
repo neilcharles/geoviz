@@ -229,3 +229,7 @@ If your GPS data is in IGC format - commonly used for glider flight data - then 
 ```R
 igc <- read_igc("path/to/your/file.igc")
 ```
+
+### Adding GPS traces to Rayshader scenes
+
+Geoviz converts decimal lat-long GPS traces into rayshader's coordinate system and then plots the GPS track using the funtion add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into rayshader's coordinates and see the converted data (e.g. so you can add your own arbirary rgl shape to the scene or for use with rayshder's render_label() function), use latlong_to_rayshader_coords().
