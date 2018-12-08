@@ -6,7 +6,8 @@
 \usage{
 add_gps_to_rayshader(raster_input, lat, long, alt, zscale,
   line_width = 1, colour = "red", alpha = 0.8, lightsaber = TRUE,
-  clamp_to_ground = FALSE, raise_agl = 0, ground_shadow = FALSE)
+  clamp_to_ground = FALSE, raise_agl = 0, ground_shadow = FALSE,
+  as_line = TRUE, point_size = 20)
 }
 \arguments{
 \item{raster_input}{a raster}
@@ -32,6 +33,10 @@ add_gps_to_rayshader(raster_input, lat, long, alt, zscale,
 \item{raise_agl}{(default = 0) raises a clamped to ground track by the specified amount. Useful if gps track occasionally disappears into the ground.}
 
 \item{ground_shadow}{(default = FALSE) adds a ground shadow to a flight gps trace}
+
+\item{as_line}{(default = TRUE) Set to FALSE to render single points instead of a trace line (which then ignores line_width & lightsaber)}
+
+\item{point_size}{size of points when as_line = TRUE}
 }
 \value{
 Adds GPS trace to the current rayshader scene
