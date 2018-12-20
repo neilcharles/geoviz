@@ -26,3 +26,5 @@ imports:
   glue,
   png,
   abind
+Suggests: 
+    testthat
