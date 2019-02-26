@@ -24,6 +24,8 @@ mosaic_defra_lidar <- function(lidar_path, raster_output_file = "mosaic_uk_grid.
 
   }
 
+  message("Unzipping DEM files...")
+
   lidar_zip_files <- tibble::tibble(zip_files = list.files(lidar_path, "LIDAR.*.zip")) %>%
     dplyr::pull(zip_files) %>%
     purrr::walk(.x, .f = ~  unzip(glue::glue("{lidar_path}{.x}"), exdir = "unzip-asc"))
@@ -34,6 +36,8 @@ mosaic_defra_lidar <- function(lidar_path, raster_output_file = "mosaic_uk_grid.
   #Load all terrain files in input directory
   raster_layers <- tibble::tibble(filename = grid_files)
 
+
+  message("Merging DEM files...")
 
   #Intialise a raster to merge in the rest of the files one at a time. Can't do it all at once due to memory issues.
   raster_mosaic <- raster::raster(rgdal::readGDAL(glue::glue("unzip-asc/{raster_layers$filename[1]}")))
@@ -46,13 +50,17 @@ mosaic_defra_lidar <- function(lidar_path, raster_output_file = "mosaic_uk_grid.
 
   }
 
-  unlink("unzip-asc")  #kill the temp directory containing .asc files
+  unlink("unzip-asc", recursive = TRUE)  #kill the temp directory containing .asc files
+
+  message("Projecting raster...")
 
   raster::crs(raster_mosaic) <- "+init=epsg:27700"
 
   raster_mosaic = raster::projectRaster(raster_mosaic, crs = "+proj=longlat +datum=WGS84 +no_defs")
 
   raster::writeRaster(raster_mosaic, raster_output_file, overwrite = TRUE)
+
+  message("Done")
 
   return(TRUE)
 
