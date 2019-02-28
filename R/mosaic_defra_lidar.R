@@ -26,7 +26,7 @@ mosaic_defra_lidar <- function(lidar_path, raster_output_file = "mosaic_uk_grid.
 
   message("Unzipping DEM files...")
 
-  lidar_zip_files <- tibble::tibble(zip_files = list.files(lidar_path, "LIDAR.*.zip")) %>%
+  lidar_zip_files <- tibble::tibble(zip_files = list.files(lidar_path, ".*.zip")) %>%
     dplyr::pull(zip_files) %>%
     purrr::walk(.x, .f = ~  unzip(glue::glue("{lidar_path}{.x}"), exdir = "unzip-asc"))
 
