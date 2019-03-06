@@ -15,9 +15,9 @@ drybrush <- function(altitude_raster, aggregation_factor = 10, max_colour_altitu
 
   raster_base <- raster::aggregate(altitude_raster, fun = min, fact = 10)
 
-  raster_base <- raster::resample(raster_base, raster_mosaic)
+  raster_base <- raster::resample(raster_base, altitude_raster)
 
-  drybrush_distance <- raster_mosaic - raster_base
+  drybrush_distance <- altitude_raster - raster_base
 
   drybrush_distance[is.na(drybrush_distance)] <- 0
   drybrush_distance[drybrush_distance < 0] <- 0

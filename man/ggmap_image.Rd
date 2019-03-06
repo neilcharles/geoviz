@@ -22,5 +22,4 @@ Gets a ggmap to overlay a rayshader scene and returns a raster
 }
 \examples{
 ggmap_image(a_raster, maptype = "Stamen", zoom = 11, color = "bw")
-
 }

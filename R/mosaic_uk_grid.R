@@ -19,7 +19,7 @@ mosaic_uk_grid <- function(os50_path, raster_output_file = "mosaic_uk_grid.raste
     file_id_u <- toupper(substr(file_id, 4, 7))
 
     r <- raster::raster(rgdal::readGDAL(
-      unzip(
+      utils::unzip(
         glue::glue("{os50_path}{file_id}"),
         glue::glue("{file_id_u}.asc")
       )

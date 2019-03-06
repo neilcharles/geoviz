@@ -9,12 +9,11 @@
 #'
 #' @examples
 #' ggmap_image(a_raster, maptype = "Stamen", zoom = 11, color = "bw")
-#'
 #' @export
 ggmap_image <- function(raster_input, use_bbox = TRUE, ...){
 
   #Work out the bounding box for the raster and convert it to ggmap projection
-  bounding_box <- as(raster::extent(raster_input), "SpatialPolygons")
+  bounding_box <- methods::as(raster::extent(raster_input), "SpatialPolygons")
 
   sp::proj4string(bounding_box) <- as.character(raster::crs(raster_input))
 
@@ -37,7 +36,7 @@ ggmap_image <- function(raster_input, use_bbox = TRUE, ...){
   #Resample ggmap to match the dimensions of raster_input
   ggmap_crop <- raster::resample(ggmap_raster, raster_input)
 
-  rgdal::writeGDAL(as(ggmap_crop, "SpatialGridDataFrame"), "map_image.png", drivername = "PNG", type = "Byte")
+  rgdal::writeGDAL(methods::as(ggmap_crop, "SpatialGridDataFrame"), "map_image.png", drivername = "PNG", type = "Byte")
 
   map_image <- png::readPNG("map_image.png")
 

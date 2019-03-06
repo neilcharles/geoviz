@@ -1,3 +1,8 @@
+`<!-- badges: start -->`
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/geoviz)](https://cran.r-project.org/package=geoviz)
+`<!-- badges: end -->`
+
 # Geoviz
 
 Helper functions to draw [rayshader](https://github.com/tylermorganwall/rayshader) scenes.
@@ -16,9 +21,9 @@ devtools::install_github("neilcharles/geoviz")
 
 Geoviz helps you to draw images like these.
 
-![rendered scene](assets/bw_example.jpg)
+![rendered scene](man/figures/bw_example.jpg)
 
-![rendered scene](assets/stamen_example.jpg)
+![rendered scene](man/figures/stamen_example.jpg)
 
 ### A note about Google Maps
 
@@ -101,7 +106,7 @@ rayshader::plot_3d(
 
 ```
 
-![rendered scene](assets/example1.png)
+![rendered scene](man/figures/example1.png)
 
 
 ```R
@@ -123,7 +128,7 @@ add_gps_to_rayshader(
 
 ```
 
-![rendered scene](assets/example2.png)
+![rendered scene](man/figures/example2.png)
 
 
 ### DEM Data Sources - EU Copernicus
