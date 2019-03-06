@@ -6,7 +6,7 @@ ggmap_to_raster = function(gmap){
 
   vgmap <- as.vector(mgmap)
 
-  vgmaprgb <- col2rgb(vgmap)
+  vgmaprgb <- grDevices::col2rgb(vgmap)
 
   gmapr <- matrix(vgmaprgb[1, ], ncol = ncol(mgmap), nrow = nrow(mgmap))
   gmapg <- matrix(vgmaprgb[2, ], ncol = ncol(mgmap), nrow = nrow(mgmap))
@@ -20,7 +20,7 @@ ggmap_to_raster = function(gmap){
 
   unlist(attr(gmap, which = "bb"))[c(2, 4, 1, 3)]
 
-  rprobextSpDF <- as(raster::extent(unlist(attr(gmap, which = "bb"))[c(2, 4, 1, 3)]), "SpatialPolygons")
+  rprobextSpDF <- methods::as(raster::extent(unlist(attr(gmap, which = "bb"))[c(2, 4, 1, 3)]), "SpatialPolygons")
 
   raster::projection(rprobextSpDF) <- sp::CRS("+init=epsg:4326")
 

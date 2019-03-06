@@ -20,7 +20,7 @@ mosaic_ASTER <- function(aster_path, raster_output_file = "mosaic_ASTER.raster")
     file_id_u <- stringr::str_replace(file_id, ".zip", "_dem.tif")
 
     r <- raster::raster(rgdal::readGDAL(
-      unzip(
+      utils::unzip(
         glue::glue("{aster_path}{file_id}"),
         glue::glue("{file_id_u}")
       )

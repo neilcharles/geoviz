@@ -34,7 +34,7 @@ crop_raster_square <- function(raster_input, lat, long, square_km, increase_reso
 
     max_edge <- max(c(nrow(raster_crop), ncol(raster_crop)))
 
-    template <- raster(extent(raster_crop), crs = crs(raster_crop), nrow = max_edge, ncol = max_edge)
+    template <- raster::raster(raster::extent(raster_crop), crs = raster::crs(raster_crop), nrow = max_edge, ncol = max_edge)
 
     raster_crop <- raster::resample(raster_crop, template)
 

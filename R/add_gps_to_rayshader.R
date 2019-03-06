@@ -18,8 +18,8 @@
 #' @return Adds GPS trace to the current rayshader scene
 #'
 #' @examples
-#' flight <- read_igc("path/to/igc/file")
-#' add_gps_to_rayshader(a_raster, flight$lat, flight$long, flight$altitude)
+#' flight <- example_igc
+#' add_gps_to_rayshader(example_raster, flight$lat, flight$long, flight$altitude, zscale = 25)
 #' @export
 add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_width = 1, colour = "red", alpha = 0.8, lightsaber = TRUE, clamp_to_ground = FALSE, raise_agl = 0, ground_shadow = FALSE, as_line = TRUE, point_size = 20){
 

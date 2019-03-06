@@ -3,7 +3,7 @@
 #' @param raster_input a raster
 #' @param lat_points a vector of decimal latitudes
 #' @param long_points a vector of decimal longitudes
-#' @param width_bufer buffer distance around the provided points
+#' @param width_buffer buffer distance around the provided points
 #' @param increase_resolution optional multiplier to increase number of cells in the raster. Default = 1.
 #'
 #' @return cropped raster
@@ -17,7 +17,7 @@ crop_raster_track <- function(raster_input, lat_points, long_points, width_buffe
   bounding_box <- sp::SpatialPoints(cbind(long_points, lat_points),
                                     proj4string = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
-  bounding_box <- as(extent(bounding_box), 'SpatialPolygons')
+  bounding_box <- methods::as(raster::extent(bounding_box), 'SpatialPolygons')
 
   sp::proj4string(bounding_box) <- "+proj=longlat +datum=WGS84 +no_defs"
 
