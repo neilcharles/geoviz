@@ -20,5 +20,7 @@ Stitches together OS Terrain 50 'GRID' files and saves as a single large raster
 Requires a target directory of 'GRID' zip files.
 }
 \examples{
+\donttest{
 mosaic_uk_grid("path/to/grid/zip_files/", "output/file.raster")
+}
 }

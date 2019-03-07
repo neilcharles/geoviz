@@ -6,7 +6,7 @@
 #' @return elevation shaded png image
 #'
 #' @examples
-#' elevation_shade(a_raster)
+#' elevation_shade(example_raster)
 #' @export
 elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF")){
   col_ramp <- grDevices::colorRampPalette(elevation_palette)

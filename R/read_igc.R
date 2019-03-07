@@ -5,7 +5,9 @@
 #' @return processed IGC file
 #'
 #' @examples
+#' \donttest{
 #' read_igc("file.igc")
+#' }
 #' @export
 read_igc <- function(path){
 

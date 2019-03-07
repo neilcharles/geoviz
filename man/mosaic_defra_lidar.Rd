@@ -21,5 +21,7 @@ Stitches together DEFRA Lidar files and saves as a single large raster
 Requires a target directory of LIDAR zip files.
 }
 \examples{
+\donttest{
 mosaic_defra_lidar("path/to/grid/zip_files/", "output/file.raster")
+}
 }

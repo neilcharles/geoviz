@@ -7,7 +7,9 @@
 #' @return TRUE
 #'
 #' @examples
+#' \donttest{
 #' mosaic_uk_grid("path/to/grid/zip_files/", "output/file.raster")
+#' }
 #' @export
 mosaic_uk_grid <- function(os50_path, raster_output_file = "mosaic_uk_grid.raster"){
 

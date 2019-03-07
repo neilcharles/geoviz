@@ -16,5 +16,7 @@ processed IGC file
 Load an IGC file
 }
 \examples{
+\donttest{
 read_igc("file.igc")
+}
 }

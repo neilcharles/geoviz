@@ -7,7 +7,7 @@
 #' @return A tibble with x,y in rayshader coordinates
 #'
 #' @examples
-#' latlong_to_rayshader_coords(a_raster, flight$lat, flight$long)
+#' latlong_to_rayshader_coords(example_raster, example_igc$lat, example_igc$long)
 #' @export
 latlong_to_rayshader_coords <- function(raster_input, lat, long){
 

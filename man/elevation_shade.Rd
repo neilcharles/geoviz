@@ -19,5 +19,5 @@ elevation shaded png image
 Produces an elevation shaded png from a raster
 }
 \examples{
-elevation_shade(a_raster)
+elevation_shade(example_raster)
 }

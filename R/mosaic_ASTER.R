@@ -7,7 +7,9 @@
 #' @return TRUE
 #'
 #' @examples
+#' \donttest{
 #' mosaic_ASTER("path/to/grid/zip_files/", "output/file.raster")
+#' }
 #' @export
 mosaic_ASTER <- function(aster_path, raster_output_file = "mosaic_ASTER.raster"){
 

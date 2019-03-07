@@ -37,16 +37,16 @@ image overlay that will only apply to valleys, or only to hills.
 # Transparency in the range between pct_alt_low and pct_alt_high will
 # smoothly transition between alpha_max and alpha_min.
 
-#Making hills transparent
-ggmap_overlay <- ggmap_image(example_raster, use_bbox = FALSE, zoom = 10,
-   source = "google", maptype = "satellite")
+overlay_image <- elevation_shade(example_raster, elevation_palette = c("#000000", "#FF0000"))
 
-ggmap_overlay_transparent_hills <- altitude_transparency(ggmap_overlay,
+#Making hills transparent
+
+ggmap_overlay_transparent_hills <- altitude_transparency(overlay_image,
    example_raster, alpha_max = 0.8, alpha_min = 0, pct_alt_low = 0.05,
    pct_alt_high = 0.25)
 
 # To make valleys transparent, flip alpha_max and alpha_min
-ggmap_overlay_transparent_valleys <- altitude_transparency(ggmap_overlay,
+ggmap_overlay_transparent_valleys <- altitude_transparency(overlay_image,
    example_raster, alpha_max = 0, alpha_min = 0.8, pct_alt_low = 0.05,
    pct_alt_high = 0.25)
 }

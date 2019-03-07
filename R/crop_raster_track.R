@@ -9,7 +9,7 @@
 #' @return cropped raster
 #'
 #' @examples
-#' crop_raster_track(a_raster, some_lat_points, some_long_points)
+#' crop_raster_track(example_raster, example_igc$lat, example_igc$long)
 #' @export
 crop_raster_track <- function(raster_input, lat_points, long_points, width_buffer = 1, increase_resolution = 1){
 

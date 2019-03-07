@@ -7,7 +7,9 @@
 #' @return TRUE
 #'
 #' @examples
+#' \donttest{
 #' mosaic_defra_lidar("path/to/grid/zip_files/", "output/file.raster")
+#' }
 #' @export
 mosaic_defra_lidar <- function(lidar_path, raster_output_file = "mosaic_uk_grid.raster"){
 

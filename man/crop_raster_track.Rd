@@ -25,5 +25,5 @@ cropped raster
 Crops a raster into a rectangle surrounding a set of lat long points
 }
 \examples{
-crop_raster_track(a_raster, some_lat_points, some_long_points)
+crop_raster_track(example_raster, example_igc$lat, example_igc$long)
 }

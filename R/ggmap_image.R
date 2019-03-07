@@ -8,7 +8,9 @@
 #' @return a png image to overlay a rayshader scene
 #'
 #' @examples
-#' ggmap_image(a_raster, maptype = "Stamen", zoom = 11, color = "bw")
+#' \donttest{
+#' ggmap_image(example_raster, maptype = "Stamen", zoom = 11, color = "bw")
+#' }
 #' @export
 ggmap_image <- function(raster_input, use_bbox = TRUE, ...){
 
@@ -36,11 +38,13 @@ ggmap_image <- function(raster_input, use_bbox = TRUE, ...){
   #Resample ggmap to match the dimensions of raster_input
   ggmap_crop <- raster::resample(ggmap_raster, raster_input)
 
-  rgdal::writeGDAL(methods::as(ggmap_crop, "SpatialGridDataFrame"), "map_image.png", drivername = "PNG", type = "Byte")
+  temp_map_image <- tempfile(fileext = ".png")
 
-  map_image <- png::readPNG("map_image.png")
+  rgdal::writeGDAL(methods::as(ggmap_crop, "SpatialGridDataFrame"), temp_map_image, drivername = "PNG", type = "Byte")
 
-  file.remove("map_image.png")
+  map_image <- png::readPNG(temp_map_image)
+
+  file.remove(temp_map_image)
 
   #add an alpha layer for ease of overlaying in rayshader
   alpha_layer <- matrix(1, nrow = dim(map_image)[1], ncol = dim(map_image)[2])

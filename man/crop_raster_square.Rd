@@ -25,5 +25,5 @@ cropped raster
 Crops a raster and returns a smaller square raster
 }
 \examples{
-crop_raster_square(a_raster, 54.4282623, -2.9787427, square_km = 10)
+crop_raster_square(example_raster, lat = 54.513293, long = -3.045598, square_km = 0.01)
 }

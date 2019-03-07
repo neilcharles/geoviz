@@ -20,5 +20,7 @@ Stitches together ASTER GDEM TIF files and saves as a single large raster
 Requires a target directory of ASTER zip files. Effecively a duplicate of mosaic_uk_grid() with a few tweaks.
 }
 \examples{
+\donttest{
 mosaic_ASTER("path/to/grid/zip_files/", "output/file.raster")
+}
 }
