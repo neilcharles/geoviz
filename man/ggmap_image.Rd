@@ -22,6 +22,10 @@ Gets a ggmap to overlay a rayshader scene and returns a raster
 }
 \examples{
 \donttest{
+library(ggmap)
+
+register_google(key = "YOUR_KEY")
+
 ggmap_image(example_raster, maptype = "Stamen", zoom = 11, color = "bw")
 }
 }
