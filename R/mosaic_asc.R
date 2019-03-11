@@ -33,7 +33,7 @@ mosaic_asc <-
     }
 
     if (extract_zip) {
-      message("Unzipping DEM files...")
+      message("Unzipping files...")
 
       #create a temporary dir to hold unzipped asc files
       unzip_dir <- tempfile(pattern = "asc_unzip_")
@@ -52,23 +52,28 @@ mosaic_asc <-
     #Load all terrain files in input directory
     raster_layers <- tibble::tibble(filename = grid_files)
 
-    message("Merging DEM files...")
+    message("Merging files...")
 
     #Intialise a raster to merge in the rest of the files one at a time. Can't do it all at once due to memory issues.
     raster_mosaic <-
-      raster::raster(rgdal::readGDAL(glue::glue(
+      raster::raster(glue::glue(
         "{asc_path}{raster_layers$filename[1]}"
-      )))
+      ))
+
+    pb <- progress::progress_bar$new(total = nrow(raster_layers)-1)
 
     #Merge layers one at a time
     for (i in 2:nrow(raster_layers)) {
       new_raster <-
-        raster::raster(rgdal::readGDAL(glue::glue(
+        raster::raster(glue::glue(
           "{asc_path}{raster_layers$filename[i]}"
-        )))
+        ))
 
       raster_mosaic <-
         raster::mosaic(raster_mosaic, new_raster, fun = "mean")
+
+      pb$tick()
+
     }
 
     unlink(unzip_dir, recursive = TRUE)  #kill the temp directory containing .asc files
