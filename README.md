@@ -1,4 +1,5 @@
-
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/geoviz)](https://cran.r-project.org/package=geoviz)
 # Geoviz
 
 Helper functions to draw [rayshader](https://github.com/tylermorganwall/rayshader) scenes.
