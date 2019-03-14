@@ -115,7 +115,7 @@ add_gps_to_rayshader(
 
 ### Handling digital elevation model data
 
-DEM files cab be downloaded from various sources, usually in .asc or .tif format. Often, they will be small files that need to be stitched together to render the scene that you want.
+DEM files can be downloaded from various sources, usually in .asc or .tif format. Often, they will be small files that need to be stitched together to render the scene that you want.
 
 If you have downloaded a set of DEM files, use mosaic_files() to create a single raster for use with Rayshader. The mosaic_files() function is flexible and will accept a directory of files or zipped files, with any naming convention and file extension.
 
