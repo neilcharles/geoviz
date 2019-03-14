@@ -1,6 +1,6 @@
 #' Creates an overlay image from various sources using Miles McBain's slippymath
 #'
-#' @param raster_input A raster
+#' @param raster_input A raster with WGS84 coordinates
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
 #' @param image_type The type of overlay to request. "satellite" (mapbox) or "watercolor", "toner", "terrain" (stamen)
 #' @param api_key API key (required for mapbox)
@@ -14,14 +14,9 @@
 #' @export
 slippy_overlay <- function(raster_input, image_source = "mapbox", image_type, api_key){
 
-  raster_input_proj <- raster::projectRaster(raster_input, crs = "+proj=longlat +datum=WGS84 +no_defs")
+  bounding_box <- methods::as(raster::extent(raster_input), "SpatialPolygons")
 
-  #resample because projectRaster can change raster dimensions
-  raster_input_proj <- raster::resample(raster_input_proj, raster_input)
-
-  bounding_box <- methods::as(raster::extent(raster_input_proj), "SpatialPolygons")
-
-  sp::proj4string(bounding_box) <- as.character(raster::crs(raster_input_proj))
+  sp::proj4string(bounding_box) <- as.character(raster::crs(raster_input))
 
   bounding_box <- sp::spTransform(bounding_box, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
@@ -67,9 +62,9 @@ slippy_overlay <- function(raster_input, image_source = "mapbox", image_type, ap
 
   unlink(tile_dir, recursive = TRUE)  #kill the temp directory containing tiles
 
-  raster_out = raster::projectRaster(raster_out, crs = "+proj=longlat +datum=WGS84 +no_defs")
+  raster_out = raster::projectRaster(raster_out, crs = raster::crs(raster_input))
 
-  raster_out <- raster::resample(raster_out, raster_input_proj)
+  raster_out <- raster::resample(raster_out, raster_input)
 
   temp_map_image <- tempfile(fileext = ".png")
 
