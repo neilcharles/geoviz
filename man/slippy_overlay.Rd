@@ -5,7 +5,7 @@
 \title{Creates an overlay image from various sources using Miles McBain's slippymath}
 \usage{
 slippy_overlay(raster_input, image_source = "mapbox", image_type,
-  api_key)
+  max_tiles = 30, return_png = TRUE, api_key)
 }
 \arguments{
 \item{raster_input}{A raster with WGS84 coordinates}
@@ -13,6 +13,10 @@ slippy_overlay(raster_input, image_source = "mapbox", image_type,
 \item{image_source}{Source for the overlay image. Valid entries are "mapbox", "stamen".}
 
 \item{image_type}{The type of overlay to request. "satellite" (mapbox) or "watercolor", "toner", "terrain" (stamen)}
+
+\item{max_tiles}{Maximum number of tiles to be requested by slippymath}
+
+\item{return_png}{\code{TRUE} to return a png image. \code{FALSE} will return a raster}
 
 \item{api_key}{API key (required for mapbox)}
 }

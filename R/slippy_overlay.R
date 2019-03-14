@@ -2,8 +2,10 @@
 #'
 #' @param raster_input A raster with WGS84 coordinates
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
-#' @param image_type The type of overlay to request. "satellite" (mapbox) or "watercolor", "toner", "terrain" (stamen)
+#' @param image_type The type of overlay to request. "satellite", "streets", "outdoors", "light", "dark" (mapbox) or "watercolor", "toner", "terrain" (stamen)
 #' @param api_key API key (required for mapbox)
+#' @param max_tiles Maximum number of tiles to be requested by slippymath
+#' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
 #'
 #' @return an overlay image for raster_input
 #'
@@ -12,7 +14,7 @@
 #' overlay_image <- slippy_overlay(example_raster, image_source = "stamen", image_type = "watercolor")
 #' }
 #' @export
-slippy_overlay <- function(raster_input, image_source = "mapbox", image_type, api_key){
+slippy_overlay <- function(raster_input, image_source = "stamen", image_type = "watercolor", max_tiles = 30, return_png = TRUE, api_key){
 
   bounding_box <- methods::as(raster::extent(raster_input), "SpatialPolygons")
 
@@ -29,15 +31,15 @@ slippy_overlay <- function(raster_input, image_source = "mapbox", image_type, ap
                   ymax = xt_scene@ymax),
                 crs = sf::st_crs("+proj=longlat +datum=WGS84 +no_defs"))
 
-  tile_grid <- slippymath::bbox_to_tile_grid(overlay_bbox, max_tiles = 30)
+  tile_grid <- slippymath::bbox_to_tile_grid(overlay_bbox, max_tiles = max_tiles)
 
   if(image_source=="stamen"){
 
-    query_string <- "http://tile.stamen.com/watercolor/{zoom}/{x}/{y}.jpg"
+    query_string <- paste0("http://tile.stamen.com/", image_type, "/{zoom}/{x}/{y}.jpg")
 
   } else if (image_source=="mapbox"){
 
-    query_string <- paste0("https://api.mapbox.com/v4/mapbox.satellite/{zoom}/{x}/{y}.jpg90",
+    query_string <- paste0("https://api.mapbox.com/v4/mapbox.", image_type, "/{zoom}/{x}/{y}.jpg90",
                            "?access_token=",
                            api_key)
   } else {
@@ -65,6 +67,10 @@ slippy_overlay <- function(raster_input, image_source = "mapbox", image_type, ap
   raster_out = raster::projectRaster(raster_out, crs = raster::crs(raster_input))
 
   raster_out <- raster::resample(raster_out, raster_input)
+
+  if(!return_png){
+    return(raster_out)
+  }
 
   temp_map_image <- tempfile(fileext = ".png")
 
