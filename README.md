@@ -1,9 +1,11 @@
+
 # Geoviz
 
 Helper functions to draw [rayshader](https://github.com/tylermorganwall/rayshader) scenes.
-- From UK OS Terrain 50, NASA ASTER and EU Copernicus DEM (Digital Elevation Model) data
+- From UK OS Terrain 50, NASA ASTER, EU Copernicus or any other DEM (Digital Elevation Model) data
 - With elevation shading (green valleys and snow capped peaks, or anything else you want)
-- With map and satellite overlays from ggmap
+- With map and satellite overlays
+- Blending between different overlays at different altitudes
 - with added  GPS tracks
 
 [Rayshader](https://github.com/tylermorganwall/rayshader) is an awesome bit of kit! I'm just doing some colouring in.
@@ -16,26 +18,19 @@ devtools::install_github("neilcharles/geoviz")
 
 Geoviz helps you to draw images like these.
 
-![rendered scene](assets/bw_example.jpg)
+![](man/figures/bw_example.jpg)
 
-![rendered scene](assets/stamen_example.jpg)
+![](man/figures/stamen_example.jpg)
 
-### A note about Google Maps
+### Update note
 
-The example below uses a Stamen map overlay because Google Maps now requires an API key. See [ggmap](https://github.com/dkahle/ggmap).
+There have been some breaking changes since v0.1
 
-If you want to do anything Googley with ggmap you'll need to register for an APIkey and before calling geocode() from ggmap or ggmap_image() from geoviz, run the following lines.
+- ggmap overlays have gone and been replaced by a new slippy_overlay() function powered by Miles McBain's [slippymath](https://github.com/MilesMcBain/slippymath). The ggmap ones were ok but had enough problems that they've been retired rather than left in the package.
 
-```R
-library(ggmap)
+- Functions for stitching together DEM files from different sources have been merged into the single function mosaic_files(), which is much more flexible.
 
-register_google(key = your_google_key)
-```
-Google will want billing details but you get plenty of free requests per month before charging begins and you can apply a spend cap of zero if you want to.
-
-
-### A quick example... see lower down the page for how to do this with your own data
-
+### Example
 
 ```R
 library(geoviz)
@@ -49,21 +44,15 @@ igc <- example_igc
 
 DEM <- example_raster
 
-#Set a few parameters to be used by rayshader (see rayshader's documentation for options etc.)
-
-exaggerate <- 1
-
-increase_resolution <- 1   #useful when you're cropping sections out of your DEM
-
 sunangle = 270
 
 zscale = 25
 
 #Get a Stamen map using ggmap that will cover our DEM
 
-ggmap_overlay <- ggmap_image(DEM, source = "stamen", maptype = "watercolor", zoom = 10)
+stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "watercolor")
 
-ggmap_overlay[,,4] <- 0.3  #sets the transparency of this overlay
+stamen_overlay[,,4] <- 0.3  #sets the transparency of this overlay
 
 #Make an elevation shading layer with dark valleys and light peaks (not essential but I like it!)
 
@@ -84,8 +73,7 @@ elmat = matrix(
 scene <- elmat %>%
   sphere_shade(sunangle = sunangle, texture = "bw") %>% 
   add_overlay(elevation_overlay) %>%
-  # add_water(rayshader::detect_water(elmat), color="imhof4") %>%
-  add_overlay(ggmap_overlay)
+  add_overlay(stamen_overlay)
 
 
 #Render the rayshader scene
@@ -93,15 +81,14 @@ scene <- elmat %>%
 rayshader::plot_3d(
   scene,
   elmat,
-  zscale = zscale / increase_resolution / exaggerate,
+  zscale = zscale,
   solid = FALSE,
   shadow = TRUE,
   shadowdepth = -100
 )
-
 ```
 
-![rendered scene](assets/example1.png)
+![](man/figures/example1.png)
 
 
 ```R
@@ -123,77 +110,74 @@ add_gps_to_rayshader(
 
 ```
 
-![rendered scene](assets/example2.png)
+![](man/figures/example2.png)
 
 
-### DEM Data Sources - EU Copernicus
+### Handling digital elevation model data
+
+DEM files can be downloaded from various sources, usually in .asc or .tif format. Often, they will be small files that need to be stitched together to render the scene that you want.
+
+If you have downloaded a set of DEM files, use mosaic_files() to create a single raster for use with Rayshader. The mosaic_files() function is flexible and will accept a directory of files or zipped files, with any naming convention and file extension.
+
+```R
+mosaic_files(
+  "path/to/zip/files",
+  extract_zip = TRUE,
+  file_match = ".*.TIF",
+  raster_output_file = "mosaic_out.raster"
+)
+
+raster_mosaic <- raster::raster("mosaic_out.gri")
+```
+
+### DEM data sources
+
+The following is by no means an exhaustive list of data sources, but it will get you started.
+
+
+**EU Copernicus**
 
 EU coverage.
 
-Copernicus map tiles are large, typically 3-5GB each and covering a country sized area. Download them [here](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1?tab=mapview)
+Copernicus map tiles are large, typically 3-5GB each and covering a country sized area. Download [Copernicus](https://land.copernicus.eu/imagery-in-situ/eu-dem/eu-dem-v1.1?tab=mapview)
 
 ```R
-big_DEM <- raster::raster("path/to/file/eu_dem_v11_E30N30.TIF")
-
 zscale <- 25
 ```
 
+**OS Terrain 50**
 
-### DEM Data Sources - OS Terrain 50
+UK coverage. Copernicus also covers the UK and comes as a single file covering the whole UK if you want to use that instead.
 
-UK coverage. Copernicus also covers the UK if you want to use that instead.
-
-To draw scenes of UK geography using OS Terrain 50 data.
-
-Download [OS Terrain 50](https://www.ordnancesurvey.co.uk/business-and-government/products/terrain-50.html) and unpack it so that you have a "data" directory.
-
-Use the following line to stitch all of the GRID files together into a single raster of the entire UK, or if you don't want to wait that long or have a lower powered machine that can't handle the whole UK mosaic, move a subset of GRID zip files out of the data directory and point the function at that subset instead. 
+Download [OS Terrain 50](https://www.ordnancesurvey.co.uk/business-and-government/products/terrain-50.html)
 
 ```R
-mosaic_uk_grid("path/to/grid/data/")  #ONLY RUN THIS ONCE TO CREATE THE WHOLE UK MOSAIC RASTER. IT MIGHT TAKE A WHILE.
-```
+mosaic_files(
+  "path/to/zip/files",
+  extract_zip = TRUE,
+  zip_file_match = ".*GRID.*.zip"
+  file_match = ".*.asc",
+  raster_output_file = "mosaic_out.raster"
+)
 
-If you find you run out of memory, try these lines before you call mosaic_uk_grid().
-
-```R
-library(raster)
-rasterOptions(todisk=TRUE)
-```
-
-Load the merged raster file
-
-```R
-big_DEM <- raster::raster("mosaic_uk_grid.grd")
+raster_mosaic <- raster::raster("mosaic_out.gri")
 
 zscale <- 50
 ```
 
-### DEM Data Sources - NASA ASTER
+**NASA ASTER**
 
 Whole world coverage but quite noisy. Copernicus is better if you're mapping in the EU.
 
-Download DEM files from [here](https://search.earthdata.nasa.gov/search/granules?p=C197265171-LPDAAC_ECS&q=aster&ok=aster). Search for "ASTER" in the top left box and select "ASTER Global Digital Elevation Model V002" underneath the map. You won't realistically be able to stitch together a single file of the whole world - it would be enormous - so just download the areas you need.
+Download [NASA Aster](https://search.earthdata.nasa.gov/search/granules?p=C197265171-LPDAAC_ECS&q=aster&ok=aster).
+Search for "ASTER" in the top left box and select "ASTER Global Digital Elevation Model V002" underneath the map. You won't realistically be able to stitch together a single file of the whole world - it would be enormous - so just download the areas you need.
 
 Stitching together the separate files is the same proces as for OS Terrain 50.
 
 ```R
-mosaic_ASTER("path/to/data/")
-```
-
-If you find you run out of memory, try these lines before you call mosaic_ASTER().
-
-```R
-library(raster)
-rasterOptions(todisk=TRUE)
-```
-
-Load the merged raster file
-
-```R
-big_DEM <- raster::raster("mosaic_ASTER.grd")
-
 zscale <- 30
 ```
+
 
 ### Slicing pieces out of the DEM
 
@@ -225,6 +209,8 @@ DEM <- crop_raster_track(big_DEM, igc$lat, igc$long, width_buffer = 2)
 You can load GPS track data any way that you like and pass decimal lat-longs as vectors to geoviz functions (see code examples above).
 
 If your GPS data is in IGC format - commonly used for glider flight data - then geoviz has a function read_igc(), which will do all the formatting work for you.
+
+If your GPS data is in .gpx format, the package plotKML has a handy function readGPX().
 
 ```R
 igc <- read_igc("path/to/your/file.igc")

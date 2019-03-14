@@ -6,16 +6,15 @@
 #' @return elevation shaded png image
 #'
 #' @examples
-#' elevation_shade(a_raster)
-#'
+#' elevation_shade(example_raster)
 #' @export
 elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF")){
-  col_ramp <- colorRampPalette(elevation_palette)
+  col_ramp <- grDevices::colorRampPalette(elevation_palette)
 
   #Create and save image to disk
-  png("elevation_shading.png", width=ncol(raster_input), height=nrow(raster_input), units = "px", pointsize = 1)
+  grDevices::png("elevation_shading.png", width=ncol(raster_input), height=nrow(raster_input), units = "px", pointsize = 1)
 
-  par(mar = c(0,0,0,0), xaxs = "i", yaxs = "i") #create a borderless image
+  graphics::par(mar = c(0,0,0,0), xaxs = "i", yaxs = "i") #create a borderless image
 
   raster::image(
     raster_input,
@@ -24,7 +23,7 @@ elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808
     axes = FALSE
   )
 
-  dev.off()
+  grDevices::dev.off()
 
   #Load generated png image
   terrain_image <- png::readPNG("elevation_shading.png")

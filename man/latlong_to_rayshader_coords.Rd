@@ -20,5 +20,5 @@ A tibble with x,y in rayshader coordinates
 Converts decimal lat long points into rayshader coordinates. Useful for adding arbitrary points and text to a rayshader scene.
 }
 \examples{
-latlong_to_rayshader_coords(a_raster, flight$lat, flight$long)
+latlong_to_rayshader_coords(example_raster, example_igc$lat, example_igc$long)
 }

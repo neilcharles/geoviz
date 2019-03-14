@@ -1,29 +1,39 @@
 Package: geoviz
 Type: Package
 Title: Elevation data visualisation
-Version: 0.1.0
+Version: 0.2.0
 Author: Neil Charles
 Maintainer: <neil.d.charles@gmail.com>
-Description: Helper functions for visualising terrain data with Rayshader
-License: What license is it under?
+Description: Geoviz contains helper functions for handling elevation data and visualising it with Tyler Morgan-Wall's Rayshader library.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-imports:
+Imports:
   dplyr,
+  magrittr,
   tidyr,
   readr,
   tibble,
   purrr,
   lubridate,
+  stringr,
   raster,
   rayshader,
   chron,
   sp,
+  sf,
   rgeos,
-  rgdal,
   glue,
   png,
-  abind
+  abind,
+  rgl,
+  slippymath,
+  curl,
+  progress,
+  methods,
+  rlang,
+  snow,
+  parallel
 Suggests: 
-    testthat
+  testthat

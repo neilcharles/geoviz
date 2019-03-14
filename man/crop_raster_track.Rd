@@ -14,9 +14,9 @@ crop_raster_track(raster_input, lat_points, long_points,
 
 \item{long_points}{a vector of decimal longitudes}
 
-\item{increase_resolution}{optional multiplier to increase number of cells in the raster. Default = 1.}
+\item{width_buffer}{buffer distance around the provided points}
 
-\item{width_bufer}{buffer distance around the provided points}
+\item{increase_resolution}{optional multiplier to increase number of cells in the raster. Default = 1.}
 }
 \value{
 cropped raster
@@ -25,5 +25,5 @@ cropped raster
 Crops a raster into a rectangle surrounding a set of lat long points
 }
 \examples{
-crop_raster_track(a_raster, some_lat_points, some_long_points)
+crop_raster_track(example_raster, example_igc$lat, example_igc$long)
 }

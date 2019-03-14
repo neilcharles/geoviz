@@ -9,7 +9,7 @@
 #' @return cropped raster
 #'
 #' @examples
-#' crop_raster_square(a_raster, 54.4282623, -2.9787427, square_km = 10)
+#' crop_raster_square(example_raster, lat = 54.513293, long = -3.045598, square_km = 0.01)
 #' @export
 crop_raster_square <- function(raster_input, lat, long, square_km, increase_resolution = 1){
   #create point
@@ -34,7 +34,7 @@ crop_raster_square <- function(raster_input, lat, long, square_km, increase_reso
 
     max_edge <- max(c(nrow(raster_crop), ncol(raster_crop)))
 
-    template <- raster(extent(raster_crop), crs = crs(raster_crop), nrow = max_edge, ncol = max_edge)
+    template <- raster::raster(raster::extent(raster_crop), crs = raster::crs(raster_crop), nrow = max_edge, ncol = max_edge)
 
     raster_crop <- raster::resample(raster_crop, template)
 
