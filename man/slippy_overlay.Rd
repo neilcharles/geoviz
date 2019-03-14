@@ -8,7 +8,7 @@ slippy_overlay(raster_input, image_source = "mapbox", image_type,
   api_key)
 }
 \arguments{
-\item{raster_input}{A raster}
+\item{raster_input}{A raster with WGS84 coordinates}
 
 \item{image_source}{Source for the overlay image. Valid entries are "mapbox", "stamen".}
 
