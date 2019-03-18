@@ -9,7 +9,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports:
+Imports: 
   dplyr,
   magrittr,
   tidyr,
@@ -34,6 +34,7 @@ Imports:
   methods,
   rlang,
   snow,
-  parallel
+  parallel,
+  ggplot2
 Suggests: 
   testthat
