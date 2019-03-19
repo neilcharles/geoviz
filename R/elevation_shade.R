@@ -2,36 +2,42 @@
 #'
 #' @param raster_input a raster
 #' @param elevation_palette a vector of colours to use for elevation shading
+#' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
+#' @param png_opacity Opacity of the returned image if requesting a png
 #'
 #' @return elevation shaded png image
 #'
 #' @examples
 #' elevation_shade(example_raster)
 #' @export
-elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF")){
-  col_ramp <- grDevices::colorRampPalette(elevation_palette)
+elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 1){
+  raster_values <- raster::values(raster_input)
 
-  #Create and save image to disk
-  grDevices::png("elevation_shading.png", width=ncol(raster_input), height=nrow(raster_input), units = "px", pointsize = 1)
+  colours <- grDevices::colorRamp(elevation_palette)(rescale(raster_values, 0,1,min(raster_values), max(raster_values)))
 
-  graphics::par(mar = c(0,0,0,0), xaxs = "i", yaxs = "i") #create a borderless image
+  red <- raster_input
+  raster::values(red) <- colours[,1]
+  green <- raster_input
+  raster::values(green) <- colours[,2]
+  blue <- raster_input
+  raster::values(blue) <- colours[,3]
 
-  raster::image(
-    raster_input,
-    col = col_ramp(64),
-    maxpixels = raster::ncell(raster_input),
-    axes = FALSE
-  )
+  image_raster <- raster::brick(list(red, green, blue))
 
-  grDevices::dev.off()
+  if(!return_png){
+    return(image_raster)
+  }
 
-  #Load generated png image
-  terrain_image <- png::readPNG("elevation_shading.png")
+  temp_image <- tempfile(fileext = ".png")
 
-  file.remove("elevation_shading.png")
+  slippymath::raster_to_png(image_raster, temp_image)
+
+  terrain_image <- png::readPNG(temp_image)
+
+  file.remove(temp_image)
 
   #add an alpha layer for ease of overlaying in rayshader
-  alpha_layer <- matrix(1, nrow = dim(terrain_image)[1], ncol = dim(terrain_image)[2])
+  alpha_layer <- matrix(png_opacity, nrow = dim(terrain_image)[1], ncol = dim(terrain_image)[2])
 
   terrain_image <- abind::abind(terrain_image, alpha_layer)
 

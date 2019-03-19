@@ -1,79 +1,49 @@
 #' Creates an overlay image from various sources using Miles McBain's slippymath
 #'
-#' @param raster_input A raster with WGS84 coordinates
+#' @param raster_base A raster to use to calculate dimensions for the overlay
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
-#' @param image_type The type of overlay to request. "satellite" (mapbox) or "watercolor", "toner", "terrain" (stamen)
+#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)
+#' @param max_tiles Maximum number of tiles to be requested by slippymath
 #' @param api_key API key (required for mapbox)
+#' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
+#' @param png_opacity Opacity of the returned image if requesting a png
 #'
-#' @return an overlay image for raster_input
+#' @return an overlay image for raster_base
 #'
 #' @examples
 #' \donttest{
 #' overlay_image <- slippy_overlay(example_raster, image_source = "stamen", image_type = "watercolor")
 #' }
 #' @export
-slippy_overlay <- function(raster_input, image_source = "mapbox", image_type, api_key){
+slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key, return_png = TRUE, png_opacity = 1){
 
-  bounding_box <- methods::as(raster::extent(raster_input), "SpatialPolygons")
+  #Calc bounding box to cover the raster
+  bounding_box <- methods::as(raster::extent(raster_base), "SpatialPolygons")
 
-  sp::proj4string(bounding_box) <- as.character(raster::crs(raster_input))
+  sp::proj4string(bounding_box) <- as.character(raster::crs(raster_base))
 
   bounding_box <- sp::spTransform(bounding_box, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
-  xt_scene <- raster::extent(bounding_box)
+  #Request slippy map
+  raster_out <- get_slippy_map(bounding_box, image_source = image_source, image_type = image_type, max_tiles = max_tiles, api_key = api_key)
 
-  overlay_bbox <-
-    sf::st_bbox(c(xmin = xt_scene@xmin,
-                  xmax = xt_scene@xmax,
-                  ymin = xt_scene@ymin,
-                  ymax = xt_scene@ymax),
-                crs = sf::st_crs("+proj=longlat +datum=WGS84 +no_defs"))
+  #Transform slippy map to a png that covers raster_input
+  raster_out = raster::projectRaster(raster_out, crs = raster::crs(raster_base))
 
-  tile_grid <- slippymath::bbox_to_tile_grid(overlay_bbox, max_tiles = 30)
+  raster_out <- raster::resample(raster_out, raster_base)
 
-  if(image_source=="stamen"){
-
-    query_string <- "http://tile.stamen.com/watercolor/{zoom}/{x}/{y}.jpg"
-
-  } else if (image_source=="mapbox"){
-
-    query_string <- paste0("https://api.mapbox.com/v4/mapbox.satellite/{zoom}/{x}/{y}.jpg90",
-                           "?access_token=",
-                           api_key)
-  } else {
-    stop(glue::glue("unknown source '{image_source}'"))
+  if(!return_png){
+    return(raster_out)
   }
-
-  #create a temporary dir to hold tiles
-  tile_dir <- tempfile(pattern = "map_tiles_")
-  dir.create(tile_dir)
-
-  images <-
-    purrr::pmap(tile_grid$tiles,
-                function(x, y, zoom){
-                  outfile <- glue::glue("{tile_dir}/{x}_{y}.jpg")
-                  curl::curl_download(url = glue::glue(query_string),
-                                      destfile = outfile)
-                  outfile
-                },
-                zoom = tile_grid$zoom)
-
-  raster_out <- slippymath::compose_tile_grid(tile_grid, images)
-
-  unlink(tile_dir, recursive = TRUE)  #kill the temp directory containing tiles
-
-  raster_out = raster::projectRaster(raster_out, crs = raster::crs(raster_input))
-
-  raster_out <- raster::resample(raster_out, raster_input)
 
   temp_map_image <- tempfile(fileext = ".png")
 
-  slippymath::raster_to_png(raster_out, temp_map_image)
+  suppressWarnings(slippymath::raster_to_png(raster_out, temp_map_image))
 
   map_image <- png::readPNG(temp_map_image)
   file.remove(temp_map_image)
 
-  alpha_layer <- matrix(1, nrow = dim(map_image)[1], ncol = dim(map_image)[2])
+  alpha_layer <- matrix(png_opacity, nrow = dim(map_image)[1], ncol = dim(map_image)[2])
 
   map_image <- abind::abind(map_image, alpha_layer)
 
