@@ -3,13 +3,14 @@
 #' @param raster_input a raster
 #' @param elevation_palette a vector of colours to use for elevation shading
 #' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
+#' @param png_opacity Opacity of the returned image if requesting a png
 #'
 #' @return elevation shaded png image
 #'
 #' @examples
 #' elevation_shade(example_raster)
 #' @export
-elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE){
+elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 1){
   raster_values <- raster::values(raster_input)
 
   colours <- grDevices::colorRamp(elevation_palette)(rescale(raster_values, 0,1,min(raster_values), max(raster_values)))
@@ -36,7 +37,7 @@ elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808
   file.remove(temp_image)
 
   #add an alpha layer for ease of overlaying in rayshader
-  alpha_layer <- matrix(1, nrow = dim(terrain_image)[1], ncol = dim(terrain_image)[2])
+  alpha_layer <- matrix(png_opacity, nrow = dim(terrain_image)[1], ncol = dim(terrain_image)[2])
 
   terrain_image <- abind::abind(terrain_image, alpha_layer)
 
