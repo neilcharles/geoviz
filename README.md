@@ -51,16 +51,11 @@ zscale = 25
 
 #Get a Stamen map using ggmap that will cover our DEM
 
-stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "watercolor")
-
-stamen_overlay[,,4] <- 0.3  #sets the transparency of this overlay
+stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "watercolor", png_opacity = 0.3)
 
 #Make an elevation shading layer with dark valleys and light peaks (not essential but I like it!)
 
-elevation_overlay <- elevation_shade(DEM, elevation_palette = c("#000000", "#FFFFFF"))
-
-elevation_overlay[,,4] <- 0.6  #sets the transparency of this overlay
-
+elevation_overlay <- elevation_shade(DEM, elevation_palette = c("#000000", "#FFFFFF"), png_opacity = 0.6)
 
 
 #Calculate the rayshader scene (see rayshader's documentation)
@@ -104,7 +99,7 @@ add_gps_to_rayshader(
   line_width = 1.5,
   lightsaber = TRUE,
   colour = "red",
-  zscale / increase_resolution / exaggerate,
+  zscale,
   ground_shadow = TRUE
 )
 
@@ -113,12 +108,66 @@ add_gps_to_rayshader(
 
 ![](man/figures/example2.png)
 
+### Quick access to digital elevation model data
+
+To draw scenes using high resolution DEM's, you'll need to download your own data (see below), but geoviz also has a helpful function to obtain 50m resolution DEM data from [Mapbox](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/). Small areas drawn using this data won't look great, but for larger areas (> 10 square km), it's a fast way to get started.
+
+```R
+
+library(rayshader)
+library(geoviz)
+
+mapbox_key <- "YOUR MAPBOX KEY"
+
+lat <- 54.4502651
+long <- -3.1767946
+square_km <- 20
+
+dem <- mapbox_dem(lat, long, square_km, mapbox_key)
+
+overlay_image <-
+  slippy_overlay(dem, image_source = "stamen", image_type = "watercolor", png_opacity = 0.5)
+
+elmat = matrix(
+  raster::extract(dem, raster::extent(dem), method = 'bilinear'),
+  nrow = ncol(dem),
+  ncol = nrow(dem)
+)
+
+scene <- elmat %>%
+  sphere_shade(sunangle = 270, texture = "desert") %>% 
+  add_overlay(overlay_image)
+
+rayshader::plot_3d(
+  scene,
+  elmat,
+  zscale = raster_zscale(dem),
+  solid = FALSE,
+  shadow = TRUE,
+  shadowdepth = -150
+)
+
+# You can also visualise your data in ggplot2 rather than rayshader.
+
+gg_overlay_image <-
+  slippy_overlay(
+    dem,
+    image_source = "stamen",
+    image_type = "watercolor",
+    return_png = FALSE
+  )
+
+ggplot2::ggplot() +
+  ggslippy(gg_overlay_image)
+
+
+```
 
 ### Handling digital elevation model data
 
 DEM files can be downloaded from various sources, usually in .asc or .tif format. Often, they will be small files that need to be stitched together to render the scene that you want.
 
-If you have downloaded a set of DEM files, use mosaic_files() to create a single raster for use with Rayshader. The mosaic_files() function is flexible and will accept a directory of files or zipped files, with any naming convention and file extension.
+If you have downloaded a set of DEM files, use mosaic_files() to create a single raster for use with Rayshader. The mosaic_files() function is flexible and will accept a directory of files or zipped files, using any naming convention and file extension.
 
 ```R
 mosaic_files(
@@ -202,7 +251,10 @@ DEM <- crop_raster_square(big_DEM, coords$lat, coords$lon, square_km)
 Or crop a section from your DEM to fit a GPS track...
 
 ```R
-DEM <- crop_raster_track(big_DEM, igc$lat, igc$long, width_buffer = 2)
+
+igc <- example_igc
+
+DEM <- crop_raster_track(example_raster, igc$lat, igc$long, width_buffer = 2)
 ```
 
 ### Loading GPS tracks
@@ -211,7 +263,7 @@ You can load GPS track data any way that you like and pass decimal lat-longs as 
 
 If your GPS data is in IGC format - commonly used for glider flight data - then geoviz has a function read_igc(), which will do all the formatting work for you.
 
-If your GPS data is in .gpx format, the package plotKML has a handy function readGPX().
+If your GPS data is in .gpx format, the plotKML package has a handy function readGPX().
 
 ```R
 igc <- read_igc("path/to/your/file.igc")
@@ -219,4 +271,4 @@ igc <- read_igc("path/to/your/file.igc")
 
 ### Adding GPS traces to Rayshader scenes
 
-Geoviz converts decimal lat-long GPS traces into rayshader's coordinate system and then plots the GPS track using the funtion add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into rayshader's coordinates and see the converted data (e.g. so you can add your own arbirary rgl shape to the scene or for use with rayshder's render_label() function), use latlong_to_rayshader_coords().
+Geoviz converts decimal lat-long GPS traces into rayshader's coordinate system and then plots the GPS track using the funtion add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into rayshader's coordinates and see the converted data (e.g. so you can add your own rgl shapse to the scene or for use with rayshder's render_label() function), use latlong_to_rayshader_coords().

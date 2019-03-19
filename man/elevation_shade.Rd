@@ -5,7 +5,7 @@
 \title{Produces an elevation shaded png from a raster}
 \usage{
 elevation_shade(raster_input, elevation_palette = c("#54843f", "#808080",
-  "#FFFFFF"), return_png = TRUE)
+  "#FFFFFF"), return_png = TRUE, png_opacity = 1)
 }
 \arguments{
 \item{raster_input}{a raster}
@@ -13,6 +13,8 @@ elevation_shade(raster_input, elevation_palette = c("#54843f", "#808080",
 \item{elevation_palette}{a vector of colours to use for elevation shading}
 
 \item{return_png}{\code{TRUE} to return a png image. \code{FALSE} will return a raster}
+
+\item{png_opacity}{Opacity of the returned image if requesting a png}
 }
 \value{
 elevation shaded png image
