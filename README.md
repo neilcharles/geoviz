@@ -99,7 +99,7 @@ add_gps_to_rayshader(
   line_width = 1.5,
   lightsaber = TRUE,
   colour = "red",
-  zscale,
+  zscale = zscale,
   ground_shadow = TRUE
 )
 
