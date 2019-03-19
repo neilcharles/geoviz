@@ -10,9 +10,9 @@ crop_raster_track(raster_input, lat_points, long_points,
 \arguments{
 \item{raster_input}{a raster}
 
-\item{lat_points}{a vector of decimal latitudes}
+\item{lat_points}{a vector of WGS84 latitudes}
 
-\item{long_points}{a vector of decimal longitudes}
+\item{long_points}{a vector of WGS84 longitudes}
 
 \item{width_buffer}{buffer distance around the provided points}
 

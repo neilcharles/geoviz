@@ -6,7 +6,7 @@ igc <- example_igc
 DEM <- example_raster
 lat = 54.4502651
 long = -3.1767946
-square_km_crop = 1
+square_km = 1
 
 test_that("slippy_overlay() has correct dimensions", {
   slippy_overlay_result <- slippy_overlay(DEM, max_tiles = 5)

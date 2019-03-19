@@ -10,16 +10,16 @@ crop_raster_square(raster_input, lat, long, square_km,
 \arguments{
 \item{raster_input}{a raster}
 
-\item{lat}{decimal latitude of the centre of the cropped square}
+\item{lat}{WGS84 latitude of the centre of the cropped square}
 
-\item{long}{decimal longitude of the centre of the cropped square}
+\item{long}{WGS84 longitude of the centre of the cropped square}
 
 \item{square_km}{length of one side of the square in km}
 
-\item{increase_resolution}{optional multiplier to increase number of cells in the raster. Default = 1.}
+\item{increase_resolution}{optional multiplier to increase number of cells in the raster}
 }
 \value{
-cropped raster
+A cropped raster
 }
 \description{
 Crops a raster and returns a smaller square raster

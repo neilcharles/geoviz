@@ -6,9 +6,8 @@
 #' @return a number to be used as zscale in rayshader::plot_3d()
 #'
 #' @examples
-#' \donttest{
-#' NEEDS EXAMPLE
-#' }
+#' raster_zscale(example_raster)
+#'
 #' @export
 raster_zscale <- function(raster, height_units = "m"){
 

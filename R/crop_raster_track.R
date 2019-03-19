@@ -1,8 +1,8 @@
 #' Crops a raster into a rectangle surrounding a set of lat long points
 #'
 #' @param raster_input a raster
-#' @param lat_points a vector of decimal latitudes
-#' @param long_points a vector of decimal longitudes
+#' @param lat_points a vector of WGS84 latitudes
+#' @param long_points a vector of WGS84 longitudes
 #' @param width_buffer buffer distance around the provided points
 #' @param increase_resolution optional multiplier to increase number of cells in the raster. Default = 1.
 #'

@@ -37,4 +37,4 @@ Imports:
   parallel,
   ggplot2
 Suggests: 
-  testthat
+    testthat

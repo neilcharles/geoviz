@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_slippy_map.R
 \name{get_slippy_map}
 \alias{get_slippy_map}
-\title{Obtains and merges map tiles from various sources}
+\title{Obtains and merges map tiles from various sources using the slippymath package}
 \usage{
 get_slippy_map(bounding_box, image_source = "stamen",
   image_type = "watercolor", max_tiles = 30, api_key)
@@ -19,13 +19,16 @@ get_slippy_map(bounding_box, image_source = "stamen",
 \item{api_key}{API key (required for mapbox)}
 }
 \value{
-a rasterBrick image with the same dimensions as bounding_box
+a rasterBrick image with the same dimensions (but not the same resolution) as bounding_box
 }
 \description{
-Obtains and merges map tiles from various sources
+Obtains and merges map tiles from various sources using the slippymath package
 }
 \examples{
 \donttest{
-# NEEDS EXAMPLE
+get_slippy_map <- function(example_raster,
+  image_source = "stamen",
+  image_type = "watercolor",
+  max_tiles = 30)
 }
 }

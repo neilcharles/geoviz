@@ -2,21 +2,39 @@
 % Please edit documentation in R/ggslippy.R
 \name{ggslippy}
 \alias{ggslippy}
-\title{Creates an overlay image from various sources using Miles McBain's slippymath}
+\title{Adds a layer created using slippy_overlay() or slippy_raster() to a ggplot2 chart}
 \usage{
-ggslippy(slippy_raster)
+ggslippy(slippy_raster, alpha = 1)
 }
 \arguments{
 \item{slippy_raster}{A raster raster returned by either \code{slippy_raster()} or \code{slippy_overlay(return_png = FALSE)}}
+
+\item{alpha}{Opacity of the raster in ggplot}
 }
 \value{
 a ggplot object
 }
 \description{
-Creates an overlay image from various sources using Miles McBain's slippymath
+Adds a layer created using slippy_overlay() or slippy_raster() to a ggplot2 chart
 }
 \examples{
 \donttest{
-example...
+
+library(ggplot2)
+library(geoviz)
+
+dem <- example_dem
+
+gg_overlay_image <-
+  slippy_overlay(
+    dem,
+    image_source = "stamen",
+    image_type = "watercolor",
+    return_png = FALSE
+  )
+
+ ggplot2::ggplot() +
+   ggslippy(gg_overlay_image)
+
 }
 }

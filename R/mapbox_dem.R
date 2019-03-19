@@ -13,6 +13,7 @@
 #' lat = 54.4502651
 #' long = -3.1767946
 #' square_km = 20
+#'
 #' dem <- mapbox_dem(lat, long, square_km, mapbox_key)
 #'
 #' }

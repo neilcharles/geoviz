@@ -1,12 +1,12 @@
 #' Crops a raster and returns a smaller square raster
 #'
 #' @param raster_input a raster
-#' @param lat decimal latitude of the centre of the cropped square
-#' @param long decimal longitude of the centre of the cropped square
+#' @param lat WGS84 latitude of the centre of the cropped square
+#' @param long WGS84 longitude of the centre of the cropped square
 #' @param square_km length of one side of the square in km
-#' @param increase_resolution optional multiplier to increase number of cells in the raster. Default = 1.
+#' @param increase_resolution optional multiplier to increase number of cells in the raster
 #'
-#' @return cropped raster
+#' @return A cropped raster
 #'
 #' @examples
 #' crop_raster_square(example_raster, lat = 54.513293, long = -3.045598, square_km = 0.01)
