@@ -99,7 +99,7 @@ add_gps_to_rayshader(
   line_width = 1.5,
   lightsaber = TRUE,
   colour = "red",
-  zscale / increase_resolution / exaggerate,
+  zscale = zscale,
   ground_shadow = TRUE
 )
 
@@ -110,18 +110,18 @@ add_gps_to_rayshader(
 
 ### Quick access to digital elevation model data
 
-To draw scenes using high resolution DEM's, you'll need to download your own data (see below), but geoviz also has a helful function to obtain 50m resolution DEM data from [Mapbox](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/). Small areas drawn using this data won't look great, but for larger areas (> 10 square km), it's a fast way to get started.
+To draw scenes using high resolution DEM's, you'll need to download your own data (see below), but geoviz also has a helpful function to obtain 50m resolution DEM data from [Mapbox](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/). Small areas drawn using this data won't look great, but for larger areas (> 10 square km), it's a fast way to get started.
 
 ```R
 
 library(rayshader)
 library(geoviz)
 
-mapbox_key = "YOUR MAPBOX KEY"
+mapbox_key <- "YOUR MAPBOX KEY"
 
-lat = 54.4502651
-long = -3.1767946
-square_km = 20
+lat <- 54.4502651
+long <- -3.1767946
+square_km <- 20
 
 dem <- mapbox_dem(lat, long, square_km, mapbox_key)
 
