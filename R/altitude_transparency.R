@@ -19,16 +19,16 @@
 #' # Transparency in the range between pct_alt_low and pct_alt_high will
 #' # smoothly transition between alpha_max and alpha_min.
 #'
-#' overlay_image <- elevation_shade(example_raster, elevation_palette = c("#000000", "#FF0000"))
+#'  overlay_image <- elevation_shade(example_raster, elevation_palette = c("#000000", "#FF0000"))
 #'
-#' #Making hills transparent
+#'  #Making hills transparent
 #'
-#' ggmap_overlay_transparent_hills <- altitude_transparency(overlay_image,
+#'  ggmap_overlay_transparent_hills <- altitude_transparency(overlay_image,
 #'    example_raster, alpha_max = 0.8, alpha_min = 0, pct_alt_low = 0.05,
 #'    pct_alt_high = 0.25)
 #'
-#' # To make valleys transparent, flip alpha_max and alpha_min
-#' ggmap_overlay_transparent_valleys <- altitude_transparency(overlay_image,
+#'  # To make valleys transparent, flip alpha_max and alpha_min
+#'  ggmap_overlay_transparent_valleys <- altitude_transparency(overlay_image,
 #'    example_raster, alpha_max = 0, alpha_min = 0.8, pct_alt_low = 0.05,
 #'    pct_alt_high = 0.25)
 #' @export

@@ -32,7 +32,7 @@ Stitches together files into a single raster
 Requires a target directory of files that can be read with raster::raster(), e.g. .asc files, or a directory of .zip files containing these files
 }
 \examples{
-\donttest{
-mosaic_asc("path/to/grid/zip_files/", "output/file.raster")
+\dontrun{
+mosaic_files("path/to/grid/zip_files/", "output/file.raster")
 }
 }

@@ -19,7 +19,6 @@ crop_raster_square <- function(raster_input, lat, long, square_km, increase_reso
 
   raster_crop <- raster::crop(raster_input, bounding_shape)
 
-
   # Check that the resulting raster is square (identical lat and long resolution) and resample if it isn't. Needed for NASA ASTER data and maybe others.
   square_error <- nrow(raster_crop) / ncol(raster_crop)
 
@@ -33,8 +32,9 @@ crop_raster_square <- function(raster_input, lat, long, square_km, increase_reso
 
   }
 
-
-  raster_crop <- raster::disaggregate(raster_crop, increase_resolution, method = 'bilinear')
+  if(increase_resolution > 1){
+    raster_crop <- raster::disaggregate(raster_crop, increase_resolution, method = 'bilinear')
+  }
 
   return(raster_crop)
 }

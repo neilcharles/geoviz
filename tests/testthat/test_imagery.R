@@ -80,5 +80,3 @@ test_that("drybrush() has correct dimensions", {
   expect_equal(ncol(drybrush_result), ncol(DEM))
   expect_equal(nrow(drybrush_result), nrow(DEM))
 })
-
-

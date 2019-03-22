@@ -8,8 +8,9 @@
 #' @return a raster with values corresponding to terrain height in metres
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' mapbox_key = "YOUR_MAPBOX_API_KEY"
+#'
 #' lat = 54.4502651
 #' long = -3.1767946
 #' square_km = 20

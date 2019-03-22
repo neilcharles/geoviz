@@ -11,6 +11,7 @@
 #' elevation_shade(example_raster)
 #' @export
 elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 1){
+
   raster_values <- raster::values(raster_input)
 
   colours <- grDevices::colorRamp(elevation_palette)(rescale(raster_values, 0,1,min(raster_values), max(raster_values)))

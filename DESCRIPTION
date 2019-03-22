@@ -4,7 +4,7 @@ Title: Elevation data visualisation
 Version: 0.2.0
 Author: Neil Charles
 Maintainer: <neil.d.charles@gmail.com>
-Description: Geoviz contains helper functions for handling elevation data and visualising it with Tyler Morgan-Wall's Rayshader library.
+Description: Geoviz contains helper functions for handling elevation data and visualising it with the rayshader package.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -16,10 +16,8 @@ Imports:
   readr,
   tibble,
   purrr,
-  lubridate,
   stringr,
   raster,
-  rayshader,
   chron,
   sp,
   sf,
@@ -33,8 +31,6 @@ Imports:
   progress,
   methods,
   rlang,
-  snow,
-  parallel,
   ggplot2
 Suggests: 
     testthat
