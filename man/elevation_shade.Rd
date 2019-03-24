@@ -4,11 +4,11 @@
 \alias{elevation_shade}
 \title{Produces an elevation shaded png from a raster}
 \usage{
-elevation_shade(raster_input, elevation_palette = c("#54843f", "#808080",
+elevation_shade(raster_dem, elevation_palette = c("#54843f", "#808080",
   "#FFFFFF"), return_png = TRUE, png_opacity = 1)
 }
 \arguments{
-\item{raster_input}{a raster}
+\item{raster_dem}{a raster}
 
 \item{elevation_palette}{a vector of colours to use for elevation shading}
 
@@ -23,5 +23,5 @@ elevation shaded png image
 Produces an elevation shaded png from a raster
 }
 \examples{
-elevation_shade(example_raster)
+elevation_shade(example_raster())
 }

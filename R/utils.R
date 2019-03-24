@@ -13,3 +13,8 @@ square_bounding_box <- function(lat, long, square_km){
 
   return(bounding_shape)
 }
+
+rescale <- function (x, nx1, nx2, minx, maxx){
+  nx = nx1 + (nx2 - nx1) * (x - minx)/(maxx - minx)
+  return(nx)
+}

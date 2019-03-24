@@ -39,11 +39,11 @@ library(rayshader)
 
 #Load an example IGC (GPS track log) file
 
-igc <- example_igc
+igc <- example_igc()
 
 #Load a small example elevation raster showing a piece of the English Lake district
 
-DEM <- example_raster
+DEM <- example_raster()
 
 sunangle = 270
 
@@ -252,9 +252,9 @@ Or crop a section from your DEM to fit a GPS track...
 
 ```R
 
-igc <- example_igc
+igc <- example_igc()
 
-DEM <- crop_raster_track(example_raster, igc$lat, igc$long, width_buffer = 2)
+DEM <- crop_raster_track(example_raster(), igc$lat, igc$long, width_buffer = 2)
 ```
 
 ### Loading GPS tracks

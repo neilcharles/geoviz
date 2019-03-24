@@ -26,7 +26,7 @@ Obtains and merges map tiles from various sources using the slippymath package
 }
 \examples{
 \donttest{
-get_slippy_map(example_raster,
+get_slippy_map(example_raster(),
   image_source = "stamen",
   image_type = "watercolor",
   max_tiles = 30)

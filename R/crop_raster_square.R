@@ -1,6 +1,6 @@
 #' Crops a raster and returns a smaller square raster
 #'
-#' @param raster_input a raster
+#' @param rasterIn a raster
 #' @param lat WGS84 latitude of the centre of the cropped square
 #' @param long WGS84 longitude of the centre of the cropped square
 #' @param square_km length of one side of the square in km
@@ -9,15 +9,15 @@
 #' @return A cropped raster
 #'
 #' @examples
-#' crop_raster_square(example_raster, lat = 54.513293, long = -3.045598, square_km = 0.01)
+#' crop_raster_square(example_raster(), lat = 54.513293, long = -3.045598, square_km = 0.01)
 #' @export
-crop_raster_square <- function(raster_input, lat, long, square_km, increase_resolution = 1){
+crop_raster_square <- function(rasterIn, lat, long, square_km, increase_resolution = 1){
 
   bounding_shape <- square_bounding_box(lat, long, square_km)
 
-  bounding_shape <- sp::spTransform(bounding_shape, sp::CRS(as.character(raster::crs(raster_input))))
+  bounding_shape <- sp::spTransform(bounding_shape, sp::CRS(as.character(raster::crs(rasterIn))))
 
-  raster_crop <- raster::crop(raster_input, bounding_shape)
+  raster_crop <- raster::crop(rasterIn, bounding_shape)
 
   # Check that the resulting raster is square (identical lat and long resolution) and resample if it isn't. Needed for NASA ASTER data and maybe others.
   square_error <- nrow(raster_crop) / ncol(raster_crop)

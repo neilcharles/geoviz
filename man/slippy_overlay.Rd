@@ -31,6 +31,7 @@ Creates an overlay image from various sources using Miles McBain's slippymath
 }
 \examples{
 \donttest{
-overlay_image <- slippy_overlay(example_raster, image_source = "stamen", image_type = "watercolor")
+overlay_image <- slippy_overlay(example_raster(),
+  image_source = "stamen", image_type = "watercolor")
 }
 }

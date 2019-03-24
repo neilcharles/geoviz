@@ -1,6 +1,6 @@
 #' Produces an elevation shaded png from a raster
 #'
-#' @param raster_input a raster
+#' @param raster_dem a raster
 #' @param elevation_palette a vector of colours to use for elevation shading
 #' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
 #' @param png_opacity Opacity of the returned image if requesting a png
@@ -8,34 +8,34 @@
 #' @return elevation shaded png image
 #'
 #' @examples
-#' elevation_shade(example_raster)
+#' elevation_shade(example_raster())
 #' @export
-elevation_shade <- function(raster_input, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 1){
+elevation_shade <- function(raster_dem, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 1){
 
-  raster_values <- raster::values(raster_input)
+  rasterValues <- raster::values(raster_dem)
 
-  colours <- grDevices::colorRamp(elevation_palette)(rescale(raster_values, 0,1,min(raster_values), max(raster_values)))
+  colours <- grDevices::colorRamp(elevation_palette)(rescale(rasterValues, 0,1,min(rasterValues), max(rasterValues)))
 
-  red <- raster_input
+  red <- raster_dem
   raster::values(red) <- colours[,1]
-  green <- raster_input
+  green <- raster_dem
   raster::values(green) <- colours[,2]
-  blue <- raster_input
+  blue <- raster_dem
   raster::values(blue) <- colours[,3]
 
-  image_raster <- raster::brick(list(red, green, blue))
+  rasterImage <- raster::brick(list(red, green, blue))
 
   if(!return_png){
-    return(image_raster)
+    return(rasterImage)
   }
 
-  temp_image <- tempfile(fileext = ".png")
+  tempImage <- tempfile(fileext = ".png")
 
-  slippymath::raster_to_png(image_raster, temp_image)
+  slippymath::raster_to_png(rasterImage, tempImage)
 
-  terrain_image <- png::readPNG(temp_image)
+  terrain_image <- png::readPNG(tempImage)
 
-  file.remove(temp_image)
+  file.remove(tempImage)
 
   #add an alpha layer for ease of overlaying in rayshader
   alpha_layer <- matrix(png_opacity, nrow = dim(terrain_image)[1], ncol = dim(terrain_image)[2])
