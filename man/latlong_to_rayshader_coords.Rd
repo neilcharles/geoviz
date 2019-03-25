@@ -20,5 +20,5 @@ A tibble with x,y in rayshader coordinates
 Converts WGS84 lat long points into rayshader coordinates. Useful for adding arbitrary points and text to a rayshader scene.
 }
 \examples{
-latlong_to_rayshader_coords(example_raster, example_igc$lat, example_igc$long)
+latlong_to_rayshader_coords(example_raster(), example_igc()$lat, example_igc()$long)
 }

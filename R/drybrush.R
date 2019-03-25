@@ -1,6 +1,6 @@
 #' Simulates a dry brushing effect. Differs from Altitude transparency in that colour is applied based on local altitude peaks, not across the whole raster
 #'
-#' @param altitude_raster A raster
+#' @param raster_dem A raster
 #' @param aggregation_factor grid size to determine local altitude peaks
 #' @param max_colour_altitude Altitude below which colours will be graduated across elevation_palette
 #' @param opacity overall opacity of the returned image
@@ -9,15 +9,15 @@
 #' @return An image with a drybrished colour effect, highlighting local peaks
 #'
 #' @examples
-#' overlay_image <- drybrush(example_raster)
+#' overlay_image <- drybrush(example_raster())
 #' @export
-drybrush <- function(altitude_raster, aggregation_factor = 10, max_colour_altitude = 30, opacity = 0.5, elevation_palette = c("#3f3f3f", "#ffa500")){
+drybrush <- function(raster_dem, aggregation_factor = 10, max_colour_altitude = 30, opacity = 0.5, elevation_palette = c("#3f3f3f", "#ffa500")){
 
-  raster_base <- raster::aggregate(altitude_raster, fun = min, fact = 10)
+  rasterBase <- raster::aggregate(raster_dem, fun = min, fact = 10)
 
-  raster_base <- raster::resample(raster_base, altitude_raster)
+  rasterBase <- raster::resample(rasterBase, raster_dem)
 
-  drybrush_distance <- altitude_raster - raster_base
+  drybrush_distance <- raster_dem - rasterBase
 
   drybrush_distance[is.na(drybrush_distance)] <- 0
   drybrush_distance[drybrush_distance < 0] <- 0

@@ -12,8 +12,8 @@
 #' @return TRUE
 #'
 #' @examples
-#' \donttest{
-#' mosaic_asc("path/to/grid/zip_files/", "output/file.raster")
+#' \dontrun{
+#' mosaic_files("path/to/grid/zip_files/", "output/file.raster")
 #' }
 #' @export
 mosaic_files <-

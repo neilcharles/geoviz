@@ -4,11 +4,11 @@
 \alias{crop_raster_square}
 \title{Crops a raster and returns a smaller square raster}
 \usage{
-crop_raster_square(raster_input, lat, long, square_km,
+crop_raster_square(rasterIn, lat, long, square_km,
   increase_resolution = 1)
 }
 \arguments{
-\item{raster_input}{a raster}
+\item{rasterIn}{a raster}
 
 \item{lat}{WGS84 latitude of the centre of the cropped square}
 
@@ -25,5 +25,5 @@ A cropped raster
 Crops a raster and returns a smaller square raster
 }
 \examples{
-crop_raster_square(example_raster, lat = 54.513293, long = -3.045598, square_km = 0.01)
+crop_raster_square(example_raster(), lat = 54.513293, long = -3.045598, square_km = 0.01)
 }

@@ -4,12 +4,11 @@
 \alias{drybrush}
 \title{Simulates a dry brushing effect. Differs from Altitude transparency in that colour is applied based on local altitude peaks, not across the whole raster}
 \usage{
-drybrush(altitude_raster, aggregation_factor = 10,
-  max_colour_altitude = 30, opacity = 0.5,
-  elevation_palette = c("#3f3f3f", "#ffa500"))
+drybrush(raster_dem, aggregation_factor = 10, max_colour_altitude = 30,
+  opacity = 0.5, elevation_palette = c("#3f3f3f", "#ffa500"))
 }
 \arguments{
-\item{altitude_raster}{A raster}
+\item{raster_dem}{A raster}
 
 \item{aggregation_factor}{grid size to determine local altitude peaks}
 
@@ -26,5 +25,5 @@ An image with a drybrished colour effect, highlighting local peaks
 Simulates a dry brushing effect. Differs from Altitude transparency in that colour is applied based on local altitude peaks, not across the whole raster
 }
 \examples{
-overlay_image <- drybrush(example_raster)
+overlay_image <- drybrush(example_raster())
 }

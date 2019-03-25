@@ -18,6 +18,6 @@ a number to be used as zscale in rayshader::plot_3d()
 Calculates the zscale of a raster Digital Elevation Model for rayshader
 }
 \examples{
-raster_zscale(example_raster)
+raster_zscale(example_raster())
 
 }

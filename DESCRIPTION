@@ -1,10 +1,10 @@
 Package: geoviz
 Type: Package
-Title: Elevation data visualisation
+Title: Elevation And GPS Data Visualisation
 Version: 0.2.0
 Author: Neil Charles
-Maintainer: <neil.d.charles@gmail.com>
-Description: Geoviz contains helper functions for handling elevation data and visualising it with Tyler Morgan-Wall's Rayshader library.
+Maintainer: Neil Charles <neil.d.charles@gmail.com>
+Description: Simpler processing of digital elevation model and GPS trace data for use with the rayshader package.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -16,10 +16,8 @@ Imports:
   readr,
   tibble,
   purrr,
-  lubridate,
   stringr,
   raster,
-  rayshader,
   chron,
   sp,
   sf,
@@ -33,8 +31,7 @@ Imports:
   progress,
   methods,
   rlang,
-  snow,
-  parallel,
-  ggplot2
+  ggplot2,
+  rgdal
 Suggests: 
     testthat

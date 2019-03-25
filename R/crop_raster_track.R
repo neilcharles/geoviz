@@ -9,9 +9,13 @@
 #' @return cropped raster
 #'
 #' @examples
-#' crop_raster_track(example_raster, example_igc$lat, example_igc$long)
+#' crop_raster_track(example_raster(), example_igc()$lat, example_igc()$long)
 #' @export
 crop_raster_track <- function(raster_input, lat_points, long_points, width_buffer = 1, increase_resolution = 1){
+
+  #Error: package rgdal is required for spTransform methods
+  #rgdal added to Imports and called here to pass checks
+  temp_rgdal <- rgdal::getGDALCheckVersion()
 
   #Make a bounding box around the track points
   bounding_box <- sp::SpatialPoints(cbind(long_points, lat_points),
