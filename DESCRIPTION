@@ -34,4 +34,7 @@ Imports:
   ggplot2,
   rgdal
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
