@@ -2,11 +2,11 @@
 
 export("%>%")
 export(add_gps_to_rayshader)
-export(altitude_transparency)
 export(crop_raster_square)
 export(crop_raster_track)
 export(drybrush)
 export(elevation_shade)
+export(elevation_transparency)
 export(example_igc)
 export(example_raster)
 export(get_slippy_map)

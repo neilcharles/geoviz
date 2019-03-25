@@ -13,5 +13,9 @@ a raster
 Returns an example digital elevation model raster file()
 }
 \examples{
+
+# Load elevation data describing  a small section of the English Lake District
+# Source: EU Copernicus https://land.copernicus.eu/terms-of-use
+
 example_raster <- example_raster()
 }

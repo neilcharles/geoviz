@@ -10,7 +10,7 @@ read_igc(path)
 \item{path}{target IGC file}
 }
 \value{
-processed IGC file
+a tibble
 }
 \description{
 Load an IGC file

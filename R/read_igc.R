@@ -2,7 +2,7 @@
 #'
 #' @param path target IGC file
 #'
-#' @return processed IGC file
+#' @return a tibble
 #'
 #' @examples
 #' \donttest{

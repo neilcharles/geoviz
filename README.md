@@ -123,17 +123,21 @@ lat <- 54.4502651
 long <- -3.1767946
 square_km <- 20
 
+#Get elevation data from Mapbox
 dem <- mapbox_dem(lat, long, square_km, mapbox_key)
 
+#Get an overlay image (Stamen for this example because it doesn't need an API key)
 overlay_image <-
   slippy_overlay(dem, image_source = "stamen", image_type = "watercolor", png_opacity = 0.5)
 
-elmat = matrix(
-  raster::extract(dem, raster::extent(dem), method = 'bilinear'),
-  nrow = ncol(dem),
-  ncol = nrow(dem)
-)
+#Optionally, turn mountainous parts of the overlay transparent
+overlay_image <-
+  altitude_transparency(overlay_image,
+                        dem,
+                        pct_alt_high = 0.5,
+                        alpha_max = 0.9)
 
+#Draw the rayshader scene
 scene <- elmat %>%
   sphere_shade(sunangle = 270, texture = "desert") %>% 
   add_overlay(overlay_image)
@@ -146,7 +150,11 @@ rayshader::plot_3d(
   shadow = TRUE,
   shadowdepth = -150
 )
+```
 
+![](man/figures/example3.png)
+
+```R
 # You can also visualise your data in ggplot2 rather than rayshader.
 
 gg_overlay_image <-
@@ -162,6 +170,7 @@ ggplot2::ggplot() +
 
 
 ```
+
 
 ### Handling digital elevation model data
 
