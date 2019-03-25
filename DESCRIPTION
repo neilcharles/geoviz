@@ -1,6 +1,6 @@
 Package: geoviz
 Type: Package
-Title: Elevation And GPS Data Visualisation
+Title: Elevation and GPS Data Visualisation
 Version: 0.2.0
 Author: Neil Charles
 Maintainer: Neil Charles <neil.d.charles@gmail.com>

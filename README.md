@@ -132,12 +132,19 @@ overlay_image <-
 
 #Optionally, turn mountainous parts of the overlay transparent
 overlay_image <-
-  altitude_transparency(overlay_image,
+  elevation_transparency(overlay_image,
                         dem,
                         pct_alt_high = 0.5,
                         alpha_max = 0.9)
 
+
 #Draw the rayshader scene
+elmat = matrix(
+  raster::extract(dem, raster::extent(dem), method = 'bilinear'),
+  nrow = ncol(dem),
+  ncol = nrow(dem)
+)
+
 scene <- elmat %>%
   sphere_shade(sunangle = 270, texture = "desert") %>% 
   add_overlay(overlay_image)
