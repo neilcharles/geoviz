@@ -1,10 +1,10 @@
 ---
-title: "Rayshader with GPS trace"
+title: "Rayshader Scene With GPS trace"
 author: "Neil Charles"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Rayshader Scene With GPS trace}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
