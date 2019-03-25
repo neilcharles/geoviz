@@ -5,9 +5,9 @@
 #' @param raster_dem elevation model raster file that will be used to adjust transparency
 #' @param alpha_max Transparency required at higher altitudes
 #' @param alpha_min Transparency required at lower altitudes
-#' @param pct_alt_low The percent of maximum altitude contained in altitude_raster
+#' @param pct_alt_low The percent of maximum altitude contained in raster_dem
 #' at which alpha_max will apply
-#' @param pct_alt_high The percent of maximum altitude contained in altitude_raster
+#' @param pct_alt_high The percent of maximum altitude contained in raster_dem
 #' at which alpha_min will apply
 #'
 #' @return An image with transparency defined by altitude

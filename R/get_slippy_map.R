@@ -6,7 +6,7 @@
 #' @param max_tiles Maximum number of tiles to be requested by slippymath
 #' @param api_key API key (required for mapbox)
 #'
-#' @return a rasterBrick image with the same dimensions (but not the same resolution) as bounding_box
+#' @return a rasterBrick with the same dimensions (but not the same resolution) as bounding_box
 #'
 #' @examples
 #' \donttest{

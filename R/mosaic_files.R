@@ -14,6 +14,8 @@
 #' @examples
 #' \dontrun{
 #' mosaic_files("path/to/grid/zip_files/", "output/file.raster")
+#'
+#' raster_mosaic <- raster::raster("output/file.gri")
 #' }
 #' @export
 mosaic_files <-

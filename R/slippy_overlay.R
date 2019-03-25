@@ -1,4 +1,4 @@
-#' Creates an overlay image from various sources using Miles McBain's slippymath
+#' Creates an overlay image from Mapbox or Stamen Maps using the slippymath package
 #'
 #' @param raster_base A raster to use to calculate dimensions for the overlay
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
@@ -6,7 +6,7 @@
 #' @param max_tiles Maximum number of tiles to be requested by slippymath
 #' @param api_key API key (required for mapbox)
 #' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
-#' @param png_opacity Opacity of the returned image if requesting a png
+#' @param png_opacity Opacity of the returned image. Ignored if \code{return_png = FALSE}
 #'
 #' @return an overlay image for raster_base
 #'

@@ -19,7 +19,7 @@ get_slippy_map(bounding_box, image_source = "stamen",
 \item{api_key}{API key (required for mapbox)}
 }
 \value{
-a rasterBrick image with the same dimensions (but not the same resolution) as bounding_box
+a rasterBrick with the same dimensions (but not the same resolution) as bounding_box
 }
 \description{
 Obtains and merges map tiles from various sources using the slippymath package

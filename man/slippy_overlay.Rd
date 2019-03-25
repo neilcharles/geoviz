@@ -2,7 +2,7 @@
 % Please edit documentation in R/slippy_overlay.R
 \name{slippy_overlay}
 \alias{slippy_overlay}
-\title{Creates an overlay image from various sources using Miles McBain's slippymath}
+\title{Creates an overlay image from Mapbox or Stamen Maps using the slippymath package}
 \usage{
 slippy_overlay(raster_base, image_source = "stamen",
   image_type = "watercolor", max_tiles = 30, api_key,
@@ -21,13 +21,13 @@ slippy_overlay(raster_base, image_source = "stamen",
 
 \item{return_png}{\code{TRUE} to return a png image. \code{FALSE} will return a raster}
 
-\item{png_opacity}{Opacity of the returned image if requesting a png}
+\item{png_opacity}{Opacity of the returned image. Ignored if \code{return_png = FALSE}}
 }
 \value{
 an overlay image for raster_base
 }
 \description{
-Creates an overlay image from various sources using Miles McBain's slippymath
+Creates an overlay image from Mapbox or Stamen Maps using the slippymath package
 }
 \examples{
 \donttest{

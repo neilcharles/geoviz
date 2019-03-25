@@ -17,10 +17,10 @@ elevation_transparency(overlay_image, raster_dem, alpha_max = 0.4,
 
 \item{alpha_min}{Transparency required at lower altitudes}
 
-\item{pct_alt_low}{The percent of maximum altitude contained in altitude_raster
+\item{pct_alt_low}{The percent of maximum altitude contained in raster_dem
 at which alpha_max will apply}
 
-\item{pct_alt_high}{The percent of maximum altitude contained in altitude_raster
+\item{pct_alt_high}{The percent of maximum altitude contained in raster_dem
 at which alpha_min will apply}
 }
 \value{

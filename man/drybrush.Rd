@@ -2,7 +2,7 @@
 % Please edit documentation in R/drybrush.R
 \name{drybrush}
 \alias{drybrush}
-\title{Simulates a dry brushing effect. Differs from Altitude transparency in that colour is applied based on local altitude peaks, not across the whole raster}
+\title{Simulates a dry brushing effect. Differs from elevation_transparency() in that colour is applied based on local altitude peaks, not across the whole raster}
 \usage{
 drybrush(raster_dem, aggregation_factor = 10, max_colour_altitude = 30,
   opacity = 0.5, elevation_palette = c("#3f3f3f", "#ffa500"))
@@ -16,13 +16,13 @@ drybrush(raster_dem, aggregation_factor = 10, max_colour_altitude = 30,
 
 \item{opacity}{overall opacity of the returned image}
 
-\item{elevation_palette}{Colour scheme c(colour for low altitude, colour for high altitude)}
+\item{elevation_palette}{Colour scheme c(colour_for_low_altitude, colour_for_high_altitude)}
 }
 \value{
-An image with a drybrished colour effect, highlighting local peaks
+An image with a drybrushed colour effect, highlighting local peaks
 }
 \description{
-Simulates a dry brushing effect. Differs from Altitude transparency in that colour is applied based on local altitude peaks, not across the whole raster
+Simulates a dry brushing effect. Differs from elevation_transparency() in that colour is applied based on local altitude peaks, not across the whole raster
 }
 \examples{
 overlay_image <- drybrush(example_raster())

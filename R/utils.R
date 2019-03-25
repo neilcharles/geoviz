@@ -18,3 +18,10 @@ rescale <- function (x, nx1, nx2, minx, maxx){
   nx = nx1 + (nx2 - nx1) * (x - minx)/(maxx - minx)
   return(nx)
 }
+
+lighten <- function(color, factor=0.2){
+  col <- grDevices::col2rgb(color)
+  col <- col+ (255 - col) * factor
+  col <- grDevices::rgb(t(col), maxColorValue=255)
+  col
+}
