@@ -1,0 +1,81 @@
+---
+title: "Rayshader with GPS trace"
+author: "Neil Charles"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Use geoviz to draw a small rayshader scene and add a GPS track to it
+
+```R
+library(geoviz)
+library(rayshader)
+
+#Load an example IGC (GPS track log) file
+
+igc <- example_igc()
+
+#Load a small example elevation raster showing a piece of the English Lake district
+#You can use mapbox_dem() to obtain a 50m resolution digital elevation model
+#of any location but will need your own mapbox key
+
+DEM <- example_raster()
+
+sunangle = 270
+
+zscale = 25
+
+#Get a Stamen map using ggmap that will cover our DEM
+
+stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "watercolor", png_opacity = 0.3)
+
+#Make an elevation shading layer with dark valleys and light peaks (not essential but I like it!)
+
+elevation_overlay <- elevation_shade(DEM, elevation_palette = c("#000000", "#FFFFFF"), png_opacity = 0.6)
+
+
+#Calculate the rayshader scene (see rayshader's documentation)
+
+elmat = matrix(
+  raster::extract(DEM, raster::extent(DEM), method = 'bilinear'),
+  nrow = ncol(DEM),
+  ncol = nrow(DEM)
+)
+
+scene <- elmat %>%
+  sphere_shade(sunangle = sunangle, texture = "bw") %>% 
+  add_overlay(elevation_overlay) %>%
+  add_overlay(stamen_overlay)
+
+
+#Render the rayshader scene
+
+rayshader::plot_3d(
+  scene,
+  elmat,
+  zscale = zscale,
+  solid = FALSE,
+  shadow = TRUE,
+  shadowdepth = -100
+)
+
+#Add the gps track
+
+add_gps_to_rayshader(
+  DEM,
+  igc$lat,
+  igc$long,
+  igc$altitude,
+  line_width = 1.5,
+  lightsaber = TRUE,
+  colour = "red",
+  zscale = zscale,
+  ground_shadow = TRUE
+)
+
+
+```

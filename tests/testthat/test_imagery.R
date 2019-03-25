@@ -42,7 +42,7 @@ test_that("elevation_shade() has correct dimensions", {
   expect_equal(nrow(elevation_shade_result), nrow(DEM))
 })
 
-test_that("altitude_transparency() has correct dimensions", {
+test_that("elevation_transparency() has correct dimensions", {
   elevation_shade_result <-
     elevation_shade(
       DEM,
@@ -50,8 +50,8 @@ test_that("altitude_transparency() has correct dimensions", {
       return_png = TRUE
     )
 
-  altitude_transparency_result <-
-    altitude_transparency(
+  elevation_transparency_result <-
+    elevation_transparency(
       elevation_shade_result,
       DEM,
       alpha_max = 0.4,
@@ -60,9 +60,9 @@ test_that("altitude_transparency() has correct dimensions", {
       pct_alt_high = 0.25
     )
 
-  expect_is(altitude_transparency_result, "array")
-  expect_equal(ncol(altitude_transparency_result), ncol(DEM))
-  expect_equal(nrow(altitude_transparency_result), nrow(DEM))
+  expect_is(elevation_transparency_result, "array")
+  expect_equal(ncol(elevation_transparency_result), ncol(DEM))
+  expect_equal(nrow(elevation_transparency_result), nrow(DEM))
 })
 
 test_that("drybrush() has correct dimensions", {

@@ -13,7 +13,7 @@
 #' @return An image with transparency defined by altitude
 #'
 #' @examples
-#' # altitude_transparency defaults to making hills transparent.  Flip alpha_max
+#' # elevation_transparency defaults to making hills transparent.  Flip alpha_max
 #' # and alpha_min values to reverse it.
 #' #
 #' # Transparency in the range between pct_alt_low and pct_alt_high will
@@ -23,16 +23,16 @@
 #'
 #'  #Making hills transparent
 #'
-#'  ggmap_overlay_transparent_hills <- altitude_transparency(overlay_image,
+#'  ggmap_overlay_transparent_hills <- elevation_transparency(overlay_image,
 #'    example_raster(), alpha_max = 0.8, alpha_min = 0, pct_alt_low = 0.05,
 #'    pct_alt_high = 0.25)
 #'
 #'  # To make valleys transparent, flip alpha_max and alpha_min
-#'  ggmap_overlay_transparent_valleys <- altitude_transparency(overlay_image,
+#'  ggmap_overlay_transparent_valleys <- elevation_transparency(overlay_image,
 #'    example_raster(), alpha_max = 0, alpha_min = 0.8, pct_alt_low = 0.05,
 #'    pct_alt_high = 0.25)
 #' @export
-altitude_transparency <- function(overlay_image, raster_dem, alpha_max = 0.4, alpha_min = 0, pct_alt_low = 0.05, pct_alt_high = 0.25){
+elevation_transparency <- function(overlay_image, raster_dem, alpha_max = 0.4, alpha_min = 0, pct_alt_low = 0.05, pct_alt_high = 0.25){
 
   if (pct_alt_high == pct_alt_low){
     stop("pct_alt_high must be > pct_alt_low")

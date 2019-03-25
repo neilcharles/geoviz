@@ -13,5 +13,8 @@ a tibble
 Returns an example IGC file using read_igc()
 }
 \examples{
+
+# Loads a paragliding flight GPS track, originally downloaded from xcleague.com
+
 igc <- example_igc()
 }
