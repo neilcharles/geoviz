@@ -1,4 +1,4 @@
-#' Creates an overlay image from various sources using Miles McBain's slippymath
+#' Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package
 #'
 #' @param lat WGS84 latitude
 #' @param long WGS84 longitude

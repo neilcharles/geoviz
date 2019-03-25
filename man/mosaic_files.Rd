@@ -34,5 +34,7 @@ Requires a target directory of files that can be read with raster::raster(), e.g
 \examples{
 \dontrun{
 mosaic_files("path/to/grid/zip_files/", "output/file.raster")
+
+raster_mosaic <- raster::raster("output/file.gri")
 }
 }

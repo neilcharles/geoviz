@@ -2,7 +2,7 @@
 % Please edit documentation in R/slippy_raster.R
 \name{slippy_raster}
 \alias{slippy_raster}
-\title{Creates an overlay image from various sources using Miles McBain's slippymath}
+\title{Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package}
 \usage{
 slippy_raster(lat, long, square_km, image_source = "stamen",
   image_type = "watercolor", resolution = 1000, max_tiles = 30,
@@ -29,7 +29,7 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 a rasterBrick image
 }
 \description{
-Creates an overlay image from various sources using Miles McBain's slippymath
+Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package
 }
 \examples{
 \donttest{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/elevation_shade.R
 \name{elevation_shade}
 \alias{elevation_shade}
-\title{Produces an elevation shaded png from a raster}
+\title{Produces an elevation shaded image from a raster}
 \usage{
 elevation_shade(raster_dem, elevation_palette = c("#54843f", "#808080",
   "#FFFFFF"), return_png = TRUE, png_opacity = 1)
@@ -12,15 +12,15 @@ elevation_shade(raster_dem, elevation_palette = c("#54843f", "#808080",
 
 \item{elevation_palette}{a vector of colours to use for elevation shading}
 
-\item{return_png}{\code{TRUE} to return a png image. \code{FALSE} will return a raster}
+\item{return_png}{\code{TRUE} to return an image. \code{FALSE} will return a raster}
 
-\item{png_opacity}{Opacity of the returned image if requesting a png}
+\item{png_opacity}{Opacity of the returned image. Ignored if \code{return_png = FALSE}}
 }
 \value{
-elevation shaded png image
+elevation shaded image
 }
 \description{
-Produces an elevation shaded png from a raster
+Produces an elevation shaded image from a raster
 }
 \examples{
 elevation_shade(example_raster())

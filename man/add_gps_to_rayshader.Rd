@@ -46,6 +46,10 @@ Adds a GPS trace to a rayshader scene
 }
 \examples{
 flight <- example_igc()
-add_gps_to_rayshader(example_raster(), flight$lat, flight$long, flight$altitude, zscale = 25)
+add_gps_to_rayshader(example_raster(),
+  flight$lat,
+  flight$long,
+  flight$altitude,
+  zscale = raster_zscale(example_raster()))
 
 }

@@ -1,11 +1,11 @@
-#' Produces an elevation shaded png from a raster
+#' Produces an elevation shaded image from a raster
 #'
 #' @param raster_dem a raster
 #' @param elevation_palette a vector of colours to use for elevation shading
-#' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
-#' @param png_opacity Opacity of the returned image if requesting a png
+#' @param return_png \code{TRUE} to return an image. \code{FALSE} will return a raster
+#' @param png_opacity Opacity of the returned image. Ignored if \code{return_png = FALSE}
 #'
-#' @return elevation shaded png image
+#' @return elevation shaded image
 #'
 #' @examples
 #' elevation_shade(example_raster())

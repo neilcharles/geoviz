@@ -1,12 +1,12 @@
-#' Simulates a dry brushing effect. Differs from Altitude transparency in that colour is applied based on local altitude peaks, not across the whole raster
+#' Simulates a dry brushing effect. Differs from elevation_transparency() in that colour is applied based on local altitude peaks, not across the whole raster
 #'
 #' @param raster_dem A raster
 #' @param aggregation_factor grid size to determine local altitude peaks
 #' @param max_colour_altitude Altitude below which colours will be graduated across elevation_palette
 #' @param opacity overall opacity of the returned image
-#' @param elevation_palette Colour scheme c(colour for low altitude, colour for high altitude)
+#' @param elevation_palette Colour scheme c(colour_for_low_altitude, colour_for_high_altitude)
 #'
-#' @return An image with a drybrished colour effect, highlighting local peaks
+#' @return An image with a drybrushed colour effect, highlighting local peaks
 #'
 #' @examples
 #' overlay_image <- drybrush(example_raster())
