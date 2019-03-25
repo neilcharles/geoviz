@@ -23,13 +23,6 @@ Geoviz helps you to draw images like these.
 
 ![](man/figures/stamen_example.jpg)
 
-### Update note
-
-There have been some breaking changes since v0.1
-
-- ggmap overlays have gone and been replaced by a new slippy_overlay() function powered by Miles McBain's [slippymath](https://github.com/MilesMcBain/slippymath). The ggmap ones were ok but had enough problems that they've been retired rather than left in the package.
-
-- Functions for stitching together DEM files from different sources have been merged into the single function mosaic_files(), which is much more flexible.
 
 ### Example
 
@@ -238,7 +231,7 @@ Whole world coverage but quite noisy. Copernicus is better if you're mapping in 
 Download [NASA Aster](https://search.earthdata.nasa.gov/search/granules?p=C197265171-LPDAAC_ECS&q=aster&ok=aster).
 Search for "ASTER" in the top left box and select "ASTER Global Digital Elevation Model V002" underneath the map. You won't realistically be able to stitch together a single file of the whole world - it would be enormous - so just download the areas you need.
 
-Stitching together the separate files is the same proces as for OS Terrain 50.
+Stitching together the separate files is the same process as for OS Terrain 50.
 
 ```R
 zscale <- 30
@@ -287,4 +280,4 @@ igc <- read_igc("path/to/your/file.igc")
 
 ### Adding GPS traces to Rayshader scenes
 
-Geoviz converts decimal lat-long GPS traces into rayshader's coordinate system and then plots the GPS track using the funtion add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into rayshader's coordinates and see the converted data (e.g. so you can add your own rgl shapse to the scene or for use with rayshder's render_label() function), use latlong_to_rayshader_coords().
+Geoviz converts decimal lat-long GPS traces into rayshader's coordinate system and then plots the GPS track using the function add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into rayshader's coordinates and see the converted data (e.g. so you can add your own rgl shapes to the scene or for use with rayshder's render_label() function), use latlong_to_rayshader_coords().
