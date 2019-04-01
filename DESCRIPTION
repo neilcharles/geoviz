@@ -1,10 +1,10 @@
 Package: geoviz
 Type: Package
 Title: Elevation and GPS Data Visualisation
-Version: 0.2.0
+Version: 0.2.0.9000
 Author: Neil Charles
 Maintainer: Neil Charles <neil.d.charles@gmail.com>
-Description: Simpler processing of digital elevation model and GPS trace data for use with the rayshader package.
+Description: Simpler processing of digital elevation model and GPS trace data for use with the 'rayshader' package.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

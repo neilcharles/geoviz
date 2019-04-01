@@ -2,14 +2,14 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/geoviz)](https://cran.r-project.org/package=geoviz)
 # Geoviz
 
-Helper functions to draw [rayshader](https://github.com/tylermorganwall/rayshader) scenes.
+Helper functions to draw ['rayshader'](https://github.com/tylermorganwall/rayshader) scenes.
 - From UK OS Terrain 50, NASA ASTER, EU Copernicus or any other DEM (Digital Elevation Model) data
 - With elevation shading (green valleys and snow capped peaks, or anything else you want)
 - With map and satellite overlays
 - Blending between different overlays at different altitudes
 - with added  GPS tracks
 
-[Rayshader](https://github.com/tylermorganwall/rayshader) is an awesome bit of kit! I'm just doing some colouring in.
+['Rayshader'](https://github.com/tylermorganwall/rayshader) is an awesome bit of kit! I'm just doing some colouring in.
 
 ### Installing
 
@@ -51,7 +51,7 @@ stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "wat
 elevation_overlay <- elevation_shade(DEM, elevation_palette = c("#000000", "#FFFFFF"), png_opacity = 0.6)
 
 
-#Calculate the rayshader scene (see rayshader's documentation)
+#Calculate the 'rayshader' scene (see 'rayshader' documentation)
 
 elmat = matrix(
   raster::extract(DEM, raster::extent(DEM), method = 'bilinear'),
@@ -65,7 +65,7 @@ scene <- elmat %>%
   add_overlay(stamen_overlay)
 
 
-#Render the rayshader scene
+#Render the 'rayshader' scene
 
 rayshader::plot_3d(
   scene,
@@ -131,7 +131,7 @@ overlay_image <-
                         alpha_max = 0.9)
 
 
-#Draw the rayshader scene
+#Draw the 'rayshader' scene
 elmat = matrix(
   raster::extract(dem, raster::extent(dem), method = 'bilinear'),
   nrow = ncol(dem),
@@ -155,7 +155,7 @@ rayshader::plot_3d(
 ![](man/figures/example3.png)
 
 ```R
-# You can also visualise your data in ggplot2 rather than rayshader.
+# You can also visualise your data in ggplot2 rather than 'rayshader'.
 
 gg_overlay_image <-
   slippy_overlay(
@@ -176,7 +176,7 @@ ggplot2::ggplot() +
 
 DEM files can be downloaded from various sources, usually in .asc or .tif format. Often, they will be small files that need to be stitched together to render the scene that you want.
 
-If you have downloaded a set of DEM files, use mosaic_files() to create a single raster for use with Rayshader. The mosaic_files() function is flexible and will accept a directory of files or zipped files, using any naming convention and file extension.
+If you have downloaded a set of DEM files, use mosaic_files() to create a single raster for use with 'rayshader'. The mosaic_files() function is flexible and will accept a directory of files or zipped files, using any naming convention and file extension.
 
 ```R
 mosaic_files(
@@ -278,6 +278,6 @@ If your GPS data is in .gpx format, the plotKML package has a handy function rea
 igc <- read_igc("path/to/your/file.igc")
 ```
 
-### Adding GPS traces to Rayshader scenes
+### Adding GPS traces to 'rayshader' scenes
 
-Geoviz converts decimal lat-long GPS traces into rayshader's coordinate system and then plots the GPS track using the function add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into rayshader's coordinates and see the converted data (e.g. so you can add your own rgl shapes to the scene or for use with rayshder's render_label() function), use latlong_to_rayshader_coords().
+Geoviz converts decimal lat-long GPS traces into the 'rayshader' coordinate system and then plots the GPS track using the function add_gps_to_rayshader(). Rather than adding a trace to a scene, if you just want to convert lat-long points into 'rayshader' coordinates and see the converted data (e.g. so you can add your own rgl shapes to the scene or for use with 'rayshder' render_label() function), use latlong_to_rayshader_coords().

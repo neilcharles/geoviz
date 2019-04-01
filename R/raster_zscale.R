@@ -1,4 +1,4 @@
-#' Approximates the zscale of a raster Digital Elevation Model for rayshader
+#' Approximates the zscale of a raster Digital Elevation Model for 'rayshader'
 #'
 #' @param raster A raster object of elevation data values
 #' @param height_units Elevation units of the raster, c("m", "feet")

@@ -37,7 +37,7 @@ elevation_shade <- function(raster_dem, elevation_palette = c("#54843f", "#80808
 
   file.remove(tempImage)
 
-  #add an alpha layer for ease of overlaying in rayshader
+  #add an alpha layer for ease of overlaying in 'rayshader'
   alpha_layer <- matrix(png_opacity, nrow = dim(terrain_image)[1], ncol = dim(terrain_image)[2])
 
   terrain_image <- abind::abind(terrain_image, alpha_layer)
