@@ -9,12 +9,10 @@
 #' @return a rasterBrick with the same dimensions (but not the same resolution) as bounding_box
 #'
 #' @examples
-#' \donttest{
-#' get_slippy_map(example_raster(),
+#' map <- get_slippy_map(example_raster(),
 #'   image_source = "stamen",
 #'   image_type = "watercolor",
-#'   max_tiles = 30)
-#' }
+#'   max_tiles = 5)
 #' @export
 get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key){
 

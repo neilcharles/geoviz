@@ -32,7 +32,14 @@ a rasterBrick image
 Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package
 }
 \examples{
-\donttest{
-#NEEDS EXAMPLE
-}
+lat <- 54.4502651
+long <- -3.1767946
+square_km <- 1
+
+overlay_image <- slippy_raster(lat = lat,
+  long = long,
+  square_km = square_km,
+  image_source = "stamen",
+  image_type = "watercolor",
+  max_tiles = 5)
 }

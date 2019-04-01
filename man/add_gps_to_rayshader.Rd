@@ -2,7 +2,7 @@
 % Please edit documentation in R/add_gps_to_rayshader.R
 \name{add_gps_to_rayshader}
 \alias{add_gps_to_rayshader}
-\title{Adds a GPS trace to a rayshader scene}
+\title{Adds a GPS trace to a 'rayshader' scene}
 \usage{
 add_gps_to_rayshader(raster_input, lat, long, alt, zscale,
   line_width = 1, colour = "red", alpha = 0.8, lightsaber = TRUE,
@@ -39,10 +39,10 @@ add_gps_to_rayshader(raster_input, lat, long, alt, zscale,
 \item{point_size}{size of points when as_line = TRUE}
 }
 \value{
-Adds GPS trace to the current rayshader scene
+Adds GPS trace to the current 'rayshader' scene
 }
 \description{
-Adds a GPS trace to a rayshader scene
+Adds a GPS trace to a 'rayshader' scene
 }
 \examples{
 flight <- example_igc()

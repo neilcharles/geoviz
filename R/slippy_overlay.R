@@ -11,10 +11,10 @@
 #' @return an overlay image for raster_base
 #'
 #' @examples
-#' \donttest{
 #' overlay_image <- slippy_overlay(example_raster(),
-#'   image_source = "stamen", image_type = "watercolor")
-#' }
+#'   image_source = "stamen",
+#'   image_type = "watercolor",
+#'   max_tiles = 5)
 #' @export
 slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key, return_png = TRUE, png_opacity = 1){
 
