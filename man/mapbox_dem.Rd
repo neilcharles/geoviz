@@ -22,7 +22,8 @@ a raster with values corresponding to terrain height in metres
 Gets Digital Elevation Model (DEM) data from mapbox
 }
 \examples{
-\dontrun{
+\dontrun{mapbox_dem() requires a mapbox API key
+#NOT RUN
 mapbox_key = "YOUR_MAPBOX_API_KEY"
 
 lat = 54.4502651

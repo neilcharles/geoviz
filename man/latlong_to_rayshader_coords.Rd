@@ -2,7 +2,7 @@
 % Please edit documentation in R/latlong_to_rayshader_coords.R
 \name{latlong_to_rayshader_coords}
 \alias{latlong_to_rayshader_coords}
-\title{Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a rayshader scene.}
+\title{Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a 'rayshader' scene.}
 \usage{
 latlong_to_rayshader_coords(raster_input, lat, long)
 }
@@ -17,7 +17,7 @@ latlong_to_rayshader_coords(raster_input, lat, long)
 A tibble with x,y in 'rayshader' coordinates
 }
 \description{
-Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a rayshader scene.
+Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a 'rayshader' scene.
 }
 \examples{
 latlong_to_rayshader_coords(example_raster(), example_igc()$lat, example_igc()$long)
