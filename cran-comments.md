@@ -1,9 +1,11 @@
 ## Resubmission
-This is a resubmission. Changes made:
+Thank you for your feedback, this is a resubmission. Changes made:
 
-* Quoted 'rayshader' and 'ggplot2' in description and in other documentation
+* Quoted package and API names in description and in other documentation, e.g. 'rayshader'
 
-* removed donttest and dontrun examples and replaced with smaller, <5 sec versions
+* Removed all \donttest and most \dontrun examples and replaced with smaller, <5 sec versions
+
+* mapbox_dem() example is still wrapped in \dontrun because mapbox requires an API key
 
 ## Test environments
 * local Windows 10, R 3.5.2

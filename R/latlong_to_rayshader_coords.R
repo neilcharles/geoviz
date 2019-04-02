@@ -1,4 +1,4 @@
-#' Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a rayshader scene.
+#' Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a 'rayshader' scene.
 #'
 #' @param raster_input a raster
 #' @param lat vector of WGS84 latitude points

@@ -2,7 +2,7 @@
 % Please edit documentation in R/slippy_raster.R
 \name{slippy_raster}
 \alias{slippy_raster}
-\title{Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package}
+\title{Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
 slippy_raster(lat, long, square_km, image_source = "stamen",
   image_type = "watercolor", resolution = 1000, max_tiles = 30,
@@ -21,15 +21,15 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 
 \item{resolution}{width and height (cell count) of the returned raster}
 
-\item{max_tiles}{Maximum number of tiles to be requested by slippymath}
+\item{max_tiles}{Maximum number of tiles to be requested by 'slippymath'}
 
-\item{api_key}{API key (required for mapbox)}
+\item{api_key}{API key (required for 'mapbox')}
 }
 \value{
 a rasterBrick image
 }
 \description{
-Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package
+Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package
 }
 \examples{
 lat <- 54.4502651

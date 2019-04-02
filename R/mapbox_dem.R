@@ -1,14 +1,15 @@
-#' Gets Digital Elevation Model (DEM) data from mapbox
+#' Gets Digital Elevation Model (DEM) data from 'mapbox'
 #'
 #' @param lat WGS84 latitude
 #' @param long WGS84 longitude
 #' @param square_km length of one edge the required square area, in km
-#' @param api_key Mapbox API key
+#' @param api_key 'Mapbox' API key
 #'
 #' @return a raster with values corresponding to terrain height in metres
 #'
 #' @examples
-#' \dontrun{
+#' \dontrun{mapbox_dem() requires a 'mapbox' API key
+#' #NOT RUN
 #' mapbox_key = "YOUR_MAPBOX_API_KEY"
 #'
 #' lat = 54.4502651

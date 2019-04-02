@@ -2,7 +2,7 @@
 % Please edit documentation in R/mapbox_dem.R
 \name{mapbox_dem}
 \alias{mapbox_dem}
-\title{Gets Digital Elevation Model (DEM) data from mapbox}
+\title{Gets Digital Elevation Model (DEM) data from 'mapbox'}
 \usage{
 mapbox_dem(lat, long, square_km, api_key)
 }
@@ -13,16 +13,17 @@ mapbox_dem(lat, long, square_km, api_key)
 
 \item{square_km}{length of one edge the required square area, in km}
 
-\item{api_key}{Mapbox API key}
+\item{api_key}{'Mapbox' API key}
 }
 \value{
 a raster with values corresponding to terrain height in metres
 }
 \description{
-Gets Digital Elevation Model (DEM) data from mapbox
+Gets Digital Elevation Model (DEM) data from 'mapbox'
 }
 \examples{
-\dontrun{
+\dontrun{mapbox_dem() requires a 'mapbox' API key
+#NOT RUN
 mapbox_key = "YOUR_MAPBOX_API_KEY"
 
 lat = 54.4502651
