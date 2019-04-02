@@ -1,7 +1,7 @@
 ## Resubmission
 This is a resubmission. Changes made:
 
-* Quoted 'rayshader' in description and in other documentation
+* Quoted 'rayshader' and 'ggplot2' in description and in other documentation
 
 * removed donttest and dontrun examples and replaced with smaller, <5 sec versions
 
