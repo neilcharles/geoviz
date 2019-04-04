@@ -22,12 +22,10 @@ a raster with values corresponding to terrain height in metres
 Gets Digital Elevation Model (DEM) data from 'mapbox'
 }
 \examples{
-<<<<<<< HEAD
-\dontrun{mapbox_dem() requires a 'mapbox' API key
-=======
-\dontrun{mapbox_dem() requires a mapbox API key
->>>>>>> b098727b71ca8256f3089c4a2ce2d07bbae16b0c
+\dontrun{
 #NOT RUN
+#mapbox_dem() requires a 'mapbox' API key
+
 mapbox_key = "YOUR_MAPBOX_API_KEY"
 
 lat = 54.4502651

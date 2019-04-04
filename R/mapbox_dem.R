@@ -8,8 +8,10 @@
 #' @return a raster with values corresponding to terrain height in metres
 #'
 #' @examples
-#' \dontrun{mapbox_dem() requires a 'mapbox' API key
+#' \dontrun{
 #' #NOT RUN
+#' #mapbox_dem() requires a 'mapbox' API key
+#'
 #' mapbox_key = "YOUR_MAPBOX_API_KEY"
 #'
 #' lat = 54.4502651

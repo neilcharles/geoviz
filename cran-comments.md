@@ -1,11 +1,7 @@
 ## Resubmission
 Thank you for your feedback, this is a resubmission. Changes made:
 
-* Quoted package and API names in description and in other documentation, e.g. 'rayshader'
-
-* Removed all \donttest and most \dontrun examples and replaced with smaller, <5 sec versions
-
-* mapbox_dem() example is still wrapped in \dontrun because mapbox requires an API key
+* Commented unexecutable line in mapbox_dem() documentation
 
 ## Test environments
 * local Windows 10, R 3.5.2
