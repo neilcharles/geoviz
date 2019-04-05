@@ -12,11 +12,14 @@
 #' @return TRUE
 #'
 #' @examples
-#' \dontrun{
-#' mosaic_files("path/to/grid/zip_files/", "output/file.raster")
+#' # Merges two small example .asc files of LIDAR data
+#' # from https://environment.data.gov.uk (open government licence)
 #'
-#' raster_mosaic <- raster::raster("output/file.gri")
-#' }
+#' path_to_files <- system.file("extdata/example_asc", package = "geoviz")
+#'
+#' mosaic_files(path_to_files, extract_zip = TRUE, file_crs = "+init=epsg:27700")
+#'
+#' raster_mosaic <- raster::raster("mosaic_out.gri")
 #' @export
 mosaic_files <-
   function(path,

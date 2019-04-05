@@ -2,7 +2,7 @@
 % Please edit documentation in R/raster_zscale.R
 \name{raster_zscale}
 \alias{raster_zscale}
-\title{Approximates the zscale of a raster Digital Elevation Model for rayshader}
+\title{Approximates the zscale of a raster Digital Elevation Model for 'rayshader'}
 \usage{
 raster_zscale(raster, height_units = "m")
 }
@@ -15,7 +15,7 @@ raster_zscale(raster, height_units = "m")
 a number to be used as zscale in rayshader::plot_3d()
 }
 \description{
-Approximates the zscale of a raster Digital Elevation Model for rayshader
+Approximates the zscale of a raster Digital Elevation Model for 'rayshader'
 }
 \examples{
 raster_zscale(example_raster())

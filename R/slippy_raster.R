@@ -1,4 +1,4 @@
-#' Creates a square image around any lat long point from Mapbox or Stamen Maps using the slippymath package
+#' Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package
 #'
 #' @param lat WGS84 latitude
 #' @param long WGS84 longitude
@@ -6,15 +6,22 @@
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
 #' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)
 #' @param resolution width and height (cell count) of the returned raster
-#' @param max_tiles Maximum number of tiles to be requested by slippymath
-#' @param api_key API key (required for mapbox)
+#' @param max_tiles Maximum number of tiles to be requested by 'slippymath'
+#' @param api_key API key (required for 'mapbox')
 #'
 #' @return a rasterBrick image
 #'
 #' @examples
-#' \donttest{
-#' #NEEDS EXAMPLE
-#' }
+#' lat <- 54.4502651
+#' long <- -3.1767946
+#' square_km <- 1
+#'
+#' overlay_image <- slippy_raster(lat = lat,
+#'   long = long,
+#'   square_km = square_km,
+#'   image_source = "stamen",
+#'   image_type = "watercolor",
+#'   max_tiles = 5)
 #' @export
 slippy_raster <- function(lat, long, square_km, image_source = "stamen", image_type = "watercolor", resolution = 1000, max_tiles = 30, api_key){
 

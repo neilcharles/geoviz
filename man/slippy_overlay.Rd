@@ -30,8 +30,8 @@ an overlay image for raster_base
 Creates an overlay image from Mapbox or Stamen Maps using the slippymath package
 }
 \examples{
-\donttest{
 overlay_image <- slippy_overlay(example_raster(),
-  image_source = "stamen", image_type = "watercolor")
-}
+  image_source = "stamen",
+  image_type = "watercolor",
+  max_tiles = 5)
 }

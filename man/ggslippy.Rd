@@ -2,39 +2,39 @@
 % Please edit documentation in R/ggslippy.R
 \name{ggslippy}
 \alias{ggslippy}
-\title{Adds a layer created using slippy_overlay() or slippy_raster() to a ggplot2 chart}
+\title{Adds a layer created using slippy_overlay() or slippy_raster() to a 'ggplot2' chart}
 \usage{
-ggslippy(slippy_raster, alpha = 1)
+ggslippy(slippy_raster, alpha = 1, set_coord_equal = TRUE)
 }
 \arguments{
 \item{slippy_raster}{A raster raster returned by either \code{slippy_raster()} or \code{slippy_overlay(return_png = FALSE)}}
 
-\item{alpha}{Opacity of the raster in ggplot}
+\item{alpha}{Opacity of the raster in 'ggplot2'}
+
+\item{set_coord_equal}{\code{TRUE} returns a square plot}
 }
 \value{
 a ggplot object
 }
 \description{
-Adds a layer created using slippy_overlay() or slippy_raster() to a ggplot2 chart
+Adds a layer created using slippy_overlay() or slippy_raster() to a 'ggplot2' chart
 }
 \examples{
-\donttest{
-
 library(ggplot2)
 library(geoviz)
 
-dem <- example_dem
+dem <- example_raster()
 
-gg_overlay_image <-
-  slippy_overlay(
-    dem,
-    image_source = "stamen",
-    image_type = "watercolor",
-    return_png = FALSE
+dem <- raster::aggregate(dem, 10) #aggregate to speed up ggplot for testing
+
+gg_overlay_image <- slippy_overlay(
+  dem,
+  image_source = "stamen",
+  image_type = "watercolor",
+  return_png = FALSE,
+  max_tiles = 2
   )
 
- ggplot2::ggplot() +
-   ggslippy(gg_overlay_image)
-
-}
+ggplot() +
+  ggslippy(gg_overlay_image, set_coord_equal = FALSE)
 }

@@ -1,15 +1,15 @@
 ---
-title: "Rayshader Scene With GPS trace"
+title: "Scene With GPS trace"
 author: "Neil Charles"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Rayshader Scene With GPS trace}
+  %\VignetteIndexEntry{Scene With GPS trace}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Use geoviz to draw a small rayshader scene and add a GPS track to it
+Use geoviz to draw a small 'rayshader' scene and add a GPS track to it
 
 ```R
 library(geoviz)
@@ -38,7 +38,7 @@ stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "wat
 elevation_overlay <- elevation_shade(DEM, elevation_palette = c("#000000", "#FFFFFF"), png_opacity = 0.6)
 
 
-#Calculate the rayshader scene (see rayshader's documentation)
+#Calculate the 'rayshader' scene (see 'rayshader' documentation)
 
 elmat = matrix(
   raster::extract(DEM, raster::extent(DEM), method = 'bilinear'),
@@ -52,7 +52,7 @@ scene <- elmat %>%
   add_overlay(stamen_overlay)
 
 
-#Render the rayshader scene
+#Render the 'rayshader' scene
 
 rayshader::plot_3d(
   scene,

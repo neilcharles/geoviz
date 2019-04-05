@@ -1,4 +1,4 @@
-#' Adds a GPS trace to a rayshader scene
+#' Adds a GPS trace to a 'rayshader' scene
 #'
 #' @param raster_input a raster
 #' @param lat vector of decimal latitude points
@@ -15,7 +15,7 @@
 #' @param as_line (default = TRUE) Set to FALSE to render single points instead of a trace line (which then ignores line_width & lightsaber)
 #' @param point_size size of points when as_line = TRUE
 #'
-#' @return Adds GPS trace to the current rayshader scene
+#' @return Adds GPS trace to the current 'rayshader' scene
 #'
 #' @examples
 #' flight <- example_igc()

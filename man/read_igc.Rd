@@ -16,7 +16,5 @@ a tibble
 Load an IGC file
 }
 \examples{
-\donttest{
-read_igc("file.igc")
-}
+igc <- read_igc(system.file("extdata/example.igc", package = "geoviz"))
 }

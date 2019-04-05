@@ -1,10 +1,10 @@
-#' Converts WGS84 lat long points into rayshader coordinates. Useful for adding arbitrary points and text to a rayshader scene.
+#' Converts WGS84 lat long points into 'rayshader' coordinates. Useful for adding arbitrary points and text to a 'rayshader' scene.
 #'
 #' @param raster_input a raster
 #' @param lat vector of WGS84 latitude points
 #' @param long vector of WGS84 longitude points
 #'
-#' @return A tibble with x,y in rayshader coordinates
+#' @return A tibble with x,y in 'rayshader' coordinates
 #'
 #' @examples
 #' latlong_to_rayshader_coords(example_raster(), example_igc()$lat, example_igc()$long)

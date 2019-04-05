@@ -5,9 +5,7 @@
 #' @return a tibble
 #'
 #' @examples
-#' \donttest{
-#' read_igc("file.igc")
-#' }
+#' igc <- read_igc(system.file("extdata/example.igc", package = "geoviz"))
 #' @export
 read_igc <- function(path){
 

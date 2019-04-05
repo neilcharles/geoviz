@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_slippy_map.R
 \name{get_slippy_map}
 \alias{get_slippy_map}
-\title{Obtains and merges map tiles from various sources using the slippymath package}
+\title{Obtains and merges map tiles from various sources using the 'slippymath' package}
 \usage{
 get_slippy_map(bounding_box, image_source = "stamen",
   image_type = "watercolor", max_tiles = 30, api_key)
@@ -14,21 +14,19 @@ get_slippy_map(bounding_box, image_source = "stamen",
 
 \item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)}
 
-\item{max_tiles}{Maximum number of tiles to be requested by slippymath}
+\item{max_tiles}{Maximum number of tiles to be requested by 'slippymath'}
 
-\item{api_key}{API key (required for mapbox)}
+\item{api_key}{API key (required for 'mapbox')}
 }
 \value{
 a rasterBrick with the same dimensions (but not the same resolution) as bounding_box
 }
 \description{
-Obtains and merges map tiles from various sources using the slippymath package
+Obtains and merges map tiles from various sources using the 'slippymath' package
 }
 \examples{
-\donttest{
-get_slippy_map(example_raster(),
+map <- get_slippy_map(example_raster(),
   image_source = "stamen",
   image_type = "watercolor",
-  max_tiles = 30)
-}
+  max_tiles = 5)
 }

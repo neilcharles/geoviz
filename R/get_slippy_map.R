@@ -1,20 +1,18 @@
-#' Obtains and merges map tiles from various sources using the slippymath package
+#' Obtains and merges map tiles from various sources using the 'slippymath' package
 #'
 #' @param bounding_box Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
 #' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)
-#' @param max_tiles Maximum number of tiles to be requested by slippymath
-#' @param api_key API key (required for mapbox)
+#' @param max_tiles Maximum number of tiles to be requested by 'slippymath'
+#' @param api_key API key (required for 'mapbox')
 #'
 #' @return a rasterBrick with the same dimensions (but not the same resolution) as bounding_box
 #'
 #' @examples
-#' \donttest{
-#' get_slippy_map(example_raster(),
+#' map <- get_slippy_map(example_raster(),
 #'   image_source = "stamen",
 #'   image_type = "watercolor",
-#'   max_tiles = 30)
-#' }
+#'   max_tiles = 5)
 #' @export
 get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key){
 
