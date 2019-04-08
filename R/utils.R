@@ -25,3 +25,13 @@ lighten <- function(color, factor=0.2){
   col <- grDevices::rgb(t(col), maxColorValue=255)
   col
 }
+
+raster_to_png <- function(tile_raster, file_path)
+{
+  if (!inherits(tile_raster, "RasterBrick")) {
+    stop("tile raster must be a RasterBrick. This is output from tg_composite().")
+  }
+  tile_raster@data@values <- sweep(tile_raster@data@values,
+                                   MARGIN = 2, STATS = tile_raster@data@max, FUN = "/")
+  png::writePNG(raster::as.array(tile_raster), target = file_path)
+}
