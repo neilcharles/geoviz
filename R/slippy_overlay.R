@@ -39,7 +39,7 @@ slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "w
 
   temp_map_image <- tempfile(fileext = ".png")
 
-  suppressWarnings(slippymath::raster_to_png(raster_out, temp_map_image))
+  raster_to_png(raster_out, temp_map_image)
 
   map_image <- png::readPNG(temp_map_image)
   file.remove(temp_map_image)

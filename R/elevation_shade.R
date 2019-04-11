@@ -31,7 +31,7 @@ elevation_shade <- function(raster_dem, elevation_palette = c("#54843f", "#80808
 
   tempImage <- tempfile(fileext = ".png")
 
-  slippymath::raster_to_png(rasterImage, tempImage)
+  raster_to_png(rasterImage, tempImage)
 
   terrain_image <- png::readPNG(tempImage)
 
