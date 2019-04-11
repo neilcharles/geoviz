@@ -2,7 +2,7 @@
 % Please edit documentation in R/slippy_raster.R
 \name{slippy_raster}
 \alias{slippy_raster}
-\title{Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package}
+\title{Creates a square image around any lat long point from 'Mapbox', 'Mapzen' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
 slippy_raster(lat, long, square_km, image_source = "stamen",
   image_type = "watercolor", resolution = 1000, max_tiles = 30,
@@ -15,9 +15,9 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 
 \item{square_km}{length of one edge the required square area, in km}
 
-\item{image_source}{Source for the overlay image. Valid entries are "mapbox", "stamen".}
+\item{image_source}{Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".}
 
-\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)}
+\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "terrain" (stamen)}
 
 \item{resolution}{width and height (cell count) of the returned raster}
 
@@ -29,7 +29,7 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 a rasterBrick image
 }
 \description{
-Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package
+Creates a square image around any lat long point from 'Mapbox', 'Mapzen' or 'Stamen' Maps using the 'slippymath' package
 }
 \examples{
 lat <- 54.4502651
