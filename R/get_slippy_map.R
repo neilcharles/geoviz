@@ -1,8 +1,8 @@
 #' Obtains and merges map tiles from various sources using the 'slippymath' package
 #'
 #' @param bounding_box Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.
-#' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
-#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)
+#' @param image_source Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".
+#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "terrain" (stamen)
 #' @param max_tiles Maximum number of tiles to be requested by 'slippymath'
 #' @param api_key API key (required for 'mapbox')
 #'
@@ -16,7 +16,9 @@
 #' @export
 get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key){
 
-  xt_scene <- raster::extent(bounding_box)
+  xt_scene <- raster::extent(
+    sp::spTransform(bounding_box, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+    )
 
   overlay_bbox <-
     sf::st_bbox(c(xmin = xt_scene@xmin,
@@ -46,6 +48,9 @@ get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "
     query_string <- paste0("https://api.mapbox.com/v4/mapbox.", image_type, "/{zoom}/{x}/{y}.jpg90",
                            "?access_token=",
                            api_key)
+
+  } else if (image_source=="mapzen" & image_type=="dem"){
+    query_string <- "https://s3.amazonaws.com/elevation-tiles-prod/geotiff/{zoom}/{x}/{y}.tif"
   } else {
     stop(glue::glue("unknown source '{image_source}'"))
   }
@@ -65,6 +70,9 @@ get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "
                 zoom = tile_grid$zoom)
 
   raster_out <- slippymath::compose_tile_grid(tile_grid, images)
+
+  #Transform raster to match projection of the original bounding box
+  raster_out <- raster::projectRaster(raster_out, crs = raster::crs(bounding_box))
 
   unlink(tile_dir, recursive = TRUE)  #kill the temp directory containing tiles
 
