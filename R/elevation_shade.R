@@ -12,6 +12,11 @@
 #' @export
 elevation_shade <- function(raster_dem, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 1){
 
+  if(length(is.na(raster_dem)) > 0){
+    warning("There are NA values in raster_dem. Assuming they are min(raster_dem@data@values, na.rm = TRUE) for shading.")
+    raster_dem[is.na(raster_dem)] <- min(raster_dem@data@values, na.rm = TRUE)
+  }
+
   rasterValues <- raster::values(raster_dem)
 
   colours <- grDevices::colorRamp(elevation_palette)(rescale(rasterValues, 0,1,min(rasterValues), max(rasterValues)))
@@ -31,7 +36,7 @@ elevation_shade <- function(raster_dem, elevation_palette = c("#54843f", "#80808
 
   tempImage <- tempfile(fileext = ".png")
 
-  slippymath::raster_to_png(rasterImage, tempImage)
+  raster_to_png(rasterImage, tempImage)
 
   terrain_image <- png::readPNG(tempImage)
 

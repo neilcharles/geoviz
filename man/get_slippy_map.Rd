@@ -5,14 +5,14 @@
 \title{Obtains and merges map tiles from various sources using the 'slippymath' package}
 \usage{
 get_slippy_map(bounding_box, image_source = "stamen",
-  image_type = "watercolor", max_tiles = 30, api_key)
+  image_type = "watercolor", max_tiles = 20, api_key)
 }
 \arguments{
 \item{bounding_box}{Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.}
 
-\item{image_source}{Source for the overlay image. Valid entries are "mapbox", "stamen".}
+\item{image_source}{Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".}
 
-\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)}
+\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "terrain" (stamen)}
 
 \item{max_tiles}{Maximum number of tiles to be requested by 'slippymath'}
 

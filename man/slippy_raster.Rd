@@ -2,11 +2,10 @@
 % Please edit documentation in R/slippy_raster.R
 \name{slippy_raster}
 \alias{slippy_raster}
-\title{Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package}
+\title{Creates a square image around any lat long point from 'Mapbox', 'Mapzen' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
 slippy_raster(lat, long, square_km, image_source = "stamen",
-  image_type = "watercolor", resolution = 1000, max_tiles = 30,
-  api_key)
+  image_type = "watercolor", max_tiles = 20, api_key)
 }
 \arguments{
 \item{lat}{WGS84 latitude}
@@ -15,11 +14,9 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 
 \item{square_km}{length of one edge the required square area, in km}
 
-\item{image_source}{Source for the overlay image. Valid entries are "mapbox", "stamen".}
+\item{image_source}{Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".}
 
-\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)}
-
-\item{resolution}{width and height (cell count) of the returned raster}
+\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "terrain" (stamen)}
 
 \item{max_tiles}{Maximum number of tiles to be requested by 'slippymath'}
 
@@ -29,7 +26,7 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 a rasterBrick image
 }
 \description{
-Creates a square image around any lat long point from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package
+Creates a square image around any lat long point from 'Mapbox', 'Mapzen' or 'Stamen' Maps using the 'slippymath' package
 }
 \examples{
 lat <- 54.4502651

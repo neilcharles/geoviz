@@ -38,6 +38,11 @@ elevation_transparency <- function(overlay_image, raster_dem, alpha_max = 0.4, a
     stop("pct_alt_high must be > pct_alt_low")
   }
 
+  if(length(is.na(raster_dem)) > 0){
+    warning("There are NA values in raster_dem. Assuming they are min(raster_dem@data@values, na.rm = TRUE) for shading.")
+    raster_dem[is.na(raster_dem)] <- min(raster_dem@data@values, na.rm = TRUE)
+  }
+
   pct_max_height <- (raster::as.array(raster_dem) - min(raster::as.array(raster_dem))) / (max(raster::as.array(raster_dem)) - min(raster::as.array(raster_dem)))
 
   pct_max_height_alpha <- pct_max_height
