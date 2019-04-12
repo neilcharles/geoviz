@@ -22,6 +22,39 @@ square_bounding_box <- function(lat, long, square_km){
   return(bounding_shape)
 }
 
+track_bounding_box <- function(lat_points, long_points, width_buffer){
+
+  #Error: package rgdal is required for spTransform methods
+  #rgdal added to Imports and called here to pass checks
+  temp_rgdal <- rgdal::getGDALCheckVersion()
+
+  #Make a bounding box around the track points
+  bounding_box <- sp::SpatialPoints(cbind(long_points, lat_points),
+                                    proj4string = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+
+  bounding_box <- methods::as(raster::extent(bounding_box), 'SpatialPolygons')
+
+  sp::proj4string(bounding_box) <- "+proj=longlat +datum=WGS84 +no_defs"
+
+  #Reproject for rgeos
+  bounding_box <- sp::spTransform(bounding_box, sp::CRS("+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
+
+  #Pad a border around the bounding box
+  bounding_shape <- rgeos::gBuffer(bounding_box, capStyle = "SQUARE", width = width_buffer * 1000)
+
+  return(bounding_shape)
+
+}
+
+
+
+
+
+
+
+
+
+
 rescale <- function (x, nx1, nx2, minx, maxx){
   nx = nx1 + (nx2 - nx1) * (x - minx)/(maxx - minx)
   return(nx)
