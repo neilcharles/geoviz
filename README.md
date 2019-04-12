@@ -31,8 +31,10 @@ Geoviz helps you to draw images like these.
 
 ![](man/figures/bw_example.jpg)
 
-![](man/figures/stamen_example.jpg)
+![](man/figures/ullswater.jpg)
 
+
+![](vignettes/figures/hawaii.jpg)
 
 ### Example
 
@@ -87,7 +89,7 @@ rayshader::plot_3d(
 )
 ```
 
-![](man/figures/example1.png)
+![](man/figures/example1.jpg)
 
 
 ```R
@@ -109,7 +111,7 @@ add_gps_to_rayshader(
 
 ```
 
-![](man/figures/example2.png)
+![](man/figures/example2.jpg)
 
 ### Quick access to digital elevation model data
 
@@ -127,7 +129,12 @@ long <- -3.1767946
 square_km <- 20
 
 #Get elevation data from Mapbox
-dem <- mapbox_dem(lat, long, square_km, mapbox_key)
+dem <- mapbox_dem(lat, long, square_km, api_key = mapbox_key)
+
+#Note: You can get elevation data from Mapzen instead, which doesn't require an API key.
+#You'll still need an API key for any mapbox image overlays.
+#Get a DEM from mapzen with:
+#dem <- mapzen_dem(lat, long, square_km)
 
 #Get an overlay image (Stamen for this example because it doesn't need an API key)
 overlay_image <-
@@ -162,7 +169,7 @@ rayshader::plot_3d(
 )
 ```
 
-![](man/figures/example3.png)
+![](man/figures/example3.jpg)
 
 ```R
 # You can also visualise your data in ggplot2 rather than 'rayshader'.

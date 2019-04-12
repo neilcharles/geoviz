@@ -9,7 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Get elevation and bathymetry data for Hawaii from 'mapzen', add a 'stamen' overlay and render the scene.
+Get elevation and bathymetry data for Hawaii from 'mapzen', add a 'stamen' overlay and render this scene.
+
+![](figures/hawaii.jpg)
 
 ```R
 library(geoviz)
@@ -22,7 +24,7 @@ square_km = 50
 
 # Set max tiles to request from 'mapzen' and 'stamen'.
 # Increase this for a higher resolution image.
-max_tiles = 10
+max_tiles = 40
 
 # Get elevation data. Increase max_tiles for a higher resolution image.
 dem <- mapzen_dem(lat, lon, square_km, max_tiles = max_tiles)
@@ -45,7 +47,21 @@ elmat = matrix(
 
 scene <- elmat %>%
   sphere_shade(sunangle = 270, texture = "bw") %>% 
-  add_overlay(overlay_image)
+  add_overlay(overlay_image)   %>% 
+
+#  For a slower but higher quality render with more realistic shadows (see 'rayshader' documentation)
+  add_shadow(
+    ray_shade(
+      elmat,
+      anglebreaks = seq(30, 60),
+      sunangle = 270,
+      multicore = TRUE,
+      lambert = FALSE,
+      remove_edges = FALSE
+    )
+  ) %>%
+  add_shadow(ambient_shade(elmat, multicore = TRUE, remove_edges = FALSE))
+
 
 rayshader::plot_3d(
   scene,
@@ -53,7 +69,7 @@ rayshader::plot_3d(
   zscale = raster_zscale(dem) / 3,  #exaggerate elevation by 3x 
   solid = TRUE,
   shadow = FALSE,
-  soliddepth = -100,
+  soliddepth = -raster_zscale(dem),
   water=TRUE,
   waterdepth = 0,
   wateralpha = 0.5,
@@ -61,5 +77,13 @@ rayshader::plot_3d(
   waterlinecolor = "white",
   waterlinealpha = 0.5
 )
+
+rgl::view3d(theta =290, phi = 18, zoom = 0.5, fov = 5)
+
+#rayshader::render_depth(
+#  focus = 0.3,
+#  fstop = 18,
+#  filename = "LIDAR.png")
+
 
 ```
