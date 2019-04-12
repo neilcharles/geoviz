@@ -3,6 +3,7 @@
 #' @param lat WGS84 latitude
 #' @param long WGS84 longitude
 #' @param square_km length of one edge the required square area, in km
+#' @param max_tiles maximum number of map tiles to request. More tiles will give higher resolution scenes but take longer to download. Note that very small numbers of tiles may result in a scene that is not square.
 #'
 #' @return a raster with values corresponding to terrain height in metres
 #'
@@ -13,7 +14,7 @@
 #'
 #' dem <- mapzen_dem(lat, long, square_km)
 #' @export
-mapzen_dem <- function(lat, long, square_km, api_key, max_tiles = 10){
+mapzen_dem <- function(lat, long, square_km, max_tiles = 10){
 
   mapzen_terrain <-
     slippy_raster(

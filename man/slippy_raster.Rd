@@ -21,8 +21,6 @@ slippy_raster(lat, long, square_km, image_source = "stamen",
 \item{max_tiles}{Maximum number of tiles to be requested by 'slippymath'}
 
 \item{api_key}{API key (required for 'mapbox')}
-
-\item{resolution}{width and height (cell count) of the returned raster}
 }
 \value{
 a rasterBrick image

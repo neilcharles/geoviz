@@ -16,9 +16,14 @@
 #' @export
 get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 20, api_key){
 
-  xt_scene <- raster::extent(
-    sp::spTransform(bounding_box, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
-    )
+  #Transform bounding_box to WGS84
+  if(stringr::str_detect(class(bounding_box)[1], "Raster")){
+    bounding_box <- raster::projectRaster(bounding_box, crs = "+proj=longlat +datum=WGS84 +no_defs")
+  } else {
+    bounding_box <- sp::spTransform(bounding_box, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+  }
+
+  xt_scene <- raster::extent(bounding_box)
 
   overlay_bbox <-
     sf::st_bbox(c(xmin = xt_scene@xmin,
