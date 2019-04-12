@@ -1,0 +1,65 @@
+---
+title: "Hawaii Elevation and Bathymetry Using 'Mapzen'"
+author: "Neil Charles"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Scene With GPS trace}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Get elevation and bathymetry data for Hawaii from 'mapzen', add a 'stamen' overlay and render the scene.
+
+```R
+library(geoviz)
+library(rayshader)
+
+# Coordinates for Hawaii
+lat = 19.593335
+lon = -155.4880287
+square_km = 50
+
+# Set max tiles to request from 'mapzen' and 'stamen'.
+# Increase this for a higher resolution image.
+max_tiles = 10
+
+# Get elevation data. Increase max_tiles for a higher resolution image.
+dem <- mapzen_dem(lat, lon, square_km, max_tiles = max_tiles)
+
+# Get a stamen overlay (or a satellite overlay etc. by changing image_source)
+overlay_image <-
+  slippy_overlay(dem,
+                 image_source = "stamen",
+                 image_type = "watercolor",
+                 png_opacity = 0.3,
+                 max_tiles = max_tiles)
+
+# Render the 'rayshader' scene.
+
+elmat = matrix(
+  raster::extract(dem, raster::extent(dem), method = 'bilinear'),
+  nrow = ncol(dem),
+  ncol = nrow(dem)
+)
+
+scene <- elmat %>%
+  sphere_shade(sunangle = 270, texture = "bw") %>% 
+  add_overlay(overlay_image)
+
+rayshader::plot_3d(
+  scene,
+  elmat,
+  zscale = raster_zscale(dem) / 3,  #exaggerate elevation by 3x 
+  solid = TRUE,
+  shadow = FALSE,
+  soliddepth = -100,
+  water=TRUE,
+  waterdepth = 0,
+  wateralpha = 0.5,
+  watercolor = "lightblue",
+  waterlinecolor = "white",
+  waterlinealpha = 0.5
+)
+
+```
