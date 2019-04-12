@@ -16,7 +16,7 @@
 #'   image_type = "watercolor",
 #'   max_tiles = 5)
 #' @export
-slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key, return_png = TRUE, png_opacity = 1){
+slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "watercolor", max_tiles = 20, api_key, return_png = TRUE, png_opacity = 1){
 
   #Calc bounding box to cover the raster
   bounding_box <- methods::as(raster::extent(raster_base), "SpatialPolygons")

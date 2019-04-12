@@ -5,7 +5,7 @@
 \title{Obtains and merges map tiles from various sources using the 'slippymath' package}
 \usage{
 get_slippy_map(bounding_box, image_source = "stamen",
-  image_type = "watercolor", max_tiles = 30, api_key)
+  image_type = "watercolor", max_tiles = 20, api_key)
 }
 \arguments{
 \item{bounding_box}{Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.}

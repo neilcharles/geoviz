@@ -5,7 +5,7 @@
 \title{Creates an overlay image from Mapbox or Stamen Maps using the slippymath package}
 \usage{
 slippy_overlay(raster_base, image_source = "stamen",
-  image_type = "watercolor", max_tiles = 30, api_key,
+  image_type = "watercolor", max_tiles = 20, api_key,
   return_png = TRUE, png_opacity = 1)
 }
 \arguments{

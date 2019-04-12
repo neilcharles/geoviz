@@ -31,8 +31,7 @@ mapbox_dem <- function(lat, long, square_km, api_key){
       square_km,
       image_source = "mapbox",
       image_type = "terrain-rgb",
-      resolution = 1000,
-      max_tiles = 30,
+      max_tiles = 20,
       api_key = api_key
     )
 

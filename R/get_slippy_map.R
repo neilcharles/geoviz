@@ -14,7 +14,7 @@
 #'   image_type = "watercolor",
 #'   max_tiles = 5)
 #' @export
-get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 30, api_key){
+get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 20, api_key){
 
   xt_scene <- raster::extent(
     sp::spTransform(bounding_box, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
@@ -50,7 +50,7 @@ get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "
                            api_key)
 
   } else if (image_source=="mapzen" & image_type=="dem"){
-    query_string <- "https://s3.amazonaws.com/elevation-tiles-prod/geotiff/{zoom}/{x}/{y}.tif"
+    query_string <- "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{zoom}/{x}/{y}.png"
   } else {
     stop(glue::glue("unknown source '{image_source}'"))
   }
