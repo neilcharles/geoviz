@@ -14,7 +14,7 @@ crop_raster_track(raster_input, lat_points, long_points,
 
 \item{long_points}{a vector of WGS84 longitudes}
 
-\item{width_buffer}{buffer distance around the provided points}
+\item{width_buffer}{buffer distance around the provided points in km}
 
 \item{increase_resolution}{optional multiplier to increase number of cells in the raster. Default = 1.}
 }

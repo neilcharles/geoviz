@@ -3,7 +3,7 @@
 #' @param raster_input a raster
 #' @param lat_points a vector of WGS84 latitudes
 #' @param long_points a vector of WGS84 longitudes
-#' @param width_buffer buffer distance around the provided points
+#' @param width_buffer buffer distance around the provided points in km
 #' @param increase_resolution optional multiplier to increase number of cells in the raster. Default = 1.
 #'
 #' @return cropped raster
@@ -13,23 +13,7 @@
 #' @export
 crop_raster_track <- function(raster_input, lat_points, long_points, width_buffer = 1, increase_resolution = 1){
 
-  #Error: package rgdal is required for spTransform methods
-  #rgdal added to Imports and called here to pass checks
-  temp_rgdal <- rgdal::getGDALCheckVersion()
-
-  #Make a bounding box around the track points
-  bounding_box <- sp::SpatialPoints(cbind(long_points, lat_points),
-                                    proj4string = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
-
-  bounding_box <- methods::as(raster::extent(bounding_box), 'SpatialPolygons')
-
-  sp::proj4string(bounding_box) <- "+proj=longlat +datum=WGS84 +no_defs"
-
-  #Reproject for rgeos
-  bounding_box <- sp::spTransform(bounding_box, sp::CRS("+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs"))
-
-  #Pad a border around the bounding box
-  bounding_shape <- rgeos::gBuffer(bounding_box, capStyle = "SQUARE", width = width_buffer * 1000)
+  bounding_shape <- track_bounding_box(lat_points, long_points, width_buffer)
 
   #Convert to match raster projection and crop
   bounding_shape <- sp::spTransform(bounding_shape, sp::CRS(as.character(raster::crs(raster_input))))

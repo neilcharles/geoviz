@@ -4,14 +4,16 @@
 \alias{mapbox_dem}
 \title{Gets Digital Elevation Model (DEM) data from 'mapbox'}
 \usage{
-mapbox_dem(lat, long, square_km, max_tiles, api_key)
+mapbox_dem(lat, long, square_km, width_buffer = 1, max_tiles, api_key)
 }
 \arguments{
-\item{lat}{WGS84 latitude}
+\item{lat}{WGS84 latitude. Either a single point to use as the centre for a \code{square_km} sized raster, or a vector of track points}
 
-\item{long}{WGS84 longitude}
+\item{long}{WGS84 longitude. Either a single point to use as the centre for a \code{square_km} sized raster, or a vector of track points}
 
-\item{square_km}{length of one edge the required square area, in km}
+\item{square_km}{length of one edge the required square area, in km. Ignored if lat and long have length > 1}
+
+\item{width_buffer}{If lat and long have length > 1, used as buffer distance around the provided points in km}
 
 \item{max_tiles}{maximum number of map tiles to request. More tiles will give higher resolution scenes but take longer to download. Note that very small numbers of tiles may result in a scene that is not square.}
 

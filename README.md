@@ -3,11 +3,12 @@
 # Geoviz
 
 Helper functions to draw ['rayshader'](https://github.com/tylermorganwall/rayshader) scenes.
-- From UK OS Terrain 50, NASA ASTER, EU Copernicus or any other DEM (Digital Elevation Model) data
-- With elevation shading (green valleys and snow capped peaks, or anything else you want)
+- Using elevation data from 'Mapzen' and 'Mapbox' 
 - With map and satellite overlays
 - Blending between different overlays at different altitudes
 - with added  GPS tracks
+- From EU Copernicus, NASA ASTER or any other DEM (Digital Elevation Model) data
+- With elevation shading (green valleys and snow capped peaks, or anything else you want)
 
 ['Rayshader'](https://github.com/tylermorganwall/rayshader) is an awesome bit of kit! I'm just doing some colouring in.
 
