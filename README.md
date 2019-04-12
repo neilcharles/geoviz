@@ -13,9 +13,19 @@ Helper functions to draw ['rayshader'](https://github.com/tylermorganwall/raysha
 
 ### Installing
 
+geoviz is on CRAN:
+
+```R
+install.packages("geoviz")
+```
+
+Or for the latest development version:
+
 ```R
 devtools::install_github("neilcharles/geoviz")
 ```
+
+Read [news](news.md) to understand the latest updates and bug fixes.
 
 Geoviz helps you to draw images like these.
 
