@@ -10,6 +10,8 @@ Bug fixes:
 - elevation_transparency() and elevation_shade() will now accept a raster_dem that contains NA values and raise a warning rather than an error
 - 'EPSG' changed to 'epsg' in add_gps_to_rayshader()
 - Changed readr::read_csv for readr::read_lines in read_igc() to remove parsing warnings
+- Check in slippy_overlay() whether map image already has an alpha layer before adding one (fixes stamen toner)
+- Removed stamen terrain in documentation, because terrain returns a DEM, not an image. Could create stamen_dem(), but seems unnecessary, when mapzen_dem() and mapbox_dem() already exist
 
 Changes:
 - mapbox_dem() and mapzen_dem() return a raster with the number of cells defined by 'max_tiles', rather than superimposing a resolution over the top, that had previously defaulted to 1000x1000. This allows you to more easily draw high resolution Rayshader scenes and doesn't arbitrarily drop the resolution of your scene if you forgot to increase resolution from the default.
