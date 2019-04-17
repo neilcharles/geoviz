@@ -1,4 +1,4 @@
-#' Creates an overlay image from Mapbox or Stamen Maps using the slippymath package
+#' Creates an overlay image from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package
 #'
 #' @param raster_base A raster to use to calculate dimensions for the overlay
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".

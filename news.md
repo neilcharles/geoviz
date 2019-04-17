@@ -2,10 +2,14 @@
 
 New features:
 - New function mapzen_dem() provides higher resolution DEM's than mapbox_dem(), without requiring an api key. Mapzen data has variable maximum resolutions in different parts of the world, see [Mapzen data sources](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md).
+- mapbox_dem() and mapzen_dem() will now accept a vector of lat-long points and create a rectangular raster to contain them, to make it easy to visualise GPS tracks
+- New vignette illustrating how to use mapzen_dem() to draw Hawaii
 
 Bug fixes:
 - Projections changed to laea centred on the requested lat-long to ensure square areas are actually square and not distorted by map projection.
 - elevation_transparency() and elevation_shade() will now accept a raster_dem that contains NA values and raise a warning rather than an error
+- 'EPSG' changed to 'epsg' in add_gps_to_rayshader()
+- Changed readr::read_csv for readr::read_lines in read_igc() to remove parsing warnings
 
 Changes:
 - mapbox_dem() and mapzen_dem() return a raster with the number of cells defined by 'max_tiles', rather than superimposing a resolution over the top, that had previously defaulted to 1000x1000. This allows you to more easily draw high resolution Rayshader scenes and doesn't arbitrarily drop the resolution of your scene if you forgot to increase resolution from the default.
