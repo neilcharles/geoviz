@@ -37,7 +37,7 @@ add_gps_to_rayshader <- function(raster_input, lat, long, alt, zscale, line_widt
 
   if (clamp_to_ground | ground_shadow) {
 
-    sp_gps <- sp::SpatialPoints(cbind(long, lat), proj4string = sp::CRS('+init=EPSG:4326'))
+    sp_gps <- sp::SpatialPoints(cbind(long, lat), proj4string = sp::CRS('+init=epsg:4326'))
 
     sp_gps <- sp::spTransform(sp_gps, sp::CRS(as.character(raster::crs(raster_input))))
 
