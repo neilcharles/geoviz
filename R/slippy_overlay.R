@@ -2,7 +2,7 @@
 #'
 #' @param raster_base A raster to use to calculate dimensions for the overlay
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
-#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)
+#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner" (stamen)
 #' @param max_tiles Maximum number of tiles to be requested by slippymath
 #' @param api_key API key (required for mapbox)
 #' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
@@ -44,9 +44,14 @@ slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "w
   map_image <- png::readPNG(temp_map_image)
   file.remove(temp_map_image)
 
-  alpha_layer <- matrix(png_opacity, nrow = dim(map_image)[1], ncol = dim(map_image)[2])
+  #add an alpha layer if one is not present
+  if(dim(map_image)[3]==3){
+    alpha_layer <- matrix(png_opacity, nrow = dim(map_image)[1], ncol = dim(map_image)[2])
 
-  map_image <- abind::abind(map_image, alpha_layer)
+    map_image <- abind::abind(map_image, alpha_layer)
+  } else {
+    map_image[,,4] <- png_opacity
+  }
 
   return(map_image)
 }
