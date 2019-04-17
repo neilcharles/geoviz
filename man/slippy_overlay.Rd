@@ -2,7 +2,7 @@
 % Please edit documentation in R/slippy_overlay.R
 \name{slippy_overlay}
 \alias{slippy_overlay}
-\title{Creates an overlay image from Mapbox or Stamen Maps using the slippymath package}
+\title{Creates an overlay image from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
 slippy_overlay(raster_base, image_source = "stamen",
   image_type = "watercolor", max_tiles = 20, api_key,
@@ -27,7 +27,7 @@ slippy_overlay(raster_base, image_source = "stamen",
 an overlay image for raster_base
 }
 \description{
-Creates an overlay image from Mapbox or Stamen Maps using the slippymath package
+Creates an overlay image from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package
 }
 \examples{
 overlay_image <- slippy_overlay(example_raster(),

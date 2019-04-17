@@ -9,7 +9,9 @@
 #' @export
 read_igc <- function(path){
 
-  igc.data <- readr::read_csv(path)
+  igc.data <- readr::read_lines(path)
+
+  igc.data <- tibble::tibble(X1 = igc.data)
 
   names(igc.data)[1] <- "X1"
 
@@ -30,6 +32,7 @@ read_igc <- function(path){
         "discarded"
       )
     ) %>%
+    dplyr::filter(substr(.data$altitude_igc_pressure, 1, 1) != "V") %>% #Pressure alt starting V (rest of record will be enmpty)
     #Format degrees minutes seconds
     dplyr::mutate(
       time_char = paste0(
