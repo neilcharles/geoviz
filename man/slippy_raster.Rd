@@ -5,7 +5,7 @@
 \title{Creates a square raster centred on any lat long point, or a rectangular raster surrounding a set of lat long points from 'Mapbox', 'Mapzen' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
 slippy_raster(lat, long, square_km, width_buffer = 1,
-  image_source = "stamen", image_type = "watercolor", max_tiles = 20,
+  image_source = "stamen", image_type = "watercolor", max_tiles = 10,
   api_key)
 }
 \arguments{

@@ -55,7 +55,7 @@ sunangle = 270
 
 zscale = 25
 
-#Get a Stamen map using ggmap that will cover our DEM
+#Get a Stamen map that will cover our DEM
 
 stamen_overlay <- slippy_overlay(DEM, image_source = "stamen", image_type = "watercolor", png_opacity = 0.3)
 
@@ -116,7 +116,7 @@ add_gps_to_rayshader(
 
 ### Quick access to digital elevation model data
 
-To draw scenes using high resolution DEM's, you'll need to download your own data (see below), but geoviz also has a helpful function to obtain 50m resolution DEM data from [Mapbox](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/). Small areas drawn using this data won't look great, but for larger areas (> 10 square km), it's a fast way to get started.
+To draw scenes using sub 2m resolution DEM's, you'll need to download your own data (see below), but geoviz also has helpful functions to obtain DEM data from [Mapbox](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/) and [Mapzen](https://www.mapzen.com/). Mapzen doesn't require an API key and gives access to higher resolution data, depending on where in the world you request.
 
 ```R
 

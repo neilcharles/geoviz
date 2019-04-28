@@ -24,7 +24,7 @@
 #'
 #' }
 #' @export
-mapbox_dem <- function(lat, long, square_km, width_buffer = 1, max_tiles, api_key){
+mapbox_dem <- function(lat, long, square_km, width_buffer = 1, max_tiles = 10, api_key){
 
   mapbox_terrain <-
     slippy_raster(

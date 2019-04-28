@@ -23,7 +23,7 @@
 #'   image_type = "watercolor",
 #'   max_tiles = 5)
 #' @export
-slippy_raster <- function(lat, long, square_km, width_buffer = 1, image_source = "stamen", image_type = "watercolor", max_tiles = 20, api_key){
+slippy_raster <- function(lat, long, square_km, width_buffer = 1, image_source = "stamen", image_type = "watercolor", max_tiles = 10, api_key){
 
   if(length(lat) != length(long)){
     stop("lengths of lat and long do not match")

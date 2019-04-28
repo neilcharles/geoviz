@@ -2,7 +2,7 @@
 #'
 #' @param bounding_box Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".
-#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner" (stamen)
+#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "toner-background", "toner-lite" (stamen). You can also request a custom Mapbox style by specifying \code{image_source = "mapbox", image_type = "username/mapid"}
 #' @param max_tiles Maximum number of tiles to be requested by 'slippymath'
 #' @param api_key API key (required for 'mapbox')
 #'
@@ -14,7 +14,7 @@
 #'   image_type = "watercolor",
 #'   max_tiles = 5)
 #' @export
-get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 20, api_key){
+get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "watercolor", max_tiles = 10, api_key){
 
   #Transform bounding_box to WGS84
   if(stringr::str_detect(class(bounding_box)[1], "Raster")){
@@ -40,7 +40,7 @@ get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "
   }
 
 
-
+  #Stamen Maps
   if(image_source=="stamen"){
     if(stringr::str_detect(image_type, "watercolor")){
       query_string <- paste0("http://tile.stamen.com/", image_type, "/{zoom}/{x}/{y}.jpg")
@@ -48,14 +48,27 @@ get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "
       query_string <- paste0("http://tile.stamen.com/", image_type, "/{zoom}/{x}/{y}.png")
     }
 
+  #Mapbox maps
   } else if (image_source=="mapbox"){
+
+    if(stringr::str_detect(image_type, "\\/")){ #image_type is a custom mapbox map url
+
+      query_string <- paste0("https://api.mapbox.com/styles/v1/", image_type, "/tiles/{zoom}/{x}/{y}",
+                             "?access_token=",
+                             api_key)
+
+    } else {
 
     query_string <- paste0("https://api.mapbox.com/v4/mapbox.", image_type, "/{zoom}/{x}/{y}.jpg90",
                            "?access_token=",
                            api_key)
+    }
 
+  #Mapzen maps
   } else if (image_source=="mapzen" & image_type=="dem"){
+
     query_string <- "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{zoom}/{x}/{y}.png"
+
   } else {
     stop(glue::glue("unknown source '{image_source}'"))
   }
@@ -74,7 +87,7 @@ get_slippy_map <- function(bounding_box, image_source = "stamen", image_type = "
                 },
                 zoom = tile_grid$zoom)
 
-  raster_out <- slippymath::compose_tile_grid(tile_grid, images)
+  raster_out <- compose_tile_grid(tile_grid, images) #not slippymath version due to png issue
 
   #Transform raster to match projection of the original bounding box
   raster_out <- raster::projectRaster(raster_out, crs = raster::crs(bounding_box))
