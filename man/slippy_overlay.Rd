@@ -5,7 +5,7 @@
 \title{Creates an overlay image from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
 slippy_overlay(raster_base, image_source = "stamen",
-  image_type = "watercolor", max_tiles = 20, api_key,
+  image_type = "watercolor", max_tiles = 10, api_key,
   return_png = TRUE, png_opacity = 0.9)
 }
 \arguments{
@@ -13,7 +13,7 @@ slippy_overlay(raster_base, image_source = "stamen",
 
 \item{image_source}{Source for the overlay image. Valid entries are "mapbox", "stamen".}
 
-\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner", "terrain" (stamen)}
+\item{image_type}{The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "toner-background", "toner-lite" (stamen). You can also request a custom Mapbox style by specifying \code{image_source = "mapbox", image_type = "username/mapid"}}
 
 \item{max_tiles}{Maximum number of tiles to be requested by slippymath}
 

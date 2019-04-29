@@ -3,6 +3,7 @@
 New features:
 - New function mapzen_dem() provides higher resolution DEM's than mapbox_dem(), without requiring an api key. Mapzen data has variable maximum resolutions in different parts of the world, see [Mapzen data sources](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md).
 - mapbox_dem() and mapzen_dem() will now accept a vector of lat-long points and create a rectangular raster to contain them, to make it easy to visualise GPS tracks
+- Mapbox custom styles can be downloaded using get_slippy_map(image_source = "mapbox", image_type = "username/mapid"). This also works for slippy_overlay()
 - New vignette illustrating how to use mapzen_dem() to draw Hawaii
 
 Bug fixes:

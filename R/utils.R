@@ -46,15 +46,6 @@ track_bounding_box <- function(lat_points, long_points, width_buffer){
 
 }
 
-
-
-
-
-
-
-
-
-
 rescale <- function (x, nx1, nx2, minx, maxx){
   nx = nx1 + (nx2 - nx1) * (x - minx)/(maxx - minx)
   return(nx)
@@ -67,12 +58,43 @@ lighten <- function(color, factor=0.2){
   col
 }
 
+
+compose_tile_grid <- function (tile_grid, images)
+{
+  #Adapted from slippymath to cope with 8 bit png images (1 layer). Slippymath saves them as .jpg but they aren't
+  bricks <- purrr::pmap(.l = list(x = tile_grid$tiles$x, y = tile_grid$tiles$y,
+                                  image = images), .f = function(x, y, image, zoom) {
+                                    bbox <- slippymath::tile_bbox(x, y, zoom)
+
+                                    raster_img <- raster::brick(image, crs = attr(bbox,
+                                                                                  "crs")$proj4string)
+                                    #adaptation --------------------
+                                    if (dim(raster_img)[3]==1){ #tile_raster has one layer
+                                      raster_img <- raster::raster(image, crs = attr(bbox,
+                                                                                     "crs")$proj4string)
+
+                                      #Apply the raster's colortable to create a 3 layer rgb version
+                                      raster_img <- raster::setValues(raster::brick(raster_img, raster_img, raster_img),
+                                                          t(col2rgb(raster_img@legend@colortable))[raster::values(raster_img) + 1,])
+                                    }
+                                    #-------------------------------
+
+                                    raster::extent(raster_img) <- raster::extent(bbox[c("xmin",
+                                                                                        "xmax", "ymin", "ymax")])
+                                    raster_img
+                                  }, zoom = tile_grid$zoom)
+  geo_refd_raster <- do.call(raster::merge, bricks)
+  geo_refd_raster
+}
+
+
 raster_to_png <- function(tile_raster, file_path)
 {
-  if (!inherits(tile_raster, "RasterBrick")) {
-    stop("tile raster must be a RasterBrick. This is output from tg_composite().")
-  }
+
+  #Adapted from slippymath to fix margin problem
   tile_raster@data@values <- sweep(tile_raster@data@values,
                                    MARGIN = 2, STATS = tile_raster@data@max, FUN = "/")
+
   png::writePNG(raster::as.array(tile_raster), target = file_path)
+
 }

@@ -2,7 +2,7 @@
 #'
 #' @param raster_base A raster to use to calculate dimensions for the overlay
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "stamen".
-#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox) or "watercolor", "toner" (stamen)
+#' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "toner-background", "toner-lite" (stamen). You can also request a custom Mapbox style by specifying \code{image_source = "mapbox", image_type = "username/mapid"}
 #' @param max_tiles Maximum number of tiles to be requested by slippymath
 #' @param api_key API key (required for mapbox)
 #' @param return_png \code{TRUE} to return a png image. \code{FALSE} will return a raster
@@ -16,7 +16,7 @@
 #'   image_type = "watercolor",
 #'   max_tiles = 2)
 #' @export
-slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "watercolor", max_tiles = 20, api_key, return_png = TRUE, png_opacity = 0.9){
+slippy_overlay <- function(raster_base, image_source = "stamen", image_type = "watercolor", max_tiles = 10, api_key, return_png = TRUE, png_opacity = 0.9){
 
   #Calc bounding box to cover the raster
   bounding_box <- methods::as(raster::extent(raster_base), "SpatialPolygons")
