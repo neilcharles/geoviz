@@ -7,8 +7,9 @@ DEM <- example_raster()
 lat = 54.4502651
 long = -3.1767946
 square_km = 1
+
 test_that("slippy_overlay() has correct dimensions", {
-  slippy_overlay_result <- slippy_overlay(DEM, max_tiles = 5)
+  slippy_overlay_result <- expect_warning(slippy_overlay(DEM, max_tiles = 5))
 
   expect_is(slippy_overlay_result, "array")
   expect_equal(ncol(slippy_overlay_result), ncol(DEM))
@@ -16,7 +17,7 @@ test_that("slippy_overlay() has correct dimensions", {
 })
 
 test_that("slippy_raster() returns data", {
-  expect_is(
+  slippy_rater_result <- expect_warning(
     slippy_raster(
       lat,
       long,
@@ -24,9 +25,10 @@ test_that("slippy_raster() returns data", {
       image_source = "stamen",
       image_type = "watercolor",
       max_tiles = 5
-    ),
-    "RasterBrick"
+    )
   )
+
+  expect_is(slippy_rater_result, "RasterBrick")
 })
 
 test_that("elevation_shade() has correct dimensions", {
