@@ -13,8 +13,8 @@
 elevation_shade <- function(raster_dem, elevation_palette = c("#54843f", "#808080", "#FFFFFF"), return_png = TRUE, png_opacity = 0.9){
 
   if(length(is.na(raster_dem)) > 0){
-    warning("There are NA values in raster_dem. Assuming they are min(raster_dem@data@values, na.rm = TRUE) for shading.")
-    raster_dem[is.na(raster_dem)] <- min(raster_dem@data@values, na.rm = TRUE)
+    message("There are NA values in raster_dem. Assuming they are min(raster_dem[], na.rm = TRUE) for shading.")
+    raster_dem[is.na(raster_dem)] <- min(raster_dem[], na.rm = TRUE)
   }
 
   rasterValues <- raster::values(raster_dem)

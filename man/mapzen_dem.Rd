@@ -28,5 +28,5 @@ lat = 54.4502651
 long = -3.1767946
 square_km = 2
 
-dem <- mapzen_dem(lat, long, square_km, max_tiles = 5)
+dem <- mapzen_dem(lat, long, square_km, max_tiles = 2)
 }

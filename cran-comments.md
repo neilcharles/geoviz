@@ -1,5 +1,5 @@
 ## Test environments
-* local Windows 10, R 3.5.2
+* local Windows 10, R 3.6.0
 * Windows Server 2008 R-devel
 * Fedora Linux R-devel
 * win-builder (devel and release)
