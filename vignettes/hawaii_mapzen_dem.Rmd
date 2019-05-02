@@ -4,14 +4,12 @@ author: "Neil Charles"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Scene With GPS trace}
+  %\VignetteIndexEntry{Hawaii Elevation and Bathymetry Using 'Mapzen'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Get elevation and bathymetry data for Hawaii from 'mapzen', add a 'stamen' overlay and render this scene.
-
-![](figures/hawaii.jpg)
+Get elevation and bathymetry data for Hawaii from 'mapzen', add a 'stamen' overlay and render the scene.
 
 ```R
 library(geoviz)

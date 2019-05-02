@@ -8,7 +8,7 @@ get_slippy_map(bounding_box, image_source = "stamen",
   image_type = "watercolor", max_tiles = 10, api_key)
 }
 \arguments{
-\item{bounding_box}{Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.}
+\item{bounding_box}{Any object for which raster::extent() can be calculated.}
 
 \item{image_source}{Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".}
 

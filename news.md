@@ -17,7 +17,7 @@ Bug fixes:
 Changes:
 - mapbox_dem() and mapzen_dem() return a raster with the number of cells defined by 'max_tiles', rather than superimposing a resolution over the top, that had previously defaulted to 1000x1000. This allows you to more easily draw high resolution Rayshader scenes and doesn't arbitrarily drop the resolution of your scene if you forgot to increase resolution from the default.
 - resolution option in slippy_raster() is deprecated
-- Dropped max_tiles defaults from 30 to 20 as a better compromise between speed and rayshader scene resolution.
+- Dropped max_tiles defaults from 30 to 10 as a better compromise between speed and rayshader scene resolution.
 
 
 ## 0.2.0

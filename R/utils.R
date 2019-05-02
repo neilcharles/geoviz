@@ -16,9 +16,6 @@ square_bounding_box <- function(lat, long, square_km){
   #create buffer square
   bounding_shape <- rgeos::gBuffer(bounding_box, width = bounding_box$square_km * 1000, quadsegs=1, capStyle="SQUARE")
 
-  #reproject (skipping to try to work with laea)
-  #bounding_shape <- sp::spTransform(bounding_shape, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
-
   return(bounding_shape)
 }
 
@@ -75,7 +72,7 @@ compose_tile_grid <- function (tile_grid, images)
 
                                       #Apply the raster's colortable to create a 3 layer rgb version
                                       raster_img <- raster::setValues(raster::brick(raster_img, raster_img, raster_img),
-                                                          t(col2rgb(raster_img@legend@colortable))[raster::values(raster_img) + 1,])
+                                                          t(grDevices::col2rgb(raster_img@legend@colortable))[raster::values(raster_img) + 1,])
                                     }
                                     #-------------------------------
 

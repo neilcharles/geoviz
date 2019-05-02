@@ -1,6 +1,6 @@
 #' Obtains and merges map tiles from various sources using the 'slippymath' package
 #'
-#' @param bounding_box Any object for which raster::extent() can be calculated. Your object must use WGS84 coordinates.
+#' @param bounding_box Any object for which raster::extent() can be calculated.
 #' @param image_source Source for the overlay image. Valid entries are "mapbox", "mapzen", "stamen".
 #' @param image_type The type of overlay to request. "satellite", "mapbox-streets-v8", "mapbox-terrain-v2", "mapbox-traffic-v1", "terrain-rgb", "mapbox-incidents-v1" (mapbox), "dem" (mapzen) or "watercolor", "toner", "toner-background", "toner-lite" (stamen). You can also request a custom Mapbox style by specifying \code{image_source = "mapbox", image_type = "username/mapid"}
 #' @param max_tiles Maximum number of tiles to be requested by 'slippymath'
