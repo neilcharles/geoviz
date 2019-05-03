@@ -50,6 +50,6 @@ add_gps_to_rayshader(example_raster(),
   flight$lat,
   flight$long,
   flight$altitude,
-  zscale = raster_zscale(example_raster()))
+  zscale = 25)
 
 }

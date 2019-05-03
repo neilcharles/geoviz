@@ -13,7 +13,7 @@
 #' long = -3.1767946
 #' square_km = 2
 #'
-#' dem <- mapzen_dem(lat, long, square_km, max_tiles = 5)
+#' dem <- mapzen_dem(lat, long, square_km, max_tiles = 2)
 #' @export
 mapzen_dem <- function(lat, long, square_km, width_buffer = 1, max_tiles = 10){
 
