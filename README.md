@@ -12,6 +12,8 @@ Helper functions to draw ['rayshader'](https://github.com/tylermorganwall/raysha
 
 ['Rayshader'](https://github.com/tylermorganwall/rayshader) is an awesome bit of kit! I'm just doing some colouring in.
 
+Tutorials below and more [here](http://www.hilltop-analytics.com/category/rstats/geoviz/).
+
 ### Installing
 
 geoviz is on CRAN:
