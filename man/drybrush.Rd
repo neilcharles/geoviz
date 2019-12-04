@@ -4,8 +4,13 @@
 \alias{drybrush}
 \title{Simulates a dry brushing effect. Differs from elevation_transparency() in that colour is applied based on local altitude peaks, not across the whole raster}
 \usage{
-drybrush(raster_dem, aggregation_factor = 10, max_colour_altitude = 30,
-  opacity = 0.5, elevation_palette = c("#3f3f3f", "#ffa500"))
+drybrush(
+  raster_dem,
+  aggregation_factor = 10,
+  max_colour_altitude = 30,
+  opacity = 0.5,
+  elevation_palette = c("#3f3f3f", "#ffa500")
+)
 }
 \arguments{
 \item{raster_dem}{A raster}

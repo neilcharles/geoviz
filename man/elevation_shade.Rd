@@ -4,8 +4,12 @@
 \alias{elevation_shade}
 \title{Produces an elevation shaded image from a raster}
 \usage{
-elevation_shade(raster_dem, elevation_palette = c("#54843f", "#808080",
-  "#FFFFFF"), return_png = TRUE, png_opacity = 0.9)
+elevation_shade(
+  raster_dem,
+  elevation_palette = c("#54843f", "#808080", "#FFFFFF"),
+  return_png = TRUE,
+  png_opacity = 0.9
+)
 }
 \arguments{
 \item{raster_dem}{a raster}

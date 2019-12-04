@@ -4,9 +4,15 @@
 \alias{slippy_overlay}
 \title{Creates an overlay image from 'Mapbox' or 'Stamen' Maps using the 'slippymath' package}
 \usage{
-slippy_overlay(raster_base, image_source = "stamen",
-  image_type = "watercolor", max_tiles = 10, api_key,
-  return_png = TRUE, png_opacity = 0.9)
+slippy_overlay(
+  raster_base,
+  image_source = "stamen",
+  image_type = "watercolor",
+  max_tiles = 10,
+  api_key,
+  return_png = TRUE,
+  png_opacity = 0.9
+)
 }
 \arguments{
 \item{raster_base}{A raster to use to calculate dimensions for the overlay}

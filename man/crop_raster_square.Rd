@@ -4,8 +4,7 @@
 \alias{crop_raster_square}
 \title{Crops a raster and returns a smaller square raster}
 \usage{
-crop_raster_square(rasterIn, lat, long, square_km,
-  increase_resolution = 1)
+crop_raster_square(rasterIn, lat, long, square_km, increase_resolution = 1)
 }
 \arguments{
 \item{rasterIn}{a raster}

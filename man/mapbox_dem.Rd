@@ -4,8 +4,7 @@
 \alias{mapbox_dem}
 \title{Gets Digital Elevation Model (DEM) data from 'mapbox'}
 \usage{
-mapbox_dem(lat, long, square_km, width_buffer = 1, max_tiles = 10,
-  api_key)
+mapbox_dem(lat, long, square_km, width_buffer = 1, max_tiles = 10, api_key)
 }
 \arguments{
 \item{lat}{WGS84 latitude. Either a single point to use as the centre for a \code{square_km} sized raster, or a vector of track points}

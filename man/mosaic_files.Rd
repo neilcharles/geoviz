@@ -5,9 +5,15 @@
 \title{Stitches together files into a single raster
 Requires a target directory of files that can be read with raster::raster(), e.g. .asc files, or a directory of .zip files containing these files}
 \usage{
-mosaic_files(path, extract_zip = FALSE, file_match = ".*.asc",
-  zip_file_match = ".*.zip", raster_output_file = "mosaic_out.raster",
-  file_crs = NULL, raster_todisk = FALSE)
+mosaic_files(
+  path,
+  extract_zip = FALSE,
+  file_match = ".*.asc",
+  zip_file_match = ".*.zip",
+  raster_output_file = "mosaic_out.raster",
+  file_crs = NULL,
+  raster_todisk = FALSE
+)
 }
 \arguments{
 \item{path}{path to files that are to be stitched together}
