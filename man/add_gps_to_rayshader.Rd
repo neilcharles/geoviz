@@ -4,10 +4,22 @@
 \alias{add_gps_to_rayshader}
 \title{Adds a GPS trace to a 'rayshader' scene}
 \usage{
-add_gps_to_rayshader(raster_input, lat, long, alt, zscale,
-  line_width = 1, colour = "red", alpha = 0.8, lightsaber = TRUE,
-  clamp_to_ground = FALSE, raise_agl = 0, ground_shadow = FALSE,
-  as_line = TRUE, point_size = 20)
+add_gps_to_rayshader(
+  raster_input,
+  lat,
+  long,
+  alt,
+  zscale,
+  line_width = 1,
+  colour = "red",
+  alpha = 0.8,
+  lightsaber = TRUE,
+  clamp_to_ground = FALSE,
+  raise_agl = 0,
+  ground_shadow = FALSE,
+  as_line = TRUE,
+  point_size = 20
+)
 }
 \arguments{
 \item{raster_input}{a raster}

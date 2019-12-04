@@ -5,8 +5,14 @@
 \title{Turns overlay images transparent based on altitude. Can be used to create an
 image overlay that will only apply to valleys, or only to hills.}
 \usage{
-elevation_transparency(overlay_image, raster_dem, alpha_max = 0.4,
-  alpha_min = 0, pct_alt_low = 0.05, pct_alt_high = 0.25)
+elevation_transparency(
+  overlay_image,
+  raster_dem,
+  alpha_max = 0.4,
+  alpha_min = 0,
+  pct_alt_low = 0.05,
+  pct_alt_high = 0.25
+)
 }
 \arguments{
 \item{overlay_image}{the image on which to alter transparency}

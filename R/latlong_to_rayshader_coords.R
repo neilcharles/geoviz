@@ -31,10 +31,10 @@ latlong_to_rayshader_coords <- function(raster_input, lat, long){
                                        c(e@xmin, e@ymax), lonlat = FALSE)/nrow(raster_input)
 
   distances_x <- raster::pointDistance(c(e@xmin, e@ymin),
-                                       cbind(long, rep(e@ymin, length(long))), lonlat = FALSE)/cell_size_x
+                                       cbind(long, rep(e@ymin, length(long))), lonlat = FALSE)/cell_size_x - (e@xmax - e@xmin)/2/cell_size_x
 
   distances_y <- raster::pointDistance(c(e@xmin, e@ymin),
-                                       cbind(rep(e@xmin, length(lat)), lat), lonlat = FALSE)/cell_size_y
+                                       cbind(rep(e@xmin, length(lat)), lat), lonlat = FALSE)/cell_size_y - (e@ymax - e@ymin)/2/cell_size_y
 
   tibble::tibble(x = distances_x,
          y = distances_y)

@@ -4,8 +4,13 @@
 \alias{crop_raster_track}
 \title{Crops a raster into a rectangle surrounding a set of lat long points}
 \usage{
-crop_raster_track(raster_input, lat_points, long_points,
-  width_buffer = 1, increase_resolution = 1)
+crop_raster_track(
+  raster_input,
+  lat_points,
+  long_points,
+  width_buffer = 1,
+  increase_resolution = 1
+)
 }
 \arguments{
 \item{raster_input}{a raster}
