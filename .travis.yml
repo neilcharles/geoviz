@@ -3,4 +3,4 @@
 language: R
 cache: packages
 before_install:
-  - sudo apt-get -y install libgdal-dev libudunits2-dev
+  - sudo apt-get -y install libgdal-dev libudunits2-dev libx11-dev mesa-common-dev libglu1-mesa-dev
