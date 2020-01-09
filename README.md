@@ -2,6 +2,8 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/geoviz)](https://cran.r-project.org/package=geoviz)
 # Geoviz
 
+[![Travis build status](https://travis-ci.org/neilcharles/geoviz.svg?branch=master)](https://travis-ci.org/neilcharles/geoviz)
+
 Helper functions to draw ['rayshader'](https://github.com/tylermorganwall/rayshader) scenes.
 - Using elevation data from 'Mapzen' and 'Mapbox' 
 - With map and satellite overlays

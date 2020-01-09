@@ -43,7 +43,11 @@ Requires a target directory of files that can be read with raster::raster(), e.g
 
 path_to_files <- system.file("extdata/example_asc", package = "geoviz")
 
-mosaic_files(path_to_files, extract_zip = TRUE, file_crs = "+init=epsg:27700")
+path_to_output <- tempdir()
 
-raster_mosaic <- raster::raster("mosaic_out.gri")
+mosaic_files(path_to_files,
+             raster_output_file = paste0(path_to_output, '/mosaic_out.raster', sep = ''),
+             extract_zip = TRUE, file_crs = "+init=epsg:27700")
+
+raster_mosaic <- raster::raster(paste0(path_to_output, '/mosaic_out.gri', sep = ''))
 }

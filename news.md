@@ -1,3 +1,7 @@
+## 0.2.2
+Bug fixes:
+- 'Rayshader' changing coordinate system in v0.13.1 caused GPS tracks to be offset. latlong_to_rayshader_coords() updated to fix
+
 ## 0.2.1
 
 New features:
