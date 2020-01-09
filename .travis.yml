@@ -2,3 +2,6 @@
 
 language: R
 cache: packages
+repos:
+  CRAN: https://cran.rstudio.com
+  rforge: http://R-Forge.R-project.org
