@@ -2,6 +2,5 @@
 
 language: R
 cache: packages
-repos:
-  CRAN: https://cran.rstudio.com
-  rforge: http://R-Forge.R-project.org
+before_install:
+  - sudo apt-get -y install libgdal-dev
