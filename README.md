@@ -30,7 +30,7 @@ Or for the latest development version:
 devtools::install_github("neilcharles/geoviz")
 ```
 
-Read [news](news.md) to understand the latest updates and bug fixes.
+Read [news](https://github.com/neilcharles/geoviz/blob/master/news.md) to understand the latest updates and bug fixes.
 
 Geoviz helps you to draw images like these.
 
