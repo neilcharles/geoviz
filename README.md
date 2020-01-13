@@ -1,6 +1,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN status](https://www.r-pkg.org/badges/version/geoviz)](https://cran.r-project.org/package=geoviz)
 
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/geoviz)
+
 [![Travis build status](https://travis-ci.org/neilcharles/geoviz.svg?branch=master)](https://travis-ci.org/neilcharles/geoviz)
 # Geoviz
 
