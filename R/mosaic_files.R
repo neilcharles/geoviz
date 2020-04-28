@@ -84,27 +84,28 @@ mosaic_files <-
 
     pb <- progress::progress_bar$new(total = nrow(raster_layers)-1)
 
-    #Merge layers one at a time
-    for (i in 2:nrow(raster_layers)) {
-      new_raster <-
-        raster::raster(glue::glue(
-          "{path}{raster_layers$filename[i]}"
-        ))
+    #Merge additional layers one at a time
+    if(nrow(raster_layers) > 1){
+      for (i in 2:nrow(raster_layers)) {
+        new_raster <-
+          raster::raster(glue::glue(
+            "{path}{raster_layers$filename[i]}"
+          ))
 
-      if(is.na(raster::crs(raster_mosaic))){
-        raster::crs(new_raster) <- file_crs
+        if(is.na(raster::crs(raster_mosaic))){
+          raster::crs(new_raster) <- file_crs
+        }
+
+        raster_mosaic <-
+          raster::mosaic(raster_mosaic, new_raster, fun = "mean")
+
+        pb$tick()
       }
-
-      raster_mosaic <-
-        raster::mosaic(raster_mosaic, new_raster, fun = "mean")
-
-      pb$tick()
-
     }
 
-    if(extract_zip){unlink(unzip_dir, recursive = TRUE)}  #kill the temp directory if unzipping
-
     raster::writeRaster(raster_mosaic, raster_output_file, overwrite = TRUE)
+
+    if(extract_zip){unlink(unzip_dir, recursive = TRUE)}  #kill the temp directory if unzipping
 
     message("Done")
 

@@ -27,7 +27,7 @@ install.packages("geoviz")
 Or for the latest development version:
 
 ```R
-devtools::install_github("neilcharles/geoviz")
+remotes::install_github("neilcharles/geoviz")
 ```
 
 Read [news](https://github.com/neilcharles/geoviz/blob/master/news.md) to understand the latest updates and bug fixes.
@@ -236,9 +236,10 @@ Download [OS Terrain 50](https://www.ordnancesurvey.co.uk/business-and-governmen
 mosaic_files(
   "path/to/zip/files",
   extract_zip = TRUE,
-  zip_file_match = ".*GRID.*.zip"
-  file_match = ".*.asc",
-  raster_output_file = "mosaic_out.raster"
+  zip_file_match = ".*GRID.*.zip",
+  file_match = ".*.asc$",
+  raster_output_file = "mosaic_out.raster",
+  file_crs = '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs'
 )
 
 raster_mosaic <- raster::raster("mosaic_out.gri")

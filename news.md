@@ -1,3 +1,8 @@
+##0.2.3
+Bug fixes:
+- Merging OS terrain 50 didn't work with a single file and documentation had errors. Fixed.
+
+
 ## 0.2.2
 Bug fixes:
 - 'Rayshader' changing coordinate system in v0.13.1 caused GPS tracks to be offset. latlong_to_rayshader_coords() updated to fix
